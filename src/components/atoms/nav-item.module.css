@@ -1,0 +1,14 @@
+.NavItem {
+  text-decoration: none;
+  margin: 0 0.5rem;
+  color: rgb(45, 45, 45);
+  font-size: 1rem;
+}
+
+.NavItem:hover {
+  border-bottom: 2px solid rgb(36, 87, 166);
+}
+
+.NavItem__active {
+  border-bottom: 2px solid rgb(36, 87, 166);
+}

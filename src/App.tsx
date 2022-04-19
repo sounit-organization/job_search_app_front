@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRoutes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+const Header = lazy(() => import("../src/components/molecules/Header"));
+// const CreateSkill = lazy(() => import("./pages/create-skill"));
+// const CreateJob = lazy(() => import("./pages/create-job"));
+// const JobList = lazy(() => import("./pages/job-list"));
+// const Favorite = lazy(() => import("./pages/Favorite"));
+// const JobDetail = lazy(() => import("./pages/job-detail"));
 
 function App() {
+  const routes = useRoutes([
+    // {
+    //   path: "/",
+    //   element: <JobList />,
+    //   children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
+    // },
+    // { path: "/jobs/new", element: <CreateJob /> },
+    // { path: "/skills/new", element: <CreateSkill /> },
+    // { path: "/favorite", element: <Favorite /> },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<p>loading....</p>}>
+      <Header />
+      {routes}
+    </Suspense>
   );
 }
 
