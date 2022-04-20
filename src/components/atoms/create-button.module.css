@@ -1,0 +1,13 @@
+.CreateButton {
+  background-color: #2da44e;
+  border: none;
+  color: #fff;
+}
+
+.CreateButton:hover {
+  background-color: #2c974b;
+}
+
+.CreateButton--disabled {
+  background-color: #94d3a2;
+}
