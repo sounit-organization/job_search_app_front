@@ -1,0 +1,48 @@
+.JobCardList {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.JobCardList__card {
+  margin-bottom: 1rem;
+  margin-top: 20px;
+}
+
+.JobCardList__input {
+  width: 100%;
+  color: rgb(148, 148, 148);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  outline: none;
+}
+
+.JobCardList__list {
+  width: 80%;
+  margin: 2rem auto;
+}
+.JobCardList__btn {
+  width: 100%;
+  min-width: 10rem;
+  cursor: pointer;
+  background-color: rgb(36, 87, 166);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+@media (min-width: 80rem) {
+  .JobCardList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .JobCardList__input {
+    width: 25rem;
+  }
+  .JobCardList__btn {
+    width: 10rem;
+  }
+}
