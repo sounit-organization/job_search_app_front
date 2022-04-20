@@ -1,0 +1,14 @@
+.CreateSkill {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.CreateSkill__input {
+  width: 15rem;
+}
+.CreateSkill__btn {
+  width: 8rem;
+  margin: 1rem;
+}

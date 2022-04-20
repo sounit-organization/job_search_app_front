@@ -2,7 +2,7 @@ import { useRoutes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 const Header = lazy(() => import("../src/components/molecules/Header"));
-// const CreateSkill = lazy(() => import("./pages/create-skill"));
+const CreateSkill = lazy(() => import("./pages/create-skill"));
 // const CreateJob = lazy(() => import("./pages/create-job"));
 // const JobList = lazy(() => import("./pages/job-list"));
 // const Favorite = lazy(() => import("./pages/Favorite"));
@@ -16,7 +16,7 @@ function App() {
     //   children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     // },
     // { path: "/jobs/new", element: <CreateJob /> },
-    // { path: "/skills/new", element: <CreateSkill /> },
+    { path: "/skills/new", element: <CreateSkill /> },
     // { path: "/favorite", element: <Favorite /> },
   ]);
   return (

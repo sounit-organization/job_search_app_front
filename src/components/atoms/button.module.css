@@ -1,0 +1,16 @@
+.Button {
+  border: 6px solid red;
+  padding: 0.5rem;
+  display: block;
+  background-color: #fff;
+  color: red;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Button:hover,
+.Button:active {
+  background-color: red;
+  color: #fff;
+}
