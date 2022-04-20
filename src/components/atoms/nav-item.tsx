@@ -14,11 +14,11 @@ const NavItem: FC<IProps> = (props) => {
     <NavLink
       key={props.item.id}
       to={props.item.to}
-      className={`${
+      className={
         match
-          ? [classes[componentName], classes[componentName__active]]
+          ? `${classes[componentName]} ${classes[`${componentName}__active`]}`
           : classes[componentName]
-      }`}
+      }
     >
       {props.item.title}
     </NavLink>
@@ -26,5 +26,4 @@ const NavItem: FC<IProps> = (props) => {
 };
 
 const componentName = "NavItem";
-const componentName__active = "NavItem__active";
 export default NavItem;
