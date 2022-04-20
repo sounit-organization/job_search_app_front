@@ -1,0 +1,40 @@
+.job-type__wrapper {
+  width: 80%;
+  margin: 2rem auto;
+  position: relative;
+}
+.job-type__btn {
+  margin: 1rem;
+  background-color: rgb(228, 226, 224);
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 6rem;
+}
+.job-type__show {
+  background-color: rgb(88, 88, 88);
+  color: #fff;
+}
+.check-wrapper {
+  width: 10rem;
+  margin: 0 1rem;
+  position: absolute;
+  top: 3.5rem;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 8%);
+  border-radius: 4px;
+}
+.job-type__check {
+  margin: 0.5rem 0;
+  width: 9rem;
+}
+.job-type__label {
+  width: 5rem;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.job-type__input {
+  width: 3rem;
+}
