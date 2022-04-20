@@ -2,12 +2,12 @@ import { FC } from "react";
 import classes from "./input.module.css";
 
 interface Props {
-  name?: string;
   id?: string;
+  name?: String;
   placeholder: string;
-  className: any;
   value: string;
   onChange: any;
+  className: string;
 }
 
 const Input: FC<Props> = (props) => {

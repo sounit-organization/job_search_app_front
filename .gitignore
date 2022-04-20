@@ -2,6 +2,7 @@
 
 # original
 .firebase
+.env
 
 # dependencies
 /node_modules

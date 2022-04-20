@@ -4,17 +4,19 @@ import { lazy, Suspense } from "react";
 const Header = lazy(() => import("../src/components/molecules/Header"));
 const CreateSkill = lazy(() => import("./pages/create-skill"));
 // const CreateJob = lazy(() => import("./pages/create-job"));
-// const JobList = lazy(() => import("./pages/job-list"));
+const JobList = lazy(() => import("./pages/job-list"));
 // const Favorite = lazy(() => import("./pages/Favorite"));
 // const JobDetail = lazy(() => import("./pages/job-detail"));
 
+console.log(process.env.REACT_APP_BACKEND_URL);
+
 function App() {
   const routes = useRoutes([
-    // {
-    //   path: "/",
-    //   element: <JobList />,
-    //   children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
-    // },
+    {
+      path: "/",
+      element: <JobList />,
+      // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
+    },
     // { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
     // { path: "/favorite", element: <Favorite /> },
