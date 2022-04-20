@@ -1,16 +1,22 @@
+import { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { INavItem } from "../../domain/nav-item";
 import classes from "./nav-item.module.css";
 
-const NavItem = (props) => {
+interface IProps {
+  item: INavItem;
+}
+
+const NavItem: FC<IProps> = (props) => {
   const location = useLocation();
   const match = location.pathname === props.item.to;
   return (
     <NavLink
       key={props.item.id}
       to={props.item.to}
-      className={` ${
+      className={`${
         match
-          ? classes[(componentName, componentName__active)]
+          ? [classes[componentName], classes[componentName__active]]
           : classes[componentName]
       }`}
     >

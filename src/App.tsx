@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-const Header = lazy(() => import("../src/components/molecules/Header"));
+const Header = lazy(() => import("../src/components/organisms/header"));
 const CreateSkill = lazy(() => import("./pages/create-skill"));
 // const CreateJob = lazy(() => import("./pages/create-job"));
 const JobList = lazy(() => import("./pages/job-list"));

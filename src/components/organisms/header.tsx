@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
-import NavItems from "./NavItems";
+import { INavItem } from "../../domain/nav-item";
+import NavItems from "../molecules/nav-items";
 import classes from "./header.module.css";
-import { type } from "@testing-library/user-event/dist/type";
-
-export interface INavItem {
-  id: string;
-  title: string;
-  to: string;
-}
 
 const Header = () => {
   const navItems: INavItem[] = [

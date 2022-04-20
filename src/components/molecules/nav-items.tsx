@@ -1,7 +1,7 @@
 import { FC } from "react";
-import NavItem from "../atoms/NavItem";
-import { INavItem } from "./Header";
-import ShowFavIcon from "../atoms/show-fav-icon";
+import { INavItem } from "../../domain/nav-item";
+import NavItem from "../atoms/nav-item";
+// import ShowFavIcon from "../atoms/show-fav-icon";
 
 interface Props {
   items: INavItem[];
