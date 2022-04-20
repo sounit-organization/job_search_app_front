@@ -1,14 +1,16 @@
 import { useRoutes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+// import { lazy, Suspense } from "react";
+import Header from "../src/components/organisms/header";
+import CreateSkill from "./pages/create-skill";
+import JobList from "./pages/job-list";
 
-const Header = lazy(() => import("../src/components/organisms/header"));
-const CreateSkill = lazy(() => import("./pages/create-skill"));
+// FIXME: no optimization before measure the performance
+// const Header = lazy(() => import("../src/components/organisms/header"));
+// const CreateSkill = lazy(() => import("./pages/create-skill"));
 // const CreateJob = lazy(() => import("./pages/create-job"));
-const JobList = lazy(() => import("./pages/job-list"));
+// const JobList = lazy(() => import("./pages/job-list"));
 // const Favorite = lazy(() => import("./pages/Favorite"));
 // const JobDetail = lazy(() => import("./pages/job-detail"));
-
-console.log(process.env.REACT_APP_BACKEND_URL);
 
 function App() {
   const routes = useRoutes([
@@ -22,10 +24,12 @@ function App() {
     // { path: "/favorite", element: <Favorite /> },
   ]);
   return (
-    <Suspense fallback={<p>loading....</p>}>
+    <>
+      {/* <Suspense fallback={<p>loading....</p>}> */}
       <Header />
       {routes}
-    </Suspense>
+      {/* </Suspense> */}
+    </>
   );
 }
 

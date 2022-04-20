@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import JobCardList from "../components/molecules/job-list/job-card-list";
@@ -9,12 +10,11 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobList = async () => {
       try {
-        const response = await fetch(
+        const response = await axios(
           `${process.env.REACT_APP_BACKEND_URL}/jobs`
         );
 
-        const responseData = await response.json();
-        console.log(responseData);
+        const responseData = response.data;
         setJobList(responseData.jobs);
       } catch (err) {
         console.log(err);
