@@ -13,6 +13,8 @@ module.exports = {
     "!src/index.tsx",
     "!src/reportWebVitals.ts",
     "!src/setupTests.ts",
+    "!src/react-app-env.d.ts",
+    "!test/**/*.*",
   ],
   verbose: true,
   moduleNameMapper: {

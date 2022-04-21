@@ -19,7 +19,6 @@ const JobCard: FC<Props> = (props) => {
     >
       <Card className={`${classes[componentName]} ${props.className}`}>
         <h2 className={classes["JobCard__title"]}>{props.job.title}</h2>
-        <p className={classes["JobCard__title"]}>{props.job.componentName}</p>
         <p className={classes["JobCard__title"]}>{props.job.city}</p>
         <p className={classes["JobCard__title"]}>{props.job.payment}</p>
         <p className={classes["JobCard__title"]}>{props.job.description}</p>

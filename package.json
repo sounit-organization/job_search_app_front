@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "test:dev": "jest --watchAll",
-    "test:cov": "jest --watchAll",
+    "test:cov": "jest --watchAll --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
