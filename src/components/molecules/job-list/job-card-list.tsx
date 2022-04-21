@@ -27,31 +27,32 @@ const JobCardList: FC<Props> = (props) => {
     setSearchCity(event.target.value);
   };
 
-  const filteredJobsHandler = (event: FormEvent<HTMLFormElement>) => {
+  // FIXME: make http request to backend to find job
+  const filterJobsHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const filter = props.jobList.filter((job) => {
+
+    const filteredJobs = props.jobList.filter((job) => {
       // there is one record from before that we added city to the table so I added the condition of undefined
-      if (job.city !== undefined) {
+      if (searchCity !== "" && job.city) {
         // if (searchCity !== "" && searchTitle !== "") {
         //   return (
         //     job.city.toLowerCase().includes(searchCity.trim().toLowerCase()) ||
         //     job.title.toLowerCase().includes(searchTitle.trim().toLowerCase())
         //   );
-
         console.log(job.city);
-        if (searchCity !== "") {
-          return job.city
-            .toLowerCase()
-            .includes(searchCity.trim().toLowerCase());
-        }
+        return job.city.toLowerCase().includes(searchCity.trim().toLowerCase());
       }
+
       if (searchTitle !== "") {
         return job.title
           .toLowerCase()
           .includes(searchTitle.trim().toLowerCase());
       }
+
+      return false;
     });
-    setFilteredJobs(filter);
+
+    setFilteredJobs(filteredJobs);
   };
 
   const checkedHandler = (checkedArr: number[]) => {
@@ -81,6 +82,8 @@ const JobCardList: FC<Props> = (props) => {
         }
         // });
       }
+
+      return false;
     });
     console.log(filtered);
     setFilteredJobs(filtered);
@@ -103,7 +106,7 @@ const JobCardList: FC<Props> = (props) => {
         />
         <button
           // FIXME'
-          onClick={filteredJobsHandler as any}
+          onClick={filterJobsHandler as any}
           className={classes[`${componentName}__btn`]}
         >
           Find Jobs
