@@ -3,6 +3,7 @@
 # original
 .firebase
 .env
+.env.production
 
 # dependencies
 /node_modules

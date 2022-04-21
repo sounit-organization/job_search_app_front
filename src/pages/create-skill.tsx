@@ -4,6 +4,8 @@ import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
 import classes from "./create-skill.module.css";
 
+export const createSkillUrl = `${process.env.REACT_APP_BACKEND_URL}/skills`;
+
 const CreateSkill: FC = () => {
   const [skillTitle, setSkillTitle] = useState<string>("");
 
@@ -12,7 +14,7 @@ const CreateSkill: FC = () => {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/skills`,
+        createSkillUrl,
         JSON.stringify({
           skill: skillTitle,
         })
