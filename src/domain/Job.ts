@@ -2,9 +2,9 @@ import { ISkill } from "./Skill";
 export interface IJob {
   id: string;
   title: string;
-  componentName: string;
+  companyName: string;
   city: string;
-  payment: string;
+  payment: number;
   description: string;
   skills: ISkill[];
 }

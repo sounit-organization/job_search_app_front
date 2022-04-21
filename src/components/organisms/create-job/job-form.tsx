@@ -34,9 +34,9 @@ const JobForm: FC<IProps> = (props) => {
   useEffect(() => {
     const fetchSkillList = async () => {
       try {
-        const response = await fetch(fetchSkillsUrl);
+        const response = await axios(fetchSkillsUrl);
 
-        const responseData = await response.json();
+        const responseData = response.data;
 
         setSkillList(responseData.skills);
       } catch (err) {
