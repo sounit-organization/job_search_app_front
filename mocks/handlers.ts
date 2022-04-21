@@ -17,14 +17,10 @@ export const handlers = [
 
   rest.post(createJobUrl, (req, res, ctx) => {
     const { title } = req.body as any;
-    return res(ctx.json({ title }));
+    return res(ctx.status(200), ctx.json({ title }));
   }),
 
   rest.get(jobsUrl, (req, res, ctx) => {
-    return res(
-      ctx.json({
-        jobs: jobDataList,
-      })
-    );
+    return res(ctx.json(jobDataList));
   }),
 ];
