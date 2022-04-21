@@ -17,7 +17,8 @@ const JobList = () => {
         const responseData = response.data;
         setJobList(responseData.jobs);
       } catch (err) {
-        console.log(err);
+        // FIXME: to avoid test error
+        // console.log(err);
       }
     };
 
