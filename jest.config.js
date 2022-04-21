@@ -2,7 +2,10 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  setupFilesAfterEnv: [
+    "@testing-library/jest-dom/extend-expect",
+    "<rootDir>/src/setupTests.ts",
+  ],
   collectCoverage: false,
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
@@ -10,9 +13,12 @@ module.exports = {
     "!src/index.tsx",
     "!src/reportWebVitals.ts",
     "!src/setupTests.ts",
+    "!src/react-app-env.d.ts",
+    "!test/**/*.*",
   ],
   verbose: true,
   moduleNameMapper: {
     "\\.(css|scss)$": "identity-obj-proxy",
   },
+  setupFiles: ["<rootDir>/.jest/setEnvVars.ts"],
 };
