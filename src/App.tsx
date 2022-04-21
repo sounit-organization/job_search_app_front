@@ -4,6 +4,7 @@ import Header from "../src/components/organisms/header";
 import CreateSkill from "./pages/create-skill";
 import JobList from "./pages/job-list";
 import CreateJob from "./pages/create-job";
+import Favorite from "./pages/favorite";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -22,7 +23,7 @@ function App() {
     },
     { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
-    // { path: "/favorite", element: <Favorite /> },
+    { path: "/favorite", element: <Favorite /> },
   ]);
   return (
     <>

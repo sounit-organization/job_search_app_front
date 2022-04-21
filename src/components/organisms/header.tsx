@@ -8,7 +8,7 @@ const Header = () => {
     { id: "n1", title: "Find jobs", to: "/" },
     { id: "n2", title: "Add Job", to: "/jobs/new" },
     { id: "n3", title: "Add Skill", to: "/skills/new" },
-    { id: "n4", title: "Favorites", to: "/skills/favorite" },
+    { id: "n4", title: "Favorites", to: "/favorite" },
   ];
 
   return (
