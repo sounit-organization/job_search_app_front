@@ -16,6 +16,8 @@ const JobList: FC = () => {
         console.log(jobsUrl);
         const response = await axios(jobsUrl);
 
+        console.log("response", response);
+
         const responseData = response.data;
         console.log(responseData);
 
