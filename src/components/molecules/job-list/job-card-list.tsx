@@ -39,7 +39,6 @@ const JobCardList: FC<Props> = (props) => {
         //     job.city.toLowerCase().includes(searchCity.trim().toLowerCase()) ||
         //     job.title.toLowerCase().includes(searchTitle.trim().toLowerCase())
         //   );
-        console.log(job.city);
         return job.city.toLowerCase().includes(searchCity.trim().toLowerCase());
       }
 
@@ -85,11 +84,8 @@ const JobCardList: FC<Props> = (props) => {
 
       return false;
     });
-    console.log(filtered);
     setFilteredJobs(filtered);
   };
-
-  console.log("job-card-list props.jobList", props.jobList);
 
   return (
     <>

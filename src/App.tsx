@@ -1,8 +1,9 @@
-import { useRoutes } from "react-router-dom";
 // import { lazy, Suspense } from "react";
+import { useRoutes } from "react-router-dom";
 import Header from "../src/components/organisms/header";
 import CreateSkill from "./pages/create-skill";
 import JobList from "./pages/job-list";
+import CreateJob from "./pages/create-job";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -19,7 +20,7 @@ function App() {
       element: <JobList />,
       // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     },
-    // { path: "/jobs/new", element: <CreateJob /> },
+    { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
     // { path: "/favorite", element: <Favorite /> },
   ]);

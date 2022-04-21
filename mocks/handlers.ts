@@ -1,6 +1,8 @@
 import { rest } from "msw";
+import { createJobUrl, fetchSkillsUrl } from "../src/constants/urls";
 import { createSkillUrl } from "../src/pages/create-skill";
 import { jobsUrl } from "../src/pages/job-list";
+import { jobDataList, skillsDataList } from "./data";
 
 export const handlers = [
   rest.post(createSkillUrl, (req, res, ctx) => {
@@ -9,36 +11,16 @@ export const handlers = [
     return res(ctx.json({ skill }));
   }),
 
+  rest.get(fetchSkillsUrl, (req, res, ctx) => {
+    return res(ctx.json(skillsDataList));
+  }),
+
+  rest.post(createJobUrl, (req, res, ctx) => {
+    const { title } = req.body as any;
+    return res(ctx.status(200), ctx.json({ title }));
+  }),
+
   rest.get(jobsUrl, (req, res, ctx) => {
-    return res(
-      ctx.json({
-        jobs: [
-          {
-            id: "j1",
-            title: "test title1",
-            companyName: "test company name1",
-            city: "test city1",
-            payment: 1.11,
-            description: "test description1",
-            skills: [
-              { id: "s1", title: "React" },
-              { id: "s2", title: "Node" },
-            ],
-          },
-          {
-            id: "j2",
-            title: "test title2",
-            companyName: "test company name2",
-            city: "test city2",
-            payment: 2.22,
-            description: "test description2",
-            skills: [
-              { id: "s3", title: "PHP" },
-              { id: "s4", title: "Docker" },
-            ],
-          },
-        ],
-      })
-    );
+    return res(ctx.json(jobDataList));
   }),
 ];

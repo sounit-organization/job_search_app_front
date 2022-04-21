@@ -1,0 +1,10 @@
+.CreateJob {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.CreateJob__form {
+  width: 60%;
+  border: 1px solid blue;
+}
