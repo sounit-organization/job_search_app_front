@@ -13,9 +13,12 @@ const JobList: FC = () => {
   useEffect(() => {
     const fetchJobList = async () => {
       try {
+        console.log(jobsUrl);
         const response = await axios(jobsUrl);
 
         const responseData = response.data;
+        console.log(responseData);
+
         setJobList(responseData.jobs);
       } catch (err) {
         // FIXME: to avoid test error
