@@ -89,6 +89,8 @@ const JobCardList: FC<Props> = (props) => {
     setFilteredJobs(filtered);
   };
 
+  console.log("job-card-list props.jobList", props.jobList);
+
   return (
     <>
       <div className={classes[componentName]}>
@@ -122,7 +124,8 @@ const JobCardList: FC<Props> = (props) => {
                 className={classes[`${componentName}__card`]}
               />
             ))
-          : props.jobList.map((job: IJob) => (
+          : props.jobList &&
+            props.jobList.map((job: IJob) => (
               <JobCard
                 key={job.id}
                 job={job}
