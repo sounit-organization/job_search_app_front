@@ -13,12 +13,11 @@ const CreateSkill: FC = () => {
     event.preventDefault();
 
     try {
-      await axios.post(
-        createSkillUrl,
-        JSON.stringify({
-          skill: skillTitle,
-        })
-      );
+      await axios.post(createSkillUrl, {
+        skill: skillTitle,
+      });
+
+      setSkillTitle("");
     } catch (err) {
       console.log(err);
     }
@@ -34,7 +33,8 @@ const CreateSkill: FC = () => {
 
       <form onSubmit={formSubmitHandler}>
         <Input
-          placeholder="skillname"
+          name={"Skill Name"}
+          placeholder="skill name"
           className={classes[`${componentName}__input`]}
           value={skillTitle}
           onChange={skillNameChangeHandler}
