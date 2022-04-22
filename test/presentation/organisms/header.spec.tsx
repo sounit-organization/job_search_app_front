@@ -1,11 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import App from "../../../src/App";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 describe("header navigate user correctly", () => {
   it("clicks logo and navigate to top page", async () => {
-    render(<App />, { wrapper: BrowserRouter });
+    renderWithWrapper(<App />);
 
     const headerLogo = screen.getByRole("heading", { name: /job search/i });
     const addSkillLink = screen.getByRole("link", { name: /add skill/i });
@@ -18,7 +19,7 @@ describe("header navigate user correctly", () => {
   });
 
   it("clicks add skill and navigate to add skill page", async () => {
-    render(<App />, { wrapper: BrowserRouter });
+    renderWithWrapper(<App />);
 
     const addSkillLink = screen.getByRole("link", { name: /add skill/i });
 

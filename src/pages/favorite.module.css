@@ -1,0 +1,8 @@
+.favorite__container {
+  width: 50vw;
+  margin: 3rem auto;
+}
+
+.favorite__card {
+  margin-bottom: 1rem;
+}

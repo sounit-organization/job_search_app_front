@@ -1,11 +1,11 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router-dom";
 import App from "../../../src/App";
+import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 describe("create job", () => {
   it("creates job and title input is empty", async () => {
-    render(<App />, { wrapper: BrowserRouter });
+    renderWithWrapper(<App />);
 
     // to create-job page
     const addJobLink = screen.getByRole("link", { name: /add job/i });
