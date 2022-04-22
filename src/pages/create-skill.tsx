@@ -14,7 +14,7 @@ const CreateSkill: FC = () => {
 
     try {
       await axios.post(createSkillUrl, {
-        skill: skillTitle,
+        title: skillTitle,
       });
 
       setSkillTitle("");
