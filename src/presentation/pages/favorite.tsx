@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Card from "../components/atoms/card";
-import { RootState } from "../services/re-ducks/store";
+import { RootState } from "../../services/re-ducks/store";
 import classes from "./favorite.module.css";
 
 const Favorite = () => {

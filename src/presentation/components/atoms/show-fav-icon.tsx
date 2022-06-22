@@ -1,7 +1,7 @@
 // import { useSelector } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "../../services/re-ducks/store";
+import { RootState } from "../../../services/re-ducks/store";
 import classes from "./show-fav-icon.module.css";
 
 const ShowFavIcon = () => {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { INavItem } from "../../domain/nav-item";
+import { INavItem } from "../../../domain/nav-item";
 import NavItems from "../molecules/nav-items";
 import classes from "./header.module.css";
 

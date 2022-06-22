@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { createJobUrl, fetchSkillsUrl } from "../src/constants/urls";
-import { createSkillUrl } from "../src/pages/create-skill";
-import { jobsUrl } from "../src/pages/job-list";
+import { createSkillUrl } from "../src/presentation/pages/create-skill";
+import { jobsUrl } from "../src/presentation/pages/job-list";
 import { jobDataList, skillsDataList } from "./data";
 
 export const handlers = [
