@@ -23,7 +23,7 @@ const JobCard: FC<Props> = (props) => {
         <p className={classes["JobCard__title"]}>{job.description}</p>
         <div>
           {job.skills &&
-            job.skills.map((skill) => <div key={skill.id}>{skill.title}</div>)}
+            job.skills.map((skill) => <div key={skill._id}>{skill.title}</div>)}
         </div>
       </Card>
     </Link>
