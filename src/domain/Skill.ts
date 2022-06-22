@@ -1,4 +1,4 @@
 export interface ISkill {
-  id: string;
+  _id: string;
   title: string;
 }

@@ -3,7 +3,7 @@ import { FavoriteActionTypes, FavoriteState } from "./types";
 const initialState: FavoriteState = {
   favoriteJobs: [
     {
-      id: "j1",
+      _id: "j1",
       companyName: "companyName",
       city: "city",
       description: "description",

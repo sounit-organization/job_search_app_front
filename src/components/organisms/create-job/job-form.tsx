@@ -62,7 +62,7 @@ const JobForm: FC<IProps> = (props) => {
       </div>
 
       {skillList.map((skill) => (
-        <div key={skill.id}>
+        <div key={skill._id}>
           <input type={"checkbox"} value={skill.title} />
           <label>{skill.title}</label>
         </div>
