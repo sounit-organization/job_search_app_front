@@ -28,6 +28,7 @@ const JobList: FC = () => {
   return (
     <div className={classes[componentName]}>
       <JobCardList jobList={jobList} />
+      {/* FIXME: child rendered here? maybe no. */}
       <Outlet />
     </div>
   );

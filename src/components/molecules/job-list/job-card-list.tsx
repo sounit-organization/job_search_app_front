@@ -87,6 +87,9 @@ const JobCardList: FC<Props> = (props) => {
     setFilteredJobs(filtered);
   };
 
+  console.log("filteredJobs", filteredJobs);
+  console.log("props.jobList", props.jobList);
+
   return (
     <>
       <div className={classes[componentName]}>
@@ -113,9 +116,9 @@ const JobCardList: FC<Props> = (props) => {
       <CheckBox onChecked={checkedHandler} />
       <ul className={classes[`${componentName}__list`]}>
         {!isFilteredJobsEmpty
-          ? filteredJobs.map((job) => (
+          ? filteredJobs.map((job: IJob) => (
               <JobCard
-                key={job.id}
+                key={job._id}
                 job={job}
                 className={classes[`${componentName}__card`]}
               />
@@ -123,7 +126,7 @@ const JobCardList: FC<Props> = (props) => {
           : props.jobList &&
             props.jobList.map((job: IJob) => (
               <JobCard
-                key={job.id}
+                key={job._id}
                 job={job}
                 className={classes[`${componentName}__card`]}
               />

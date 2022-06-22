@@ -1,6 +1,6 @@
 import { ISkill } from "./Skill";
 export interface IJob {
-  id: string;
+  _id: string;
   title: string;
   companyName: string;
   city: string;

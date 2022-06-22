@@ -12,20 +12,18 @@ interface Props {
 }
 
 const JobCard: FC<Props> = (props) => {
+  const { job, className } = props;
+
   return (
-    <Link
-      to={`/jobs/detail/${props.job.id}`}
-      className={classes["JobCard__link"]}
-    >
-      <Card className={`${classes[componentName]} ${props.className}`}>
-        <h2 className={classes["JobCard__title"]}>{props.job.title}</h2>
-        <p className={classes["JobCard__title"]}>{props.job.city}</p>
-        <p className={classes["JobCard__title"]}>{props.job.payment}</p>
-        <p className={classes["JobCard__title"]}>{props.job.description}</p>
+    <Link to={`/jobs/detail/${job._id}`} className={classes["JobCard__link"]}>
+      <Card className={`${classes[componentName]} ${className}`}>
+        <h2 className={classes["JobCard__title"]}>{job.title}</h2>
+        <p className={classes["JobCard__title"]}>{job.city}</p>
+        <p className={classes["JobCard__title"]}>{job.payment}</p>
+        <p className={classes["JobCard__title"]}>{job.description}</p>
         <div>
-          {props.job.skills.map((skill) => (
-            <div key={skill.id}>{skill.title}</div>
-          ))}
+          {job.skills &&
+            job.skills.map((skill) => <div key={skill.id}>{skill.title}</div>)}
         </div>
       </Card>
     </Link>
