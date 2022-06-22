@@ -1,9 +1,9 @@
 import Card from "../../atoms/card";
 import classes from "./job-card.module.css";
 import { Link } from "react-router-dom";
-import { ISkill } from "../../../domain/Skill";
+import { ISkill } from "../../../../domain/Skill";
 import { FC } from "react";
-import { IJob } from "../../../domain/Job";
+import { IJob } from "../../../../domain/Job";
 
 interface Props {
   className: string;

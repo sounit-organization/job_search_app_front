@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { rest } from "msw";
 import { BrowserRouter } from "react-router-dom";
 import { server } from "../../../mocks/server";
-import JobList, { jobsUrl } from "../../../src/pages/job-list";
+import JobList, { jobsUrl } from "../../../src/presentation/pages/job-list";
 
 describe("initial rendering", () => {
   describe("fetch job list", () => {

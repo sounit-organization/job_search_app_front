@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { INavItem } from "../../domain/nav-item";
+import { INavItem } from "../../../domain/nav-item";
 import classes from "./nav-item.module.css";
 
 interface IProps {

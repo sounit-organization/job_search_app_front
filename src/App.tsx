@@ -1,10 +1,10 @@
 // import { lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
-import Header from "../src/components/organisms/header";
-import CreateSkill from "./pages/create-skill";
-import JobList from "./pages/job-list";
-import CreateJob from "./pages/create-job";
-import Favorite from "./pages/favorite";
+import Header from "./presentation/components/organisms/header";
+import CreateSkill from "./presentation/pages/create-skill";
+import JobList from "./presentation/pages/job-list";
+import CreateJob from "./presentation/pages/create-job";
+import Favorite from "./presentation/pages/favorite";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));

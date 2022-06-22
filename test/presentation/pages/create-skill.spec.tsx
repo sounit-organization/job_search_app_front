@@ -1,7 +1,7 @@
 import { getByRole, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
-import CreateSkill from "../../../src/pages/create-skill";
+import CreateSkill from "../../../src/presentation/pages/create-skill";
 
 it("create test", async () => {
   // FIXME: to App

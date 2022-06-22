@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
-import { createJobUrl, fetchSkillsUrl } from "../../../constants/urls";
-import { ISkill } from "../../../domain/Skill";
+import { createJobUrl, fetchSkillsUrl } from "../../../../constants/urls";
+import { ISkill } from "../../../../domain/Skill";
 import CreateButton from "../../atoms/create-button";
 import Input from "../../atoms/input";
 import classes from "./job-form.module.css";

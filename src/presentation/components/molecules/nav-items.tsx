@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { INavItem } from "../../domain/nav-item";
+import { INavItem } from "../../../domain/nav-item";
 import NavItem from "../atoms/nav-item";
 import ShowFavIcon from "../atoms/show-fav-icon";
 // import ShowFavIcon from "../atoms/show-fav-icon";
