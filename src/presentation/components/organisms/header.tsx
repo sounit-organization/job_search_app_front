@@ -8,6 +8,8 @@ const Header = () => {
     { id: "n1", title: "Find jobs", to: "/" },
     { id: "n2", title: "Add Job", to: "/jobs/new" },
     { id: "n3", title: "Add Skill", to: "/skills/new" },
+    { id: "n4", title: "Login", to: "/login" },
+    { id: "n5", title: "SignUp", to: "/signUp" },
   ];
 
   return (
