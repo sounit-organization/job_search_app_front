@@ -27,6 +27,7 @@ function App() {
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
   ]);
+
   return (
     <>
       {/* <Suspense fallback={<p>loading....</p>}> */}

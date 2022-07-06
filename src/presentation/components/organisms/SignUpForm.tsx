@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { TextField, Container, FormControl, Button } from "@mui/material";
 import { signUp } from "../../../services/authHttpClient.adapter";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { authActions } from "../../../services/redux/authSlice";
+
+const initialValues = {
+  firstName: "test first name",
+  lastName: "test last name",
+  email: "test email",
+  password: "test password",
+};
 
 const SignUpForm = () => {
-  const initialValues = {
-    firstName: "test first name",
-    lastName: "test last name",
-    email: "test email",
-    password: "test password",
-  };
-
   const [values, setValues] = useState(initialValues);
   const { firstName, lastName, email, password } = values;
+  const dispatch = useAppDispatch();
 
   const valueChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -32,8 +35,14 @@ const SignUpForm = () => {
     console.log({ firstName, lastName, email, password });
 
     try {
-      const result = await signUp({ firstName, lastName, email, password });
-      console.log("submit result", result);
+      const { token } = await signUp({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+
+      dispatch(authActions.signUp(token));
     } catch (error) {
       // FIXME: add error modal
       console.log(error);
