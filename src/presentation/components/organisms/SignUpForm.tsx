@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextField, Container, FormControl, Button } from "@mui/material";
+import { signUp } from "../../../services/authHttpClient.adapter";
 
 const SignUpForm = () => {
   const initialValues = {
@@ -15,17 +16,28 @@ const SignUpForm = () => {
   const valueChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
+    const { name, value } = event.target;
     setValues((prevState) => ({
       ...prevState,
-      [event.target.name]: event.target.value,
+      [name]: value,
     }));
   };
 
-  const submitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
     event.preventDefault();
 
     console.log("submitHandler");
     console.log({ firstName, lastName, email, password });
+
+    try {
+      const result = await signUp({ firstName, lastName, email, password });
+      console.log("submit result", result);
+    } catch (error) {
+      // FIXME: add error modal
+      console.log(error);
+    }
   };
 
   return (
@@ -48,25 +60,29 @@ const SignUpForm = () => {
             label="Last Name"
             variant="standard"
             value={lastName}
+            onChange={valueChangeHandler}
           />
         </FormControl>
         <FormControl fullWidth margin="dense">
           <TextField
             fullWidth
             name="email"
+            type="email"
             label="Email"
             variant="standard"
             value={email}
+            onChange={valueChangeHandler}
           />
         </FormControl>
         <FormControl fullWidth margin="dense">
           <TextField
             fullWidth
+            type="password"
             name="password"
             label="Password"
-            type="password"
             variant="standard"
             value={password}
+            onChange={valueChangeHandler}
           />
         </FormControl>
         <Button type="submit" variant="outlined">

@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { createJobUrl, fetchSkillsUrl } from "../src/constants/urls";
+import { createJobUrl, fetchSkillsUrl } from "../src/constants/constants";
 import { createSkillUrl } from "../src/presentation/pages/create-skill";
 import { jobsUrl } from "../src/presentation/pages/job-list";
 import { jobDataList, skillsDataList } from "./data";
