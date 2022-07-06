@@ -24,6 +24,7 @@ const Header = () => {
       <div className={classes[`${componentName}__nav-items`]}>
         <NavItems items={navItems} />
       </div>
+      {/* FIXME: refactor to same style component */}
       <p onClick={logoutHandler} className="cursor-pointer">
         Logout
       </p>
