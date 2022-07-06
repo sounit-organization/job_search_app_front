@@ -3,6 +3,8 @@ import { TextField, Container, FormControl, Button } from "@mui/material";
 import { signUp } from "../../../services/authHttpClient.adapter";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { authActions } from "../../../services/redux/authSlice";
+import { saveToken } from "../../../services/token.adapter";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   firstName: "test first name",
@@ -15,6 +17,7 @@ const SignUpForm = () => {
   const [values, setValues] = useState(initialValues);
   const { firstName, lastName, email, password } = values;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const valueChangeHandler: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -31,9 +34,6 @@ const SignUpForm = () => {
   ) => {
     event.preventDefault();
 
-    console.log("submitHandler");
-    console.log({ firstName, lastName, email, password });
-
     try {
       const { token } = await signUp({
         firstName,
@@ -43,6 +43,10 @@ const SignUpForm = () => {
       });
 
       dispatch(authActions.signUp(token));
+
+      saveToken(token);
+
+      navigate("/");
     } catch (error) {
       // FIXME: add error modal
       console.log(error);
