@@ -3,6 +3,7 @@ import { TextField, Container, FormControl, Button } from "@mui/material";
 import { signUp } from "../../../services/authHttpClient.adapter";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { authActions } from "../../../services/redux/authSlice";
+import { saveToken } from "../../../services/token.adapter";
 
 const initialValues = {
   firstName: "test first name",
@@ -31,9 +32,6 @@ const SignUpForm = () => {
   ) => {
     event.preventDefault();
 
-    console.log("submitHandler");
-    console.log({ firstName, lastName, email, password });
-
     try {
       const { token } = await signUp({
         firstName,
@@ -43,6 +41,8 @@ const SignUpForm = () => {
       });
 
       dispatch(authActions.signUp(token));
+
+      saveToken(token);
     } catch (error) {
       // FIXME: add error modal
       console.log(error);
