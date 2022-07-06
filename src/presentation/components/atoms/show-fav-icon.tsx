@@ -1,13 +1,9 @@
-// import { useSelector } from "react-redux";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "../../../services/re-ducks/store";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import classes from "./show-fav-icon.module.css";
 
 const ShowFavIcon = () => {
-  const favoriteJobs = useSelector(
-    (state: RootState) => state.favorite.favoriteJobs
-  );
+  const favoriteJobs = useAppSelector((state) => state.favorites.favoriteJobs);
 
   const getFavJobsCount = () => {
     return Object.keys(favoriteJobs).length;

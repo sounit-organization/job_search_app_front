@@ -1,12 +1,9 @@
-import { useSelector } from "react-redux";
 import Card from "../components/atoms/card";
-import { RootState } from "../../services/re-ducks/store";
 import classes from "./favorite.module.css";
+import { useAppSelector } from "../hooks/reduxHooks";
 
 const Favorite = () => {
-  const favoriteJobs = useSelector(
-    (state: RootState) => state.favorite.favoriteJobs
-  );
+  const favoriteJobs = useAppSelector((state) => state.favorites.favoriteJobs);
 
   console.log(favoriteJobs);
 
