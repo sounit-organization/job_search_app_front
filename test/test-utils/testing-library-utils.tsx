@@ -1,14 +1,12 @@
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { configureStore } from "../../src/services/re-ducks/store";
-
-const reduxStore = configureStore();
+import { store } from "../../src/services/redux/store";
 
 const renderWithWrapper = (ui: any, options?: any) => {
   const Wrapper = ({ children }: any) => {
     return (
-      <Provider store={reduxStore}>
+      <Provider store={store}>
         <BrowserRouter>{children}</BrowserRouter>
       </Provider>
     );
