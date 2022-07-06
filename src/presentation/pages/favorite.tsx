@@ -10,7 +10,7 @@ const Favorite = () => {
   return (
     <div className={classes.favorite__container}>
       {favoriteJobs.map((job) => (
-        <Card className={classes.favorite__card}>
+        <Card key={job._id} className={classes.favorite__card}>
           <h2>{job.title}</h2>
         </Card>
       ))}

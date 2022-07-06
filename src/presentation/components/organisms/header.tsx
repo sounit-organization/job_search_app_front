@@ -12,6 +12,10 @@ const Header = () => {
     { id: "n5", title: "SignUp", to: "/signUp" },
   ];
 
+  const logoutHandler = () => {
+    console.log("logout");
+  };
+
   return (
     <header className={classes[componentName]}>
       <Link to="/" className={classes[`${componentName}__logo-link`]}>
@@ -20,6 +24,9 @@ const Header = () => {
       <div className={classes[`${componentName}__nav-items`]}>
         <NavItems items={navItems} />
       </div>
+      <p onClick={logoutHandler} className="cursor-pointer">
+        Logout
+      </p>
     </header>
   );
 };
