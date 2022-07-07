@@ -1,11 +1,12 @@
-import { getByRole, render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter as Router } from "react-router-dom";
 import CreateSkill from "../../../src/presentation/pages/create-skill";
+import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 it("create test", async () => {
   // FIXME: to App
-  render(<CreateSkill />, { wrapper: Router });
+  // render(<CreateSkill />, { wrapper: Router });
+  renderWithWrapper(<CreateSkill />);
 
   // const skillPageLink = await screen.findByRole("link", { name: /add skill/i });
   // userEvent.click(skillPageLink);
