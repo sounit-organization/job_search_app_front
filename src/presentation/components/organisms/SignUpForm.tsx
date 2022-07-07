@@ -9,8 +9,8 @@ import useForm from "../../hooks/useForm";
 const initialValues = {
   firstName: "test first name",
   lastName: "test last name",
-  email: "test email",
-  password: "test password",
+  email: "test@email",
+  password: "testpassword",
 };
 
 const SignUpForm = () => {
