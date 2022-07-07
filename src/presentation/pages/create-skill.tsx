@@ -1,5 +1,6 @@
 import axios from "axios";
-import { FC, FormEvent } from "react";
+import { FC, FormEvent, useEffect } from "react";
+import { getSkills } from "../../services/skillHttpClient.adapter";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
 import useForm from "../hooks/useForm";
@@ -26,6 +27,15 @@ const CreateSkill: FC = () => {
       console.log(err);
     }
   };
+
+  const fetchSkills = async () => {
+    const res = await getSkills();
+    console.log("getSkills res", res);
+  };
+
+  useEffect(() => {
+    fetchSkills();
+  }, []);
 
   return (
     <div className={classes[componentName]}>
