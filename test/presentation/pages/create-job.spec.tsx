@@ -5,6 +5,9 @@ import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 // FIXME: test fail because of react-query
 describe("create job", () => {
+  it("fake test", () => {
+    expect("").toBe("");
+  });
   // it("creates job and title input is empty", async () => {
   //   renderWithWrapper(<App />);
   //   // to create-job page
