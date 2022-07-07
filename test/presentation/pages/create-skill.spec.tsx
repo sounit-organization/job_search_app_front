@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import CreateSkill from "../../../src/presentation/pages/create-skill";
 import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
+// FIXME: test fail because of react-query
 // it("create test", async () => {
 //   // FIXME: to App
 //   // render(<CreateSkill />, { wrapper: Router });
