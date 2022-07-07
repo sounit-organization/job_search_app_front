@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { authActions } from "../../../services/redux/authSlice";
+import { removeToken } from "../../../services/token.adapter";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import NavItem from "../atoms/nav-item";
 import classes from "./header.module.css";
 
 const Header = () => {
   const { isLogin } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   const logoutHandler = () => {
-    console.log("logout");
+    dispatch(authActions.logout());
+    removeToken();
   };
 
   return (
