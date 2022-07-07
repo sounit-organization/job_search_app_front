@@ -1,5 +1,10 @@
 import { useQuery } from "react-query";
+import { getSkills } from "../../services/skillHttpClient.adapter";
 
 const useGetSkills = () => {
-  useQuery("skills");
+  const { data, isLoading, isError, error } = useQuery("skills", getSkills);
+
+  return { data, isLoading, isError, error };
 };
+
+export default useGetSkills;

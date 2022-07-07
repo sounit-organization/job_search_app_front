@@ -1,9 +1,9 @@
 import axios from "axios";
-import { FC, FormEvent, useEffect } from "react";
-import { getSkills } from "../../services/skillHttpClient.adapter";
+import { FC, FormEvent } from "react";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
 import useForm from "../hooks/useForm";
+import useGetSkills from "../hooks/useGetSkills";
 import classes from "./create-skill.module.css";
 
 export const createSkillUrl = `${process.env.REACT_APP_BACKEND_URL}/skills`;
@@ -15,6 +15,7 @@ const formInitialValues = {
 const CreateSkill: FC = () => {
   const { values, valueChangeHandler } = useForm(formInitialValues);
   const { title } = values;
+  const { data: skills, isLoading, isError, error } = useGetSkills();
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,14 +29,14 @@ const CreateSkill: FC = () => {
     }
   };
 
-  const fetchSkills = async () => {
-    const res = await getSkills();
-    console.log("getSkills res", res);
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  useEffect(() => {
-    fetchSkills();
-  }, []);
+  if (isError) {
+    console.log(error);
+    return <div>Fetch Skills Error!</div>;
+  }
 
   return (
     <div className={classes[componentName]}>
@@ -53,6 +54,9 @@ const CreateSkill: FC = () => {
           className={classes[`${componentName}__btn`]}
         />
       </form>
+      {skills?.map((skill) => (
+        <div key={skill._id}>{skill.title}</div>
+      ))}
     </div>
   );
 };
