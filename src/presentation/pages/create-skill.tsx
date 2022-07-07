@@ -1,14 +1,13 @@
 import axios from "axios";
 import { FC, FormEvent } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
+import { createSkill } from "../../services/skillHttpClient.adapter";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import useForm from "../hooks/useForm";
 import useGetSkills from "../hooks/useGetSkills";
 import classes from "./create-skill.module.css";
-
-export const createSkillUrl = `${process.env.REACT_APP_BACKEND_URL}/skills`;
 
 const formInitialValues = {
   title: "",
@@ -26,17 +25,11 @@ const CreateSkill: FC = () => {
     event.preventDefault();
 
     try {
-      await axios.post(
-        createSkillUrl,
-        {
-          title,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      createSkill({ title }, token);
     } catch (error) {
       console.log(error);
       dispatch(
