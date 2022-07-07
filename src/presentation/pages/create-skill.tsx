@@ -1,45 +1,43 @@
 import axios from "axios";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { FC, FormEvent } from "react";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
+import useForm from "../hooks/useForm";
 import classes from "./create-skill.module.css";
 
 export const createSkillUrl = `${process.env.REACT_APP_BACKEND_URL}/skills`;
 
+const formInitialValues = {
+  title: "",
+};
+
 const CreateSkill: FC = () => {
-  const [skillTitle, setSkillTitle] = useState<string>("");
+  const { values, valueChangeHandler } = useForm(formInitialValues);
+  const { title } = values;
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       await axios.post(createSkillUrl, {
-        title: skillTitle,
+        title,
       });
-
-      setSkillTitle("");
     } catch (err) {
       console.log(err);
     }
   };
 
-  const skillNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setSkillTitle(event.target.value);
-  };
-
   return (
     <div className={classes[componentName]}>
-      <h1>Create Skill</h1>
-
       <form onSubmit={formSubmitHandler}>
+        {/* FIXME: replace with mui-v5 component */}
         <Input
-          name={"Skill Name"}
-          placeholder="skill name"
+          name="title"
+          placeholder="Title"
           className={classes[`${componentName}__input`]}
-          value={skillTitle}
-          onChange={skillNameChangeHandler}
+          value={title}
+          onChange={valueChangeHandler}
         />
-
         <CreateButton
           title="Add Skill"
           className={classes[`${componentName}__btn`]}

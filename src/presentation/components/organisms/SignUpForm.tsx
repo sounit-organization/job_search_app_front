@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { TextField, Container, FormControl, Button } from "@mui/material";
 import { signUp } from "../../../services/authHttpClient.adapter";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { authActions } from "../../../services/redux/authSlice";
 import { saveToken } from "../../../services/token.adapter";
 import { useNavigate } from "react-router-dom";
+import useForm from "../../hooks/useForm";
 
 const initialValues = {
   firstName: "test first name",
@@ -14,20 +14,10 @@ const initialValues = {
 };
 
 const SignUpForm = () => {
-  const [values, setValues] = useState(initialValues);
+  const { values, valueChangeHandler } = useForm(initialValues);
   const { firstName, lastName, email, password } = values;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const valueChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (event) => {
-    const { name, value } = event.target;
-    setValues((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
     event
