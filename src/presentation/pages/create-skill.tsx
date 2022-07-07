@@ -3,7 +3,7 @@ import { FC, FormEvent } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import useForm from "../hooks/useForm";
 import useGetSkills from "../hooks/useGetSkills";
 import classes from "./create-skill.module.css";
@@ -15,18 +15,28 @@ const formInitialValues = {
 };
 
 const CreateSkill: FC = () => {
+  const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.auth);
+  const { data: skills, isLoading, isError, error } = useGetSkills();
+
   const { values, valueChangeHandler } = useForm(formInitialValues);
   const { title } = values;
-  const { data: skills, isLoading, isError, error } = useGetSkills();
-  const dispatch = useAppDispatch();
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      await axios.post(createSkillUrl, {
-        title,
-      });
+      await axios.post(
+        createSkillUrl,
+        {
+          title,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.log(error);
       dispatch(
