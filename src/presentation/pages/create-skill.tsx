@@ -1,7 +1,9 @@
 import axios from "axios";
 import { FC, FormEvent } from "react";
+import { errorActions } from "../../services/redux/errorSlice";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
+import { useAppDispatch } from "../hooks/reduxHooks";
 import useForm from "../hooks/useForm";
 import useGetSkills from "../hooks/useGetSkills";
 import classes from "./create-skill.module.css";
@@ -16,6 +18,7 @@ const CreateSkill: FC = () => {
   const { values, valueChangeHandler } = useForm(formInitialValues);
   const { title } = values;
   const { data: skills, isLoading, isError, error } = useGetSkills();
+  const dispatch = useAppDispatch();
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,8 +27,13 @@ const CreateSkill: FC = () => {
       await axios.post(createSkillUrl, {
         title,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        errorActions.setError(
+          `Failed to create skill: ${(error as Error).message}`
+        )
+      );
     }
   };
 
@@ -34,8 +42,11 @@ const CreateSkill: FC = () => {
   }
 
   if (isError) {
-    console.log(error);
-    return <div>Fetch Skills Error!</div>;
+    console.log("isError");
+
+    console.log(error as Error);
+    dispatch(errorActions.setError((error as Error).message));
+    return <div></div>;
   }
 
   return (

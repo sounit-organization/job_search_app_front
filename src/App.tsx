@@ -7,6 +7,8 @@ import CreateJob from "./presentation/pages/create-job";
 import Favorite from "./presentation/pages/favorite";
 import SignUp from "./presentation/pages/SignUp";
 import useAuth from "./presentation/hooks/useAuth";
+import Modal from "./presentation/components/organisms/Modal";
+import { useAppSelector } from "./presentation/hooks/reduxHooks";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -28,11 +30,13 @@ function App() {
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
   ]);
+  const { errorMessage } = useAppSelector((state) => state.error);
 
   useAuth();
 
   return (
     <>
+      <Modal message={errorMessage} isOpen={!!errorMessage} />
       {/* <Suspense fallback={<p>loading....</p>}> */}
       <Header />
       {routes}

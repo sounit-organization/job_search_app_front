@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
+import { errorReducer } from "./errorSlice";
 import favoritesReducer from "./favoriteSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     favorites: favoritesReducer,
+    error: errorReducer,
   },
 });
 

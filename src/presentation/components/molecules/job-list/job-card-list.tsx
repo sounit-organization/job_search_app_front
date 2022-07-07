@@ -87,9 +87,6 @@ const JobCardList: FC<Props> = (props) => {
     setFilteredJobs(filtered);
   };
 
-  console.log("filteredJobs", filteredJobs);
-  console.log("props.jobList", props.jobList);
-
   return (
     <>
       <div className={classes[componentName]}>
