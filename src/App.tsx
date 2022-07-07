@@ -6,6 +6,7 @@ import JobList from "./presentation/pages/job-list";
 import CreateJob from "./presentation/pages/create-job";
 import Favorite from "./presentation/pages/favorite";
 import SignUp from "./presentation/pages/SignUp";
+import useAuth from "./presentation/hooks/useAuth";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -27,6 +28,8 @@ function App() {
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
   ]);
+
+  useAuth();
 
   return (
     <>
