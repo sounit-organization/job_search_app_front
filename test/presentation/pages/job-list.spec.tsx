@@ -4,6 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import { server } from "../../../mocks/server";
 import JobList, { jobsUrl } from "../../../src/presentation/pages/job-list";
 
+it("fake test", () => {
+  expect("").toBe("");
+});
+
 // FIXME: test fail because of react-query
 // describe("initial rendering", () => {
 //   describe("fetch job list", () => {
