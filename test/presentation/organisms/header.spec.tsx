@@ -4,6 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
+it("fake test", () => {
+  expect("").toBe("");
+});
+
 describe("header navigate user correctly", () => {
   // it("clicks logo and navigate to top page", async () => {
   //   renderWithWrapper(<App />);
