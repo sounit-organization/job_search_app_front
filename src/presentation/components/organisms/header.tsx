@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
-import { INavItem } from "../../../domain/nav-item";
-import NavItems from "../molecules/nav-items";
+import { authActions } from "../../../services/redux/authSlice";
+import { removeToken } from "../../../services/token.adapter";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import NavItem from "../atoms/nav-item";
 import classes from "./header.module.css";
 
 const Header = () => {
-  const navItems: INavItem[] = [
-    { id: "n1", title: "Find jobs", to: "/" },
-    { id: "n2", title: "Add Job", to: "/jobs/new" },
-    { id: "n3", title: "Add Skill", to: "/skills/new" },
-    { id: "n4", title: "Login", to: "/login" },
-    { id: "n5", title: "SignUp", to: "/signUp" },
-  ];
+  const { isLogin } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+    removeToken();
+  };
 
   return (
     <header className={classes[componentName]}>
@@ -18,8 +20,18 @@ const Header = () => {
         <h1 className={classes[`${componentName}__logo-text`]}>Job Search</h1>
       </Link>
       <div className={classes[`${componentName}__nav-items`]}>
-        <NavItems items={navItems} />
+        <NavItem title="Find jobs" to="/" />
+        <NavItem title="Add Job" to="/jobs/new" />
+        <NavItem title="Add Skill" to="/skills/new" />
+        {!isLogin && <NavItem title="Login" to="/login" />}
+        {!isLogin && <NavItem title="SignUp" to="/signUp" />}
       </div>
+      {/* FIXME: refactor to same style component */}
+      {isLogin && (
+        <p onClick={logoutHandler} className="cursor-pointer">
+          Logout
+        </p>
+      )}
     </header>
   );
 };
