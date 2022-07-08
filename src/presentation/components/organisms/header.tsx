@@ -21,8 +21,8 @@ const Header = () => {
       </Link>
       <div className={classes[`${componentName}__nav-items`]}>
         <NavItem title="Find jobs" to="/" />
-        <NavItem title="Add Job" to="/jobs/new" />
-        <NavItem title="Add Skill" to="/skills/new" />
+        {isLogin && <NavItem title="Add Job" to="/jobs/new" />}
+        {isLogin && <NavItem title="Add Skill" to="/skills/new" />}
         {!isLogin && <NavItem title="Login" to="/login" />}
         {!isLogin && <NavItem title="SignUp" to="/signUp" />}
       </div>
