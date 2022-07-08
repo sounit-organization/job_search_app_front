@@ -7,6 +7,7 @@ import { useSkillMutations } from "../hooks/useSkillMutations";
 import useForm from "../hooks/useForm";
 import useSkillsQuery from "../hooks/useSkillsQuery";
 import classes from "./create-skill.module.css";
+import SkillCard from "../components/organisms/SkillCard";
 
 const formInitialValues = {
   title: "",
@@ -80,9 +81,11 @@ const CreateSkill: FC = () => {
           className={classes[`${componentName}__btn`]}
         />
       </form>
-      {skills?.map((skill) => (
-        <div key={skill._id}>{skill.title}</div>
-      ))}
+      <div className="grid grid-cols-4 gap-4">
+        {skills?.map((skill) => (
+          <SkillCard key={skill._id} skill={skill} />
+        ))}
+      </div>
     </div>
   );
 };
