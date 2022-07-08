@@ -17,7 +17,17 @@ const EditSkill = () => {
     return <div>Error</div>;
   }
 
-  return <EditSkillForm initialFormData={{ ...skill! }} />;
+  const submitLogic = () => {
+    console.log("Update skill");
+  };
+
+  return (
+    <EditSkillForm
+      buttonText="Update Skill"
+      initialFormData={{ title: skill!.title }}
+      onSubmitLogic={submitLogic}
+    />
+  );
 };
 
 export default EditSkill;

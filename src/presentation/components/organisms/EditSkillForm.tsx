@@ -1,25 +1,31 @@
 import { Button, TextField } from "@mui/material";
 import { FC } from "react";
-import { ISkill } from "../../../domain/Skill";
-import useForm from "../../hooks/useForm";
+import useForm, { FormInitialValues } from "../../hooks/useForm";
 
 type Props = {
-  initialFormData: ISkill;
+  initialFormData: FormInitialValues;
+  buttonText: string;
+  onSubmitLogic: (title: string) => void;
 };
 
 const EditSkillForm: FC<Props> = (props) => {
-  const { initialFormData } = props;
+  const { initialFormData, buttonText, onSubmitLogic } = props;
 
-  const { values, valueChangeHandler } = useForm({ ...initialFormData });
+  const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
   const { title } = values;
 
-  const submitHandler = () => {};
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    onSubmitLogic(title);
+
+    resetValues();
+  };
 
   return (
     <form onSubmit={submitHandler}>
-      {title && <TextField value={title} onChange={valueChangeHandler} />}
+      <TextField name="title" value={title} onChange={valueChangeHandler} />
       <Button type="submit" variant="outlined">
-        Update Skill
+        {buttonText}
       </Button>
     </form>
   );

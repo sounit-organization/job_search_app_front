@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type FormInitialValues = {
+export type FormInitialValues = {
   [key: string]: string;
 };
 
@@ -11,7 +11,6 @@ const useForm = (initialValues: FormInitialValues) => {
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const { name, value } = event.target;
-    console.log("valueChangeHandler", name, value);
 
     setValues((prevState) => ({
       ...prevState,

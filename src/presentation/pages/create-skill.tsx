@@ -1,14 +1,17 @@
 import { FC } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
 import classes from "./create-skill.module.css";
 import SkillCard from "../components/organisms/SkillCard";
-import CreateSkillForm from "../components/organisms/CreateSkillForm";
+import EditSkillForm from "../components/organisms/EditSkillForm";
+import { useSkillMutations } from "../hooks/useSkillMutations";
 
 const CreateSkill: FC = () => {
+  const { token } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const getSkillsQuery = useGetSkillsQuery();
+  const { createSkillMutation } = useSkillMutations();
 
   const { data: skills } = getSkillsQuery;
 
@@ -27,9 +30,22 @@ const CreateSkill: FC = () => {
     );
   }
 
+  const submitLogic = (title: string) => {
+    if (!token) {
+      return dispatch(
+        errorActions.setError(`Failed to create skill: No token found`)
+      );
+    }
+    createSkillMutation.mutate({ newSkill: { title }, token });
+  };
+
   return (
     <div className={classes[componentName]}>
-      <CreateSkillForm />
+      <EditSkillForm
+        buttonText="Create Skill"
+        initialFormData={{ title: "" }}
+        onSubmitLogic={submitLogic}
+      />
       <div className="grid grid-cols-4 gap-4">
         {skills?.map((skill) => (
           <SkillCard key={skill._id} skill={skill} />
