@@ -1,8 +1,8 @@
-import { screen } from "@testing-library/react";
-import App from "../../../src/App";
-import { BrowserRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
-import { renderWithWrapper } from "../../test-utils/testing-library-utils";
+// import { screen } from "@testing-library/react";
+// import App from "../../../src/App";
+// import { BrowserRouter } from "react-router-dom";
+// import userEvent from "@testing-library/user-event";
+// import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 it("fake test", () => {
   expect("").toBe("");
