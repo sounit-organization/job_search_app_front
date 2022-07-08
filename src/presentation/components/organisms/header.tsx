@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { authActions } from "../../../services/redux/authSlice";
-import { removeToken } from "../../../services/token.adapter";
+import { removeToken } from "../../../services/localStorage.adapter";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import NavItem from "../atoms/nav-item";
 import classes from "./header.module.css";

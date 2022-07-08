@@ -2,16 +2,18 @@ import { Action, createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {
   isLogin: boolean;
+  userId: string | null;
   token: string | null;
 };
 
 const initialState: InitialState = {
   isLogin: false,
+  userId: null,
   token: null,
 };
 
 type signUpAction = Action & {
-  payload: string;
+  payload: { token: string; userId: string };
 };
 
 const authSlice = createSlice({
@@ -19,9 +21,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signUp: (state, action: signUpAction) => {
-      const token = action.payload;
+      const { token, userId } = action.payload;
       state.isLogin = true;
       state.token = token;
+      state.userId = userId;
     },
     logout: (state) => {
       state.isLogin = false;

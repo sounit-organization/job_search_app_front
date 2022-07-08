@@ -2,7 +2,7 @@ import { TextField, Container, FormControl, Button } from "@mui/material";
 import { signUp } from "../../../services/authHttpClient.adapter";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { authActions } from "../../../services/redux/authSlice";
-import { saveToken } from "../../../services/token.adapter";
+import { saveToken, saveUserId } from "../../../services/localStorage.adapter";
 import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 
@@ -25,16 +25,18 @@ const SignUpForm = () => {
     event.preventDefault();
 
     try {
-      const { token } = await signUp({
+      const { token, user } = await signUp({
         firstName,
         lastName,
         email,
         password,
       });
+      const { _id: userId } = user;
 
-      dispatch(authActions.signUp(token));
+      dispatch(authActions.signUp({ token, userId }));
 
       saveToken(token);
+      saveUserId(userId);
 
       navigate("/");
     } catch (error) {
