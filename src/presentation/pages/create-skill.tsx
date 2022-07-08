@@ -28,17 +28,6 @@ const CreateSkill: FC = () => {
     return <div>Loading...</div>;
   }
 
-  if (getSkillsQuery.isError) {
-    console.log("isError");
-    console.log(getSkillsQuery.error as Error);
-
-    dispatch(
-      errorActions.setError(
-        `Failed to create skill: ${getSkillsQuery.error as Error}`
-      )
-    );
-  }
-
   if (createSkillMutation.isLoading) {
     return <div>Creating...</div>;
   }

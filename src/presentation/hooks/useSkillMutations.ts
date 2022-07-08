@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { REACT_QUERY_KEY_SKILLS } from "../../constants/constants";
 import { ISkill } from "../../domain/Skill";
 import {
@@ -8,6 +9,7 @@ import {
 
 export const useSkillMutations = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   // https://qiita.com/suzuki0430/items/1812e600797bba661cef
   const createSkillMutation = useMutation<
@@ -28,6 +30,8 @@ export const useSkillMutations = () => {
     onSuccess: (data) => {
       queryClient.setQueryData([REACT_QUERY_KEY_SKILLS, data._id], data);
       queryClient.invalidateQueries(REACT_QUERY_KEY_SKILLS);
+
+      navigate("/skills/new");
     },
   });
 

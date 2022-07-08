@@ -14,14 +14,6 @@ const EditSkill = () => {
   const getSkillByIdQuery = useGetSkillByIdQuery(skillId!);
   const skill = getSkillByIdQuery.data;
 
-  if (getSkillByIdQuery.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (getSkillByIdQuery.isError) {
-    return <div>Error</div>;
-  }
-
   const submitLogic = (title: string) => {
     if (!token) {
       return dispatch(
@@ -37,6 +29,14 @@ const EditSkill = () => {
 
     updateSkillMutation.mutate({ updatedSkill: { title }, token, skillId });
   };
+
+  if (getSkillByIdQuery.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (getSkillByIdQuery.isError) {
+    return <div>Get Skill Error</div>;
+  }
 
   if (updateSkillMutation.isLoading) {
     return <div>Updating....</div>;
