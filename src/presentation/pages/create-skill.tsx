@@ -1,12 +1,11 @@
-import axios from "axios";
 import { FC, FormEvent } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
-import { createSkill } from "../../services/skillHttpClient.adapter";
 import CreateButton from "../components/atoms/create-button";
 import Input from "../components/atoms/input";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { useSkillMutations } from "../hooks/useSkillMutations";
 import useForm from "../hooks/useForm";
-import useGetSkills from "../hooks/useGetSkills";
+import useSkillsQuery from "../hooks/useSkillsQuery";
 import classes from "./create-skill.module.css";
 
 const formInitialValues = {
@@ -16,40 +15,54 @@ const formInitialValues = {
 const CreateSkill: FC = () => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
-  const { data: skills, isLoading, isError, error } = useGetSkills();
+  const skillsQuery = useSkillsQuery();
+  const { createSkillMutation } = useSkillMutations();
+  const { data: skills } = skillsQuery;
 
-  const { values, valueChangeHandler } = useForm(formInitialValues);
+  const { values, valueChangeHandler, resetValues } =
+    useForm(formInitialValues);
   const { title } = values;
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      if (!token) {
-        throw new Error("No token found");
-      }
-
-      createSkill({ title }, token);
-    } catch (error) {
-      console.log(error);
-      dispatch(
-        errorActions.setError(
-          `Failed to create skill: ${(error as Error).message}`
-        )
+    if (!token) {
+      return dispatch(
+        errorActions.setError(`Failed to create skill: No token found`)
       );
     }
+
+    // FIXME: add type
+    createSkillMutation.mutate({ newSkill: { title }, token });
+
+    resetValues();
   };
 
-  if (isLoading) {
+  if (skillsQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (skillsQuery.isError) {
     console.log("isError");
+    console.log(skillsQuery.error as Error);
 
-    console.log(error as Error);
-    dispatch(errorActions.setError((error as Error).message));
-    return <div></div>;
+    dispatch(
+      errorActions.setError(
+        `Failed to create skill: ${skillsQuery.error as Error}`
+      )
+    );
+  }
+
+  if (createSkillMutation.isError) {
+    console.log("skillError", createSkillMutation.error);
+
+    dispatch(
+      errorActions.setError(
+        `Failed to create skill: ${createSkillMutation.error as Error}`
+      )
+    );
+
+    createSkillMutation.reset();
   }
 
   return (
