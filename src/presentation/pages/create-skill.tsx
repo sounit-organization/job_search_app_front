@@ -1,28 +1,28 @@
 import { FC } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch } from "../hooks/reduxHooks";
-import useSkillsQuery from "../hooks/useSkillsQuery";
+import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
 import classes from "./create-skill.module.css";
 import SkillCard from "../components/organisms/SkillCard";
 import CreateSkillForm from "../components/organisms/CreateSkillForm";
 
 const CreateSkill: FC = () => {
   const dispatch = useAppDispatch();
-  const skillsQuery = useSkillsQuery();
+  const getSkillsQuery = useGetSkillsQuery();
 
-  const { data: skills } = skillsQuery;
+  const { data: skills } = getSkillsQuery;
 
-  if (skillsQuery.isLoading) {
+  if (getSkillsQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (skillsQuery.isError) {
+  if (getSkillsQuery.isError) {
     console.log("isError");
-    console.log(skillsQuery.error as Error);
+    console.log(getSkillsQuery.error as Error);
 
     dispatch(
       errorActions.setError(
-        `Failed to create skill: ${skillsQuery.error as Error}`
+        `Failed to create skill: ${getSkillsQuery.error as Error}`
       )
     );
   }

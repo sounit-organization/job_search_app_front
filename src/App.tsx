@@ -9,6 +9,7 @@ import SignUp from "./presentation/pages/SignUp";
 import useAuth from "./presentation/hooks/useAuth";
 import Modal from "./presentation/components/organisms/Modal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
+import EditSkill from "./presentation/pages/EditSkill";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -27,6 +28,7 @@ function App() {
     },
     { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
+    { path: "/skills/:skillId/edit", element: <EditSkill /> },
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
   ]);

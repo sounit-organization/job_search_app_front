@@ -8,6 +8,12 @@ export const getSkills = (): Promise<ISkill[]> => {
     .then((res) => res.data.skills);
 };
 
+export const getSkillById = (skillId: string): Promise<ISkill> => {
+  return httpClientAdapter
+    .get(`${API_URL}/skills/${skillId}`)
+    .then((res) => res.data.skill);
+};
+
 export const createSkill = ({
   newSkill,
   token,
