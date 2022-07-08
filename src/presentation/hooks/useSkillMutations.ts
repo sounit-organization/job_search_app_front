@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
 import { REACT_QUERY_KEY_SKILLS } from "../../constants/constants";
 import { ISkill } from "../../domain/Skill";
-import { createSkill } from "../../services/skillHttpClient.adapter";
+import {
+  createSkill,
+  updateSkill,
+} from "../../services/skillHttpClient.adapter";
 
 export const useSkillMutations = () => {
   const queryClient = useQueryClient();
@@ -11,13 +14,25 @@ export const useSkillMutations = () => {
     ISkill,
     Error,
     { newSkill: ISkill; token: string }
-  >(createSkill as any, {
+  >(createSkill, {
     onSuccess: () => {
+      queryClient.invalidateQueries(REACT_QUERY_KEY_SKILLS);
+    },
+  });
+
+  const updateSkillMutation = useMutation<
+    ISkill,
+    Error,
+    { updatedSkill: ISkill; token: string; skillId: string }
+  >(updateSkill, {
+    onSuccess: (data) => {
+      queryClient.setQueryData([REACT_QUERY_KEY_SKILLS, data._id], data);
       queryClient.invalidateQueries(REACT_QUERY_KEY_SKILLS);
     },
   });
 
   return {
     createSkillMutation,
+    updateSkillMutation,
   };
 };

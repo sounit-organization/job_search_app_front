@@ -29,3 +29,21 @@ export const createSkill = ({
     })
     .then((res) => res.data);
 };
+
+export const updateSkill = ({
+  updatedSkill,
+  token,
+  skillId,
+}: {
+  updatedSkill: ISkill;
+  token: string;
+  skillId: string;
+}): Promise<ISkill> => {
+  return httpClientAdapter
+    .patch(`${API_URL}/skills/${skillId}`, updatedSkill, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
