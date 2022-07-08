@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import { rest } from "msw";
-import { BrowserRouter } from "react-router-dom";
-import { server } from "../../../mocks/server";
-import JobList, { jobsUrl } from "../../../src/presentation/pages/job-list";
+// import { render, screen } from "@testing-library/react";
+// import { rest } from "msw";
+// import { BrowserRouter } from "react-router-dom";
+// import { server } from "../../../mocks/server";
+// import JobList, { jobsUrl } from "../../../src/presentation/pages/job-list";
 
 it("fake test", () => {
   expect("").toBe("");

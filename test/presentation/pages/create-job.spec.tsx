@@ -1,7 +1,7 @@
-import { screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import App from "../../../src/App";
-import { renderWithWrapper } from "../../test-utils/testing-library-utils";
+// import { screen, waitFor } from "@testing-library/react";
+// import userEvent from "@testing-library/user-event";
+// import App from "../../../src/App";
+// import { renderWithWrapper } from "../../test-utils/testing-library-utils";
 
 // FIXME: test fail because of react-query
 describe("create job", () => {
