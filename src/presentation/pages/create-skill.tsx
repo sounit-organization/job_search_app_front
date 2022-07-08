@@ -15,6 +15,15 @@ const CreateSkill: FC = () => {
 
   const { data: skills } = getSkillsQuery;
 
+  const submitLogic = (title: string) => {
+    if (!token) {
+      return dispatch(
+        errorActions.setError(`Failed to create skill: No token found`)
+      );
+    }
+    createSkillMutation.mutate({ newSkill: { title }, token });
+  };
+
   if (getSkillsQuery.isLoading) {
     return <div>Loading...</div>;
   }
@@ -30,14 +39,21 @@ const CreateSkill: FC = () => {
     );
   }
 
-  const submitLogic = (title: string) => {
-    if (!token) {
-      return dispatch(
-        errorActions.setError(`Failed to create skill: No token found`)
-      );
-    }
-    createSkillMutation.mutate({ newSkill: { title }, token });
-  };
+  if (createSkillMutation.isLoading) {
+    return <div>Creating...</div>;
+  }
+
+  if (createSkillMutation.isError) {
+    console.log("skillError", createSkillMutation.error);
+
+    dispatch(
+      errorActions.setError(
+        `Failed to create skill: ${createSkillMutation.error as Error}`
+      )
+    );
+
+    createSkillMutation.reset();
+  }
 
   return (
     <div className={classes[componentName]}>
