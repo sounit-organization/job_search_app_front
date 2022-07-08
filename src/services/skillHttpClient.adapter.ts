@@ -8,6 +8,12 @@ export const getSkills = (): Promise<ISkill[]> => {
     .then((res) => res.data.skills);
 };
 
+export const getSkillById = (skillId: string): Promise<ISkill> => {
+  return httpClientAdapter
+    .get(`${API_URL}/skills/${skillId}`)
+    .then((res) => res.data.skill);
+};
+
 export const createSkill = ({
   newSkill,
   token,
@@ -17,6 +23,24 @@ export const createSkill = ({
 }): Promise<ISkill> => {
   return httpClientAdapter
     .post(`${API_URL}/skills`, newSkill, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const updateSkill = ({
+  updatedSkill,
+  token,
+  skillId,
+}: {
+  updatedSkill: ISkill;
+  token: string;
+  skillId: string;
+}): Promise<ISkill> => {
+  return httpClientAdapter
+    .patch(`${API_URL}/skills/${skillId}`, updatedSkill, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,55 +1,35 @@
-import { FC, FormEvent } from "react";
+import { FC } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
-import CreateButton from "../components/atoms/create-button";
-import Input from "../components/atoms/input";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { useSkillMutations } from "../hooks/useSkillMutations";
-import useForm from "../hooks/useForm";
-import useSkillsQuery from "../hooks/useSkillsQuery";
+import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
 import classes from "./create-skill.module.css";
-
-const formInitialValues = {
-  title: "",
-};
+import SkillCard from "../components/organisms/SkillCard";
+import EditSkillForm from "../components/organisms/EditSkillForm";
+import { useSkillMutations } from "../hooks/useSkillMutations";
 
 const CreateSkill: FC = () => {
-  const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
-  const skillsQuery = useSkillsQuery();
+  const dispatch = useAppDispatch();
+  const getSkillsQuery = useGetSkillsQuery();
   const { createSkillMutation } = useSkillMutations();
-  const { data: skills } = skillsQuery;
 
-  const { values, valueChangeHandler, resetValues } =
-    useForm(formInitialValues);
-  const { title } = values;
+  const { data: skills } = getSkillsQuery;
 
-  const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const submitLogic = (title: string) => {
     if (!token) {
       return dispatch(
         errorActions.setError(`Failed to create skill: No token found`)
       );
     }
-
     createSkillMutation.mutate({ newSkill: { title }, token });
-
-    resetValues();
   };
 
-  if (skillsQuery.isLoading) {
+  if (getSkillsQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (skillsQuery.isError) {
-    console.log("isError");
-    console.log(skillsQuery.error as Error);
-
-    dispatch(
-      errorActions.setError(
-        `Failed to create skill: ${skillsQuery.error as Error}`
-      )
-    );
+  if (createSkillMutation.isLoading) {
+    return <div>Creating...</div>;
   }
 
   if (createSkillMutation.isError) {
@@ -66,23 +46,16 @@ const CreateSkill: FC = () => {
 
   return (
     <div className={classes[componentName]}>
-      <form onSubmit={formSubmitHandler}>
-        {/* FIXME: replace with mui-v5 component */}
-        <Input
-          name="title"
-          placeholder="Title"
-          className={classes[`${componentName}__input`]}
-          value={title}
-          onChange={valueChangeHandler}
-        />
-        <CreateButton
-          title="Add Skill"
-          className={classes[`${componentName}__btn`]}
-        />
-      </form>
-      {skills?.map((skill) => (
-        <div key={skill._id}>{skill.title}</div>
-      ))}
+      <EditSkillForm
+        buttonText="Create Skill"
+        initialFormData={{ title: "" }}
+        onSubmitLogic={submitLogic}
+      />
+      <div className="grid grid-cols-4 gap-4">
+        {skills?.map((skill) => (
+          <SkillCard key={skill._id} skill={skill} />
+        ))}
+      </div>
     </div>
   );
 };

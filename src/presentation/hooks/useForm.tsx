@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type FormInitialValues = {
+export type FormInitialValues = {
   [key: string]: string;
 };
 
@@ -11,6 +11,7 @@ const useForm = (initialValues: FormInitialValues) => {
     HTMLInputElement | HTMLTextAreaElement
   > = (event) => {
     const { name, value } = event.target;
+
     setValues((prevState) => ({
       ...prevState,
       [name]: value,
@@ -21,7 +22,7 @@ const useForm = (initialValues: FormInitialValues) => {
     setValues(initialValues);
   };
 
-  return { values, valueChangeHandler, resetValues };
+  return { values, valueChangeHandler, resetValues, setValues };
 };
 
 export default useForm;
