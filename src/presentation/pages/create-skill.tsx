@@ -32,7 +32,6 @@ const CreateSkill: FC = () => {
       );
     }
 
-    // FIXME: add type
     createSkillMutation.mutate({ newSkill: { title }, token });
 
     resetValues();

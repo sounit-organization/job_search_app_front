@@ -1,11 +1,14 @@
 import { rest } from "msw";
-import { createJobUrl, fetchSkillsUrl } from "../src/constants/constants";
-import { createSkillUrl } from "../src/presentation/pages/create-skill";
+import {
+  API_URL,
+  createJobUrl,
+  fetchSkillsUrl,
+} from "../src/constants/constants";
 import { jobsUrl } from "../src/presentation/pages/job-list";
 import { jobDataList, skillsDataList } from "./data";
 
 export const handlers = [
-  rest.post(createSkillUrl, (req, res, ctx) => {
+  rest.post(`${API_URL}/skills`, (req, res, ctx) => {
     const body = req.body;
     const { skill } = body as any;
     return res(ctx.json({ skill }));
