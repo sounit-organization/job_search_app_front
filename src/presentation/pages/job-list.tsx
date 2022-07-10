@@ -10,26 +10,23 @@ export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 const JobList: FC = () => {
   const [jobList, setJobList] = useState<IJob[]>([]);
 
-  useEffect(() => {
-    const fetchJobList = async () => {
-      try {
-        const response = await axios(jobsUrl);
-        const responseData = response.data;
-        setJobList(responseData.jobs);
-      } catch (err) {
-        // FIXME: to avoid test error
-        // console.log(err);
-      }
-    };
+  const fetchJobList = async () => {
+    try {
+      const response = await axios(jobsUrl);
+      const responseData = response.data;
+      setJobList(responseData.jobs);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     fetchJobList();
   }, []);
 
   return (
     <div className={classes[componentName]}>
       <JobCardList jobList={jobList} />
-      {/* FIXME: child rendered here? maybe no. */}
-      <Outlet />
     </div>
   );
 };

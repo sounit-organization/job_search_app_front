@@ -24,6 +24,8 @@ function App() {
     {
       path: "/",
       element: <JobList />,
+
+      // FIXME: job detail is not children, sibling?
       // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     },
     { path: "/jobs/new", element: <CreateJob /> },

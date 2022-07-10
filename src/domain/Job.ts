@@ -7,4 +7,5 @@ export interface IJob {
   payment: number;
   description: string;
   skills: ISkill[];
+  userId: string;
 }
