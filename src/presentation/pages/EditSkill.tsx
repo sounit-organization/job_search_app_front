@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { errorActions } from "../../services/redux/errorSlice";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import useErrorHandler from "../hooks/useErrorHandler";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import { useGetSkillByIdQuery } from "../hooks/useSkillsQuery";
 
@@ -10,6 +11,7 @@ const EditSkill = () => {
   const { skillId } = useParams();
   const { token } = useAppSelector((state) => state.auth);
   const { updateSkillMutation } = useSkillMutations();
+  const { handleError } = useErrorHandler();
 
   const getSkillByIdQuery = useGetSkillByIdQuery(skillId!);
   const skill = getSkillByIdQuery.data;
@@ -43,12 +45,7 @@ const EditSkill = () => {
   }
 
   if (updateSkillMutation.isError) {
-    dispatch(
-      errorActions.setError(
-        `Failed to create skill: ${updateSkillMutation.error}`
-      )
-    );
-
+    handleError(updateSkillMutation.error);
     updateSkillMutation.reset();
   }
 
