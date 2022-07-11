@@ -1,5 +1,5 @@
-import Card from "../../atoms/card";
-import classes from "./job-card.module.css";
+import Card from "../../atoms/Card";
+import classes from "./JobCard.module.css";
 import { Link } from "react-router-dom";
 import { ISkill } from "../../../../domain/Skill";
 import { FC } from "react";

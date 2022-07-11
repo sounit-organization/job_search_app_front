@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useState } from "react";
-import classes from "./check-box.module.css";
+import classes from "./CheckBox.module.css";
 
 const jobTypes = [
   { id: 1, name: "Part Time" },

@@ -4,7 +4,7 @@ import {
   createJobUrl,
   fetchSkillsUrl,
 } from "../src/constants/constants";
-import { jobsUrl } from "../src/presentation/pages/job-list";
+import { jobsUrl } from "../src/presentation/pages/JobList";
 import { jobDataList, skillsDataList } from "./data";
 
 export const handlers = [

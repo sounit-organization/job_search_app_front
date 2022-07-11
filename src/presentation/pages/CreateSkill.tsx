@@ -2,7 +2,7 @@ import { FC } from "react";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
-import classes from "./create-skill.module.css";
+import classes from "./CreateSkill.module.css";
 import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";

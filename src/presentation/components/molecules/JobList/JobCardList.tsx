@@ -1,8 +1,8 @@
-import Input from "../../atoms/input";
-import JobCard from "./job-card";
-import classes from "./job-card-list.module.css";
+import Input from "../../atoms/Input";
+import JobCard from "./JobCard";
+import classes from "./JobCardList.module.css";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
-import CheckBox from "../check-box";
+import CheckBox from "../CheckBox";
 import { IJob } from "../../../../domain/Job";
 
 const componentName = "JobCardList";

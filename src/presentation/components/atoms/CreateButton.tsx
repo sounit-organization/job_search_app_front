@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Button from "./button";
-import classes from "./create-button.module.css";
+import Button from "./Button";
+import classes from "./CreateButton.module.css";
 
 interface Props {
   title: string;

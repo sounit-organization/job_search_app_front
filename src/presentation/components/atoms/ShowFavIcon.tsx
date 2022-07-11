@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
-import classes from "./show-fav-icon.module.css";
+import classes from "./ShowFavIcon.module.css";
 
 const ShowFavIcon = () => {
   const favoriteJobs = useAppSelector((state) => state.favorites.favoriteJobs);
