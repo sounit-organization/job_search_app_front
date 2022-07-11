@@ -7,7 +7,6 @@ import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
-import { createMuiTheme } from "@mui/material";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
