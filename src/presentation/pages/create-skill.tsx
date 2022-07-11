@@ -6,12 +6,15 @@ import classes from "./create-skill.module.css";
 import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
+import useErrorHandler from "../hooks/useErrorHandler";
+import { createMuiTheme } from "@mui/material";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const getSkillsQuery = useGetSkillsQuery();
   const { createSkillMutation } = useSkillMutations();
+  const { handleError } = useErrorHandler();
 
   const { data: skills } = getSkillsQuery;
 
@@ -33,14 +36,7 @@ const CreateSkill: FC = () => {
   }
 
   if (createSkillMutation.isError) {
-    console.log("skillError", createSkillMutation.error);
-
-    dispatch(
-      errorActions.setError(
-        `Failed to create skill: ${createSkillMutation.error as Error}`
-      )
-    );
-
+    handleError(createSkillMutation.error);
     createSkillMutation.reset();
   }
 
