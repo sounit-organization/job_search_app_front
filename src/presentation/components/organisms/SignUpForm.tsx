@@ -5,6 +5,7 @@ import { authActions } from "../../../services/redux/authSlice";
 import { saveToken, saveUserId } from "../../../services/localStorage.adapter";
 import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
+import useErrorHandler from "../../hooks/useErrorHandler";
 
 const initialValues = {
   firstName: "test first name",
@@ -18,6 +19,7 @@ const SignUpForm = () => {
   const { firstName, lastName, email, password } = values;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { handleError } = useErrorHandler();
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -40,8 +42,7 @@ const SignUpForm = () => {
 
       navigate("/");
     } catch (error) {
-      // FIXME: add error modal
-      console.log(error);
+      handleError(error);
     }
   };
 
