@@ -1,5 +1,5 @@
 import { FC } from "react";
-import classes from "./input.module.css";
+import classes from "./Input.module.css";
 
 interface Props {
   id?: string;

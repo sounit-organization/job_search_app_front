@@ -1,5 +1,5 @@
-import Card from "../components/atoms/card";
-import classes from "./favorite.module.css";
+import Card from "../components/atoms/Card";
+import classes from "./Favorite.module.css";
 import { useAppSelector } from "../hooks/reduxHooks";
 
 const Favorite = () => {

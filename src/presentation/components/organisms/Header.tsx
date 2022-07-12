@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { authActions } from "../../../services/redux/authSlice";
 import { removeToken } from "../../../services/localStorage.adapter";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import NavItem from "../atoms/nav-item";
-import classes from "./header.module.css";
+import NavItem from "../atoms/NavItem";
+import classes from "./Header.module.css";
 
 const Header = () => {
   const { isLogin } = useAppSelector((state) => state.auth);

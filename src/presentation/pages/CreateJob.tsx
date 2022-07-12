@@ -1,6 +1,6 @@
 import { FC } from "react";
-import JobForm from "../components/organisms/create-job/job-form";
-import classes from "./create-job.module.css";
+import JobForm from "../components/organisms/CreateJob/JobForm";
+import classes from "./CreateJob.module.css";
 
 const CreateJob: FC = () => {
   return (

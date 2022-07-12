@@ -1,15 +1,15 @@
 // import { lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
-import Header from "./presentation/components/organisms/header";
-import CreateSkill from "./presentation/pages/create-skill";
-import JobList from "./presentation/pages/job-list";
-import CreateJob from "./presentation/pages/create-job";
-import Favorite from "./presentation/pages/favorite";
+import CreateSkill from "./presentation/pages/CreateSkill";
+import JobList from "./presentation/pages/JobList";
+import CreateJob from "./presentation/pages/CreateJob";
+import Favorite from "./presentation/pages/Favorite";
 import SignUp from "./presentation/pages/SignUp";
 import useAuth from "./presentation/hooks/useAuth";
 import Modal from "./presentation/components/organisms/Modal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
+import Header from "./presentation/components/organisms/Header";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));

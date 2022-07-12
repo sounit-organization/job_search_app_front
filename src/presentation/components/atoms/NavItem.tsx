@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import classes from "./nav-item.module.css";
+import classes from "./NavItem.module.css";
 
 interface IProps {
   title: string;
