@@ -1,6 +1,9 @@
 import { FC } from "react";
 import { searchJobs } from "../../../services/jobHttpClient.adapter";
+import { jobActions } from "../../../services/redux/jobSlice";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import useForm from "../../hooks/useForm";
+import { useSearchJobsQuery } from "../../hooks/useJobsQuery";
 import Input from "../atoms/Input";
 import CheckBox from "../molecules/CheckBox";
 import classes from "./JobSearchForm.module.css";
@@ -15,21 +18,28 @@ type FormInitialValues = {
 };
 
 const JobSearchForm: FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
   const { initialValues } = props;
   const { values, valueChangeHandler } = useForm(initialValues);
   const { title, city } = values as FormInitialValues;
+  const searchJobsQuery = useSearchJobsQuery({ title, city });
 
   const searchJobsHandler: React.MouseEventHandler<HTMLButtonElement> = async (
     event
   ) => {
     event.preventDefault();
 
-    const response = await searchJobs({ searchTerms: { title, city } });
-    console.log(response);
+    const { data } = await searchJobsQuery.refetch();
+
+    dispatch(jobActions.setJobs(data));
   };
 
   // FIXME: add logic
   const checkedHandler = (checkedArr: number[]) => {};
+
+  if (searchJobsQuery.isLoading) {
+    return <div>Searching...</div>;
+  }
 
   return (
     <>

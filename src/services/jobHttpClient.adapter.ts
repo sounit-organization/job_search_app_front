@@ -1,7 +1,7 @@
 import { API_URL } from "../constants/constants";
 import httpClientAdapter from "./httpClient.adapter";
 
-type SearchTerms = { title: string; city: string };
+export type SearchTerms = { title: string; city: string };
 
 export const searchJobs = ({ searchTerms }: { searchTerms: SearchTerms }) => {
   const { title, city } = searchTerms;
