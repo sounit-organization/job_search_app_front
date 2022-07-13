@@ -22,6 +22,9 @@ const JobCardList: FC<Props> = (props) => {
             className={classes[`${componentName}__card`]}
           />
         ))}
+        {((jobList && jobList.length === 0) || !jobList) && (
+          <div>No Job Found!</div>
+        )}
       </ul>
     </>
   );
