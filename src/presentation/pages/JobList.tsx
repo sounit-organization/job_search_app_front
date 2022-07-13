@@ -1,10 +1,11 @@
-import axios from "axios";
 import { FC, useCallback, useEffect } from "react";
 import JobCardList from "../components/molecules/JobList/JobCardList";
 import classes from "./JobList.module.css";
 import JobSearchForm from "../components/organisms/JobSearchForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { jobActions } from "../../services/redux/jobSlice";
+import { getJobs } from "../../services/jobHttpClient.adapter";
+import { useGetJobsQuery } from "../hooks/useJobsQuery";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
@@ -15,22 +16,23 @@ const formInitialValues = {
 
 const JobList: FC = () => {
   const dispatch = useAppDispatch();
+  const getJobsQuery = useGetJobsQuery();
+
+  // updated both from JobList and SearchJobForm
   const { jobs } = useAppSelector((state) => state.jobs);
 
   const fetchJobList = useCallback(async () => {
-    try {
-      const response = await axios(jobsUrl);
-      const { jobs } = response.data;
-
-      dispatch(jobActions.setJobs(jobs));
-    } catch (err) {
-      console.log(err);
-    }
+    const jobs = await getJobs();
+    dispatch(jobActions.setJobs(jobs));
   }, [dispatch]);
 
   useEffect(() => {
     fetchJobList();
   }, [fetchJobList]);
+
+  if (getJobsQuery.isLoading) {
+    return <div>Loading....</div>;
+  }
 
   return (
     <div className={classes[componentName]}>

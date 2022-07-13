@@ -1,6 +1,13 @@
 import { useQuery } from "react-query";
-import { REACT_QUERY_KEY_SEARCH_JOBS } from "../../constants/constants";
-import { searchJobs, SearchTerms } from "../../services/jobHttpClient.adapter";
+import {
+  REACT_QUERY_KEY_GET_JOBS,
+  REACT_QUERY_KEY_SEARCH_JOBS,
+} from "../../constants/constants";
+import {
+  getJobs,
+  searchJobs,
+  SearchTerms,
+} from "../../services/jobHttpClient.adapter";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch } from "./reduxHooks";
 
@@ -21,4 +28,16 @@ export const useSearchJobsQuery = (searchTerms: SearchTerms) => {
   );
 
   return searchJobsQuery;
+};
+
+export const useGetJobsQuery = () => {
+  const dispatch = useAppDispatch();
+
+  const getJobsQuery = useQuery(REACT_QUERY_KEY_GET_JOBS, getJobs, {
+    onError: () => {
+      dispatch(errorActions.setError(`Failed to fetch jobs...`));
+    },
+  });
+
+  return getJobsQuery;
 };
