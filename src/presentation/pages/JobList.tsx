@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { jobActions } from "../../services/redux/jobSlice";
 import { getJobs } from "../../services/jobHttpClient.adapter";
 import { useGetJobsQuery } from "../hooks/useJobsQuery";
-import useErrorHandler from "../hooks/useErrorHandler";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
@@ -18,19 +17,14 @@ const formInitialValues = {
 const JobList: FC = () => {
   const dispatch = useAppDispatch();
   const getJobsQuery = useGetJobsQuery();
-  const { handleError } = useErrorHandler();
 
   // updated both from JobList and SearchJobForm
   const { jobs } = useAppSelector((state) => state.jobs);
 
   const fetchJobList = useCallback(async () => {
-    try {
-      const jobs = await getJobs();
-      dispatch(jobActions.setJobs(jobs));
-    } catch (err) {
-      handleError(err);
-    }
-  }, [dispatch, handleError]);
+    const jobs = await getJobs();
+    dispatch(jobActions.setJobs(jobs));
+  }, [dispatch]);
 
   useEffect(() => {
     fetchJobList();
