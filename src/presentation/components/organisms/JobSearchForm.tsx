@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { searchJobs } from "../../../services/jobHttpClient.adapter";
 import { jobActions } from "../../../services/redux/jobSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import useForm from "../../hooks/useForm";
