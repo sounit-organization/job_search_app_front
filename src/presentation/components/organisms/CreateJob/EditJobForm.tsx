@@ -3,12 +3,11 @@ import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import { createJobUrl, fetchSkillsUrl } from "../../../../constants/constants";
 import { ISkill } from "../../../../domain/Skill";
 import CreateButton from "../../atoms/CreateButton";
-import Input from "../../atoms/Input";
 import classes from "./EditJobForm.module.css";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { TextField, Button } from "@mui/material";
-import useForm, { FormInitialValues } from "../../../hooks/useForm";
-import { current } from "@reduxjs/toolkit";
+// import useForm, { FormInitialValues } from "../../../hooks/useForm";
+// import { current } from "@reduxjs/toolkit";
 
 // interface IProps {
 //   className: string;
@@ -27,7 +26,7 @@ const JobForm: FC<Props> = (props) => {
   const [jobPayment, setJobPayment] = useState("");
   const [jobDesc, setJobDesc] = useState("");
   const [skillList, setSkillList] = useState<ISkill[]>([]);
-  const [checkedSkillList, setCheckedSkillList] = useState<ISkill[]>([]);
+  // const [checkedSkillList, setCheckedSkillList] = useState<ISkill[]>([]);
   const { token } = useAppSelector((state) => state.auth);
 
   const { buttonText } = props;
@@ -47,7 +46,7 @@ const JobForm: FC<Props> = (props) => {
   // };
 
   const checkedChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setCheckedSkillList((current: any) => [...current, e.target.value]);
+    // setCheckedSkillList((current: any) => [...current, e.target.value]);
     // setCheckedSkillList(e.target.value);
   };
 

@@ -4,10 +4,7 @@ import { IJob } from "../../domain/Job";
 import { errorActions } from "../../services/redux/errorSlice";
 import { getJobs, getJobById } from "../../services/jobsHttpClient.adapter";
 import { useAppDispatch } from "./reduxHooks";
-import {
-  REACT_QUERY_KEY_GET_JOBS,
-  REACT_QUERY_KEY_SEARCH_JOBS,
-} from "../../constants/constants";
+import { REACT_QUERY_KEY_SEARCH_JOBS } from "../../constants/constants";
 import { searchJobs, SearchTerms } from "../../services/jobHttpClient.adapter";
 export const useGetJobsQuery = () => {
   const dispatch = useAppDispatch();
