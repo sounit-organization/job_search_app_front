@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { IJob } from "../../../domain/Job";
+import { FC } from "react";
+import { searchJobs } from "../../../services/jobHttpClient.adapter";
 import useForm from "../../hooks/useForm";
 import Input from "../atoms/Input";
 import CheckBox from "../molecules/CheckBox";
@@ -19,16 +19,13 @@ const JobSearchForm: FC<Props> = (props) => {
   const { values, valueChangeHandler } = useForm(initialValues);
   const { title, city } = values as FormInitialValues;
 
-  // FIXME: delete?
-  const [filteredJobs, setFilteredJobs] = useState<IJob[]>([]);
-
-  // FIXME: make http request to backend to find job
-  const filterJobsHandler: React.MouseEventHandler<HTMLButtonElement> = (
+  const searchJobsHandler: React.MouseEventHandler<HTMLButtonElement> = async (
     event
   ) => {
     event.preventDefault();
 
-    setFilteredJobs(filteredJobs);
+    const response = await searchJobs({ searchTerms: { title, city } });
+    console.log(response);
   };
 
   // FIXME: add logic
@@ -55,10 +52,10 @@ const JobSearchForm: FC<Props> = (props) => {
             wrapperClassName={classes["JobSearchForm__input"]}
           />
           <button
-            onClick={filterJobsHandler as any}
+            onClick={searchJobsHandler as any}
             className={classes[`JobSearchForm__btn`]}
           >
-            Find Jobs
+            Search Jobs
           </button>
         </div>
       </div>
