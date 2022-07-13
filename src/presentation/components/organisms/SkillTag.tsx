@@ -4,13 +4,14 @@ import { ISkill } from "../../../domain/Skill";
 
 type Props = {
   skill: ISkill;
+  className: string;
 };
 
 const SkillTag: FC<Props> = (props) => {
-  const { skill } = props;
+  const { skill, className } = props;
   const { title } = skill;
 
-  return <Chip label={title} color="primary" />;
+  return <Chip className={className} label={title} color="primary" />;
 };
 
 export default SkillTag;

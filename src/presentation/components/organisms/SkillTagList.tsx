@@ -12,7 +12,13 @@ const SkillTagList: FC<Props> = (props) => {
   return (
     <div className={classes["skillTagList"]}>
       {skills &&
-        skills.map((skill) => <SkillTag key={skill._id} skill={skill} />)}
+        skills.map((skill) => (
+          <SkillTag
+            key={skill._id}
+            skill={skill}
+            className={classes["skillTagList__skillTag"]}
+          />
+        ))}
     </div>
   );
 };

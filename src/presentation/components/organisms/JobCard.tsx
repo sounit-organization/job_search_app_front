@@ -19,22 +19,22 @@ const JobCard: FC<Props> = (props) => {
   const { userId: loginUserId } = useAppSelector((state) => state.auth);
 
   return (
-    <div className={classes["JobCard__link"]}>
-      <Card className={`${classes[componentName]} ${className}`}>
-        <h2 className={classes["JobCard__title"]}>{job.title}</h2>
-        <p className={classes["JobCard__title"]}>{job.city}</p>
-        <p className={classes["JobCard__title"]}>{job.payment}</p>
-        <SkillTagList skills={job.skills} />
+    <Card className={`${classes["JobCard"]} ${className}`}>
+      <div className={classes["JobCard__container"]}>
+        <div>
+          <h2 className={classes["JobCard__title"]}>{job.title}</h2>
+          <p className={classes["JobCard__title"]}>{job.city}</p>
+          <p className={classes["JobCard__title"]}>{job.payment}</p>
+          <SkillTagList skills={job.skills} />
+        </div>
         <JobCardActions
           jobId={job._id}
           jobUserId={jobUserId}
           loginUserId={loginUserId}
         />
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 };
-
-const componentName = "JobCard";
 
 export default JobCard;
