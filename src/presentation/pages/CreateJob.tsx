@@ -1,11 +1,10 @@
 import { FC } from "react";
-import JobForm from "../components/organisms/CreateJob/JobForm";
+import EditJobForm from "../components/organisms/CreateJob/EditJobForm";
 import classes from "./CreateJob.module.css";
-
 const CreateJob: FC = () => {
   return (
     <div className={classes[componentName]}>
-      <JobForm className={classes[`${componentName}__form`]} />
+      <EditJobForm buttonText="Create Job" />
     </div>
   );
 };
