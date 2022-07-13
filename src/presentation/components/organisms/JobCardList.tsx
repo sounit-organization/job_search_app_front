@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { IJob } from "../../../domain/Job";
 import JobCard from "./JobCard";
-import { IJob } from "../../../../domain/Job";
 import classes from "./JobCardList.module.css";
 
 const componentName = "JobCardList";
