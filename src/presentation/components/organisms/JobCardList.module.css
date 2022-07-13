@@ -1,0 +1,22 @@
+.JobCardList {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.JobCardList__card {
+  margin-bottom: 1rem;
+  margin-top: 20px;
+}
+
+.JobCardList__list {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+@media (min-width: 80rem) {
+  .JobCardList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

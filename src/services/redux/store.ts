@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import { errorReducer } from "./errorSlice";
 import favoritesReducer from "./favoriteSlice";
+import { jobReducer } from "./jobSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     favorites: favoritesReducer,
     error: errorReducer,
+    jobs: jobReducer,
   },
 });
 

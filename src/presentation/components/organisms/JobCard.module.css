@@ -1,0 +1,28 @@
+.JobCard {
+  width: 100%;
+}
+
+.JobCard__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.JobCard__title {
+  color: #000;
+}
+
+.JobCard__label {
+  font-weight: 600;
+  color: rgb(36, 87, 166);
+}
+
+/* for PC */
+@media (min-width: 40rem) {
+  /* .JobCard {
+    max-width: 40rem;
+  } */
+  /* .JobCard__container {
+    max-width: 40rem;
+  } */
+}

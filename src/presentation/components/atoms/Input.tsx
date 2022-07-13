@@ -7,20 +7,31 @@ interface Props {
   placeholder: string;
   value: string;
   onChange: any;
-  className?: string;
+  inputClassName?: string;
+  wrapperClassName?: string;
 }
 
 const Input: FC<Props> = (props) => {
+  const {
+    name,
+    onChange,
+    placeholder,
+    value,
+    inputClassName,
+    id,
+    wrapperClassName,
+  } = props;
+
   return (
-    <div>
-      <label htmlFor={props.name}>{props.name}</label>
+    <div className={wrapperClassName}>
+      <label htmlFor={name}>{name}</label>
       <input
-        name={props.name || ""}
-        id={props.id}
-        placeholder={props.placeholder || "Search"}
-        className={`${classes[componentName]} ${props.className}`}
-        value={props.value}
-        onChange={props.onChange}
+        name={name || ""}
+        id={id}
+        placeholder={placeholder || "Search"}
+        className={`${classes[componentName]} ${inputClassName}`}
+        value={value}
+        onChange={onChange}
         type="text"
       />
     </div>
