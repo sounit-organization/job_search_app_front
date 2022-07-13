@@ -1,35 +1,41 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { FC, useCallback, useEffect } from "react";
 import JobCardList from "../components/molecules/JobList/JobCardList";
-import { IJob } from "../../domain/Job";
 import classes from "./JobList.module.css";
+import JobSearchForm from "../components/organisms/JobSearchForm";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { jobActions } from "../../services/redux/jobSlice";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
+const formInitialValues = {
+  title: "",
+  city: "",
+};
+
 const JobList: FC = () => {
-  const [jobList, setJobList] = useState<IJob[]>([]);
+  const dispatch = useAppDispatch();
+  const { jobs } = useAppSelector((state) => state.jobs);
+
+  const fetchJobList = useCallback(async () => {
+    try {
+      const response = await axios(jobsUrl);
+      const { jobs } = response.data;
+
+      dispatch(jobActions.setJobs(jobs));
+    } catch (err) {
+      console.log(err);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    const fetchJobList = async () => {
-      try {
-        const response = await axios(jobsUrl);
-        const responseData = response.data;
-        setJobList(responseData.jobs);
-      } catch (err) {
-        // FIXME: to avoid test error
-        // console.log(err);
-      }
-    };
-
     fetchJobList();
-  }, []);
+  }, [fetchJobList]);
 
   return (
     <div className={classes[componentName]}>
-      <JobCardList jobList={jobList} />
-      {/* FIXME: child rendered here? maybe no. */}
-      <Outlet />
+      <JobSearchForm initialValues={formInitialValues} />
+      <JobCardList jobList={jobs} />
     </div>
   );
 };
