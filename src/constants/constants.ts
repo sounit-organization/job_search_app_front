@@ -8,4 +8,6 @@ export const TOKEN_KEY = "JOB_SEARCH_APP_TOKEN_KEY";
 export const USER_ID_KEY = "JOB_SEARCH_APP_USER_ID_KEY";
 
 export const REACT_QUERY_KEY_SKILLS = "skills";
+
+export const REACT_QUERY_KEY_GET_JOBS = "jobs";
 export const REACT_QUERY_KEY_SEARCH_JOBS = "search-jobs";
