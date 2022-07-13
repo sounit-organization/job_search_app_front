@@ -12,6 +12,11 @@
   color: #000;
 }
 
+.JobCard__label {
+  font-weight: 600;
+  color: rgb(36, 87, 166);
+}
+
 /* for PC */
 @media (min-width: 40rem) {
   /* .JobCard {
