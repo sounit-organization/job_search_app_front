@@ -1,11 +1,11 @@
 import { FC, useCallback, useEffect } from "react";
-import JobCardList from "../components/molecules/JobList/JobCardList";
 import classes from "./JobList.module.css";
 import JobSearchForm from "../components/organisms/JobSearchForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { jobActions } from "../../services/redux/jobSlice";
 import { getJobs } from "../../services/jobHttpClient.adapter";
 import { useGetJobsQuery } from "../hooks/useJobsQuery";
+import JobCardList from "../components/organisms/JobCardList";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
