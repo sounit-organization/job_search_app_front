@@ -7,7 +7,7 @@ interface Props {
   placeholder: string;
   value: string;
   onChange: any;
-  className?: string;
+  inputClassName?: string;
   wrapperClassName?: string;
 }
 
@@ -17,7 +17,7 @@ const Input: FC<Props> = (props) => {
     onChange,
     placeholder,
     value,
-    className,
+    inputClassName,
     id,
     wrapperClassName,
   } = props;
@@ -29,7 +29,7 @@ const Input: FC<Props> = (props) => {
         name={name || ""}
         id={id}
         placeholder={placeholder || "Search"}
-        className={`${classes[componentName]} ${className}`}
+        className={`${classes[componentName]} ${inputClassName}`}
         value={value}
         onChange={onChange}
         type="text"

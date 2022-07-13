@@ -41,17 +41,17 @@ const JobSearchForm: FC<Props> = (props) => {
           <Input
             name="title"
             placeholder="Job title"
-            className={classes[`JobSearchForm__input`]}
             onChange={valueChangeHandler}
             value={title}
+            inputClassName={classes[`JobSearchForm__input__input`]}
             wrapperClassName={classes["JobSearchForm__input"]}
           />
           <Input
             name="city"
             placeholder="Vancouver, BC"
-            className={classes[`JobSearchForm__input`]}
             onChange={valueChangeHandler}
             value={city}
+            inputClassName={classes[`JobSearchForm__input__input`]}
             wrapperClassName={classes["JobSearchForm__input"]}
           />
           <button
