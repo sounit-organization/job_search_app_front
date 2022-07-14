@@ -22,9 +22,11 @@ const SkillCard: FC<Props> = (props) => {
     <Paper elevation={1} className="px-5 py-3">
       {title}
       {stateUserId === userId && (
-        <Button variant="outlined" onClick={editClickHandler}>
-          Edit
-        </Button>
+        <div>
+          <Button variant="outlined" onClick={editClickHandler}>
+            Edit
+          </Button>
+        </div>
       )}
     </Paper>
   );

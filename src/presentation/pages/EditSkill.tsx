@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import { errorActions } from "../../services/redux/errorSlice";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import LoadingPage from "../components/organisms/LoadingPage";
@@ -51,11 +52,17 @@ const EditSkill = () => {
   }
 
   return (
-    <EditSkillForm
-      buttonText="Update Skill"
-      initialFormData={{ ...skill! }}
-      onSubmitLogic={submitLogic}
-    />
+    <div className="flex justify-center flex-col items-center">
+      <EditSkillForm
+        buttonText="Update Skill"
+        initialFormData={{ ...skill! }}
+        onSubmitLogic={submitLogic}
+        className="md:w-1/3"
+      />
+      <Button>
+        <Link to="/skills/new">Back to Skills</Link>
+      </Button>
+    </div>
   );
 };
 
