@@ -15,27 +15,26 @@ const Header = () => {
   };
 
   return (
-    <header className={classes[componentName]}>
-      <Link to="/" className={classes[`${componentName}__logo-link`]}>
-        <h1 className={classes[`${componentName}__logo-text`]}>Job Search</h1>
-      </Link>
-      <div className={classes[`${componentName}__nav-items`]}>
+    <header className={classes["Header"]}>
+      <div className={classes[`Header__nav-items`]}>
+        <Link to="/" className={classes[`Header__logo-link`]}>
+          <h1 className={classes[`Header__logo-text`]}>Job Search</h1>
+        </Link>
         <NavItem title="Find jobs" to="/" />
         {isLogin && <NavItem title="Add Job" to="/jobs/new" />}
         {isLogin && <NavItem title="Add Skill" to="/skills/new" />}
+      </div>
+      <div className={classes["Header__auth-links"]}>
         {!isLogin && <NavItem title="Login" to="/login" />}
         {!isLogin && <NavItem title="SignUp" to="/signUp" />}
+        {isLogin && (
+          <p onClick={logoutHandler} className="cursor-pointer">
+            Logout
+          </p>
+        )}
       </div>
-      {/* FIXME: refactor to same style component */}
-      {isLogin && (
-        <p onClick={logoutHandler} className="cursor-pointer">
-          Logout
-        </p>
-      )}
     </header>
   );
 };
-
-const componentName = "Header";
 
 export default Header;

@@ -1,7 +1,8 @@
 .Header {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 0.0625rem solid rgb(228, 226, 224);
 }
