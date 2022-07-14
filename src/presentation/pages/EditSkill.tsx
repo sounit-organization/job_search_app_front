@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { errorActions } from "../../services/redux/errorSlice";
 import EditSkillForm from "../components/organisms/EditSkillForm";
+import LoadingPage from "../components/organisms/LoadingPage";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import useErrorHandler from "../hooks/useErrorHandler";
 import { useSkillMutations } from "../hooks/useSkillMutations";
@@ -33,7 +34,7 @@ const EditSkill = () => {
   };
 
   if (getSkillByIdQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (getSkillByIdQuery.isError) {
@@ -41,7 +42,7 @@ const EditSkill = () => {
   }
 
   if (updateSkillMutation.isLoading) {
-    return <div>Updating....</div>;
+    return <LoadingPage />;
   }
 
   if (updateSkillMutation.isError) {

@@ -6,6 +6,7 @@ import { jobActions } from "../../services/redux/jobSlice";
 import { getJobs } from "../../services/jobHttpClient.adapter";
 import { useGetJobsQuery } from "../hooks/useJobsQuery";
 import JobCardList from "../components/organisms/JobCardList";
+import LoadingPage from "../components/organisms/LoadingPage";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
@@ -31,7 +32,7 @@ const JobList: FC = () => {
   }, [fetchJobList]);
 
   if (getJobsQuery.isLoading) {
-    return <div>Loading....</div>;
+    return <LoadingPage />;
   }
 
   return (
