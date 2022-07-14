@@ -1,0 +1,32 @@
+.PcHeaderItems__main-links {
+  display: flex;
+}
+
+.PcHeaderItems__nav-items {
+  display: none;
+}
+
+.PcHeaderItems__auth-links {
+  display: none;
+}
+
+.PcHeaderItems__logo-link {
+  text-decoration: none;
+  color: rgb(36, 87, 166);
+}
+
+.PcHeaderItems__logo-text {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .PcHeaderItems__nav-items {
+    display: flex;
+    align-items: center;
+  }
+
+  .PcHeaderItems__auth-links {
+    display: flex;
+  }
+}

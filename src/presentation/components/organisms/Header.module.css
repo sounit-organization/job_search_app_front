@@ -1,22 +1,8 @@
 .Header {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 0.0625rem solid rgb(228, 226, 224);
-}
-
-.Header__logo-link {
-  text-decoration: none;
-  color: rgb(36, 87, 166);
-}
-
-.Header__logo-text {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-}
-
-.Header__nav-items {
-  display: flex;
-  align-items: center;
 }

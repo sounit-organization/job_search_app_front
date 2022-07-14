@@ -1,0 +1,9 @@
+.MobileHeaderItems {
+  display: block;
+}
+
+@media (min-width: 40rem) {
+  .MobileHeaderItems {
+    display: none;
+  }
+}
