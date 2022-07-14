@@ -15,20 +15,8 @@
   outline: none;
 }
 
-.JobSearchForm__input__input {
-  padding: 1rem;
-}
-
 .JobSearchForm__btn {
   width: 100%;
-  padding: 1rem;
-  min-width: 10rem;
-  cursor: pointer;
-  background-color: rgb(36, 87, 166);
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 0.2rem;
 }
 
 /* for PC */

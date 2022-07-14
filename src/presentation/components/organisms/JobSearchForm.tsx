@@ -1,11 +1,12 @@
+import { Button, TextField } from "@mui/material";
 import { FC } from "react";
 import { jobActions } from "../../../services/redux/jobSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import useForm from "../../hooks/useForm";
 import { useSearchJobsQuery } from "../../hooks/useJobsQuery";
-import Input from "../atoms/Input";
 import CheckBox from "../molecules/CheckBox";
 import classes from "./JobSearchForm.module.css";
+import LoadingPage from "./LoadingPage";
 
 type Props = {
   initialValues: FormInitialValues;
@@ -37,35 +38,34 @@ const JobSearchForm: FC<Props> = (props) => {
   const checkedHandler = (checkedArr: number[]) => {};
 
   if (searchJobsQuery.isLoading) {
-    return <div>Searching...</div>;
+    return <LoadingPage />;
   }
 
   return (
     <>
       <div className={classes["wrapper"]}>
         <div className={classes["JobSearchForm"]}>
-          <Input
+          <TextField
+            label="Job Title"
             name="title"
-            placeholder="Job title"
             onChange={valueChangeHandler}
             value={title}
-            inputClassName={classes[`JobSearchForm__input__input`]}
-            wrapperClassName={classes["JobSearchForm__input"]}
+            className={classes["JobSearchForm__input"]}
           />
-          <Input
+          <TextField
+            label="City"
             name="city"
-            placeholder="Vancouver, BC"
             onChange={valueChangeHandler}
             value={city}
-            inputClassName={classes[`JobSearchForm__input__input`]}
-            wrapperClassName={classes["JobSearchForm__input"]}
+            className={classes["JobSearchForm__input"]}
           />
-          <button
+          <Button
+            variant="contained"
             onClick={searchJobsHandler as any}
             className={classes[`JobSearchForm__btn`]}
           >
             Search Jobs
-          </button>
+          </Button>
         </div>
       </div>
       {/* FIXME: add logic */}
