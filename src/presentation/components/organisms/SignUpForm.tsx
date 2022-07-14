@@ -2,6 +2,7 @@ import { TextField, Container, FormControl, Button } from "@mui/material";
 import useErrorHandler from "../../hooks/useErrorHandler";
 import { useAuthMutations } from "../../hooks/useAuthMutations";
 import useForm from "../../hooks/useForm";
+import LoadingPage from "./LoadingPage";
 
 const initialValues = {
   firstName: "test first name",
@@ -30,7 +31,7 @@ const SignUpForm = () => {
   };
 
   if (signUpMutation.isLoading) {
-    return <div>Signing up...</div>;
+    return <LoadingPage />;
   }
 
   if (signUpMutation.isError) {
