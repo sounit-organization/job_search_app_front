@@ -6,7 +6,7 @@ import CreateJob from "./presentation/pages/CreateJob";
 import Favorite from "./presentation/pages/Favorite";
 import SignUp from "./presentation/pages/SignUp";
 import useAuth from "./presentation/hooks/useAuth";
-import Modal from "./presentation/components/organisms/Modal";
+import ErrorModal from "./presentation/components/organisms/ErrorModal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <Modal message={errorMessage} isOpen={!!errorMessage} />
+      <ErrorModal message={errorMessage} isOpen={!!errorMessage} />
       {/* <Suspense fallback={<p>loading....</p>}> */}
       <Header />
       {routes}

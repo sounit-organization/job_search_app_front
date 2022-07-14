@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Modal as MuiMOdal, Typography } from "@mui/material";
+import { Alert, AlertTitle, Modal as MuiModal } from "@mui/material";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { errorActions } from "../../../services/redux/errorSlice";
 
@@ -8,7 +8,7 @@ type Props = {
   isOpen: boolean;
 };
 
-const Modal: FC<Props> = (props) => {
+const ErrorModal: FC<Props> = (props) => {
   const { message, isOpen } = props;
   const dispatch = useAppDispatch();
 
@@ -17,14 +17,13 @@ const Modal: FC<Props> = (props) => {
   };
 
   return (
-    <MuiMOdal open={isOpen} onClose={closeModalHandler}>
-      <Box className="bg-white fixed w-1/2 left-1/4 top-1/3 p-5">
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          {message}
-        </Typography>
-      </Box>
-    </MuiMOdal>
+    <MuiModal open={isOpen} onClose={closeModalHandler}>
+      <Alert severity="error" className="fixed w-1/2 left-1/4 top-1/3 p-5">
+        <AlertTitle>Error!</AlertTitle>
+        {message}
+      </Alert>
+    </MuiModal>
   );
 };
 
-export default Modal;
+export default ErrorModal;
