@@ -46,8 +46,9 @@ const CreateSkill: FC = () => {
         buttonText="Create Skill"
         initialFormData={{ title: "" }}
         onSubmitLogic={submitLogic}
+        className="md:w-1/3"
       />
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
         {skills?.map((skill) => (
           <SkillCard key={skill._id} skill={skill} />
         ))}
