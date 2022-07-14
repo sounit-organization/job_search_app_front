@@ -10,6 +10,7 @@ import Modal from "./presentation/components/organisms/Modal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
+import LoadingSpinner from "./presentation/components/organisms/LoadingSpinner";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));

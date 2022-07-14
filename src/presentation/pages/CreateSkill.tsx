@@ -7,6 +7,8 @@ import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
+import LoadingSpinner from "../components/organisms/LoadingSpinner";
+import LoadingPage from "../components/organisms/LoadingPage";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
@@ -27,11 +29,11 @@ const CreateSkill: FC = () => {
   };
 
   if (getSkillsQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (createSkillMutation.isLoading) {
-    return <div>Creating...</div>;
+    return <LoadingPage />;
   }
 
   if (createSkillMutation.isError) {
