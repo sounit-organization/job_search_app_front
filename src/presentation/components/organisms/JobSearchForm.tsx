@@ -50,6 +50,7 @@ const JobSearchForm: FC<Props> = (props) => {
             name="title"
             onChange={valueChangeHandler}
             value={title}
+            sx={{ mb: 1 }}
             className={classes["JobSearchForm__input"]}
           />
           <TextField
@@ -57,6 +58,7 @@ const JobSearchForm: FC<Props> = (props) => {
             name="city"
             onChange={valueChangeHandler}
             value={city}
+            sx={{ mb: 1 }}
             className={classes["JobSearchForm__input"]}
           />
           <Button
