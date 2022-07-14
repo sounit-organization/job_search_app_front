@@ -7,7 +7,6 @@ import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
-import LoadingSpinner from "../components/organisms/LoadingSpinner";
 import LoadingPage from "../components/organisms/LoadingPage";
 
 const CreateSkill: FC = () => {

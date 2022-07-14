@@ -8,7 +8,7 @@ type Props = {
 const LoadingSpinner: FC<Props> = (props) => {
   const { className } = props;
 
-  return <BeatLoader color="#1976d2" />;
+  return <BeatLoader className={className} color="#1976d2" />;
 };
 
 export default LoadingSpinner;
