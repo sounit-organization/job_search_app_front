@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useQuery } from "react-query";
 import {
   REACT_QUERY_KEY_GET_JOBS,
