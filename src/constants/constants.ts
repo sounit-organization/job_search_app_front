@@ -11,3 +11,5 @@ export const REACT_QUERY_KEY_SKILLS = "skills";
 
 export const REACT_QUERY_KEY_GET_JOBS = "jobs";
 export const REACT_QUERY_KEY_SEARCH_JOBS = "search-jobs";
+
+export const ITEMS_PER_PAGE = 5;

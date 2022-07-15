@@ -3,8 +3,13 @@ import httpClientAdapter from "./httpClient.adapter";
 
 export type SearchTerms = { title: string; city: string };
 
-export const getJobs = () => {
-  return httpClientAdapter.get(`${API_URL}/jobs`).then((res) => res.data.jobs);
+export type Pagination = { skip: number; limit: number };
+
+export const getJobs = ({ pagination }: { pagination: Pagination }) => {
+  const { skip, limit } = pagination;
+  return httpClientAdapter
+    .get(`${API_URL}/jobs?skip=${skip}&limit=${limit}`)
+    .then((res) => res.data);
 };
 
 export const searchJobs = ({ searchTerms }: { searchTerms: SearchTerms }) => {
@@ -12,5 +17,5 @@ export const searchJobs = ({ searchTerms }: { searchTerms: SearchTerms }) => {
 
   return httpClientAdapter
     .get(`${API_URL}/jobs/search?title=${title}&city=${city}`)
-    .then((res) => res.data.jobs);
+    .then((res) => res.data);
 };

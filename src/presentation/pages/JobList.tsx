@@ -1,12 +1,13 @@
-import { FC, useCallback, useEffect } from "react";
+import { FC, useState } from "react";
 import classes from "./JobList.module.css";
 import JobSearchForm from "../components/organisms/JobSearchForm";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { jobActions } from "../../services/redux/jobSlice";
-import { getJobs } from "../../services/jobHttpClient.adapter";
+import { useAppSelector } from "../hooks/reduxHooks";
 import { useGetJobsQuery } from "../hooks/useJobsQuery";
 import JobCardList from "../components/organisms/JobCardList";
 import LoadingPage from "../components/organisms/LoadingPage";
+import Pagination from "../components/organisms/Pagination";
+import { Pagination as PaginationType } from "../../services/jobHttpClient.adapter";
+import { ITEMS_PER_PAGE } from "../../constants/constants";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
@@ -15,34 +16,45 @@ const formInitialValues = {
   city: "",
 };
 
+const initialPagination: PaginationType = {
+  skip: 0,
+  limit: ITEMS_PER_PAGE,
+};
+
 const JobList: FC = () => {
-  const dispatch = useAppDispatch();
-  const getJobsQuery = useGetJobsQuery();
+  // FIXME: make usePagination hook
+  const [pagination, setPagination] = useState(initialPagination);
 
-  // updated both from JobList and SearchJobForm
-  const { jobs } = useAppSelector((state) => state.jobs);
+  const { limit } = pagination;
+  const getJobsQuery = useGetJobsQuery(pagination);
+  // use application scope
+  // because jobs are updated both from JobList and SearchJobForm
+  const { jobs, count } = useAppSelector((state) => state.jobs);
 
-  const fetchJobList = useCallback(async () => {
-    const jobs = await getJobs();
-    dispatch(jobActions.setJobs(jobs));
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchJobList();
-  }, [fetchJobList]);
-
-  if (getJobsQuery.isLoading) {
-    return <LoadingPage />;
-  }
+  // FIXME: make usePagination hook
+  const changePageHandler = (_: any, page: number) => {
+    const skip = (page - 1) * ITEMS_PER_PAGE;
+    setPagination((prevState) => ({ ...prevState, skip, limit }));
+  };
 
   return (
-    <div className={classes[componentName]}>
-      <JobSearchForm initialValues={formInitialValues} />
-      <JobCardList jobList={jobs} />
+    <div className={classes["JobList"]}>
+      {getJobsQuery.isLoading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          <JobSearchForm initialValues={formInitialValues} />
+          <JobCardList jobList={jobs} />
+        </>
+      )}
+      {/* put pagination outside of toggle rendering to prevent reset state */}
+      <Pagination
+        count={Math.ceil(count / ITEMS_PER_PAGE)}
+        onChange={changePageHandler}
+        className="flex justify-center mb-10"
+      />
     </div>
   );
 };
-
-const componentName = "JobList";
 
 export default JobList;

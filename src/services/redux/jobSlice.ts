@@ -3,14 +3,16 @@ import { IJob } from "../../domain/Job";
 
 type InitialState = {
   jobs: IJob[];
+  count: number;
 };
 
 type SetJobsAction = Action & {
-  payload: IJob[];
+  payload: { jobs: IJob[]; count: number };
 };
 
 const initialState: InitialState = {
   jobs: [],
+  count: 0,
 };
 
 const jobSlice = createSlice({
@@ -18,7 +20,9 @@ const jobSlice = createSlice({
   initialState,
   reducers: {
     setJobs: (state, action: SetJobsAction) => {
-      state.jobs = action.payload;
+      const { jobs, count } = action.payload;
+      state.jobs = jobs;
+      state.count = count;
     },
   },
 });
