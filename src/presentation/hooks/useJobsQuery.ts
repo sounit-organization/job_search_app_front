@@ -5,10 +5,12 @@ import {
 } from "../../constants/constants";
 import {
   getJobs,
+  Pagination,
   searchJobs,
   SearchTerms,
 } from "../../services/jobHttpClient.adapter";
 import { errorActions } from "../../services/redux/errorSlice";
+import { jobActions } from "../../services/redux/jobSlice";
 import { useAppDispatch } from "./reduxHooks";
 
 export const useSearchJobsQuery = (searchTerms: SearchTerms) => {
@@ -30,14 +32,22 @@ export const useSearchJobsQuery = (searchTerms: SearchTerms) => {
   return searchJobsQuery;
 };
 
-export const useGetJobsQuery = () => {
+export const useGetJobsQuery = (pagination: Pagination) => {
   const dispatch = useAppDispatch();
+  const { skip, limit } = pagination;
 
-  const getJobsQuery = useQuery(REACT_QUERY_KEY_GET_JOBS, getJobs, {
-    onError: () => {
-      dispatch(errorActions.setError(`Failed to fetch jobs...`));
-    },
-  });
+  const getJobsQuery = useQuery(
+    [REACT_QUERY_KEY_GET_JOBS, `skip=${skip}`, `limit=${limit}`],
+    () => getJobs({ pagination }),
+    {
+      onSuccess: (data) => {
+        dispatch(jobActions.setJobs(data));
+      },
+      onError: () => {
+        dispatch(errorActions.setError(`Failed to fetch jobs...`));
+      },
+    }
+  );
 
   return getJobsQuery;
 };
