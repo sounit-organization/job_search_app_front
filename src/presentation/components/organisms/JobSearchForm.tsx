@@ -1,7 +1,6 @@
 import { Button, TextField } from "@mui/material";
-import { FC } from "react";
-import { jobActions } from "../../../services/redux/jobSlice";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { FC, useCallback, useEffect } from "react";
+import { Pagination } from "../../../services/jobHttpClient.adapter";
 import useForm from "../../hooks/useForm";
 import { useSearchJobsQuery } from "../../hooks/useJobsQuery";
 import CheckBox from "../molecules/CheckBox";
@@ -10,6 +9,7 @@ import LoadingPage from "./LoadingPage";
 
 type Props = {
   initialValues: FormInitialValues;
+  pagination: Pagination;
 };
 
 type FormInitialValues = {
@@ -18,24 +18,34 @@ type FormInitialValues = {
 };
 
 const JobSearchForm: FC<Props> = (props) => {
-  const dispatch = useAppDispatch();
-  const { initialValues } = props;
+  const { initialValues, pagination } = props;
+
   const { values, valueChangeHandler } = useForm(initialValues);
   const { title, city } = values as FormInitialValues;
-  const searchJobsQuery = useSearchJobsQuery({ title, city });
+  const { skip, limit } = pagination;
+
+  const searchJobsQuery = useSearchJobsQuery({
+    searchTerms: { title, city },
+    pagination: { skip, limit },
+  });
+
+  const refetchSearchJobs = useCallback(async () => {
+    await searchJobsQuery.refetch();
+  }, []);
 
   const searchJobsHandler: React.MouseEventHandler<HTMLButtonElement> = async (
     event
   ) => {
     event.preventDefault();
-
-    const { data } = await searchJobsQuery.refetch();
-
-    dispatch(jobActions.setJobs(data));
+    refetchSearchJobs();
   };
 
   // FIXME: add logic
   const checkedHandler = (checkedArr: number[]) => {};
+
+  useEffect(() => {
+    refetchSearchJobs();
+  }, [skip, limit, refetchSearchJobs]);
 
   if (searchJobsQuery.isLoading) {
     return <LoadingPage />;

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import classes from "./JobList.module.css";
-import JobSearchForm from "../components/organisms/JobSearchForm";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { useGetJobsQuery } from "../hooks/useJobsQuery";
 import JobCardList from "../components/organisms/JobCardList";
@@ -11,11 +10,6 @@ import { ITEMS_PER_PAGE } from "../../constants/constants";
 import { usePagination } from "../hooks/usePagination";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
-
-const formInitialValues = {
-  title: "",
-  city: "",
-};
 
 const initialPagination: PaginationType = {
   skip: 0,
@@ -38,10 +32,7 @@ const JobList: FC = () => {
       {getJobsQuery.isLoading ? (
         <LoadingPage />
       ) : (
-        <>
-          <JobSearchForm initialValues={formInitialValues} />
-          <JobCardList jobList={jobs} />
-        </>
+        <JobCardList jobList={jobs} />
       )}
       {/* put pagination outside of toggle rendering to prevent reset state */}
       <Pagination
