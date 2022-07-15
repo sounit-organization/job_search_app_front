@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import classes from "./JobList.module.css";
 import JobSearchForm from "../components/organisms/JobSearchForm";
 import { useAppSelector } from "../hooks/reduxHooks";
@@ -8,6 +8,7 @@ import LoadingPage from "../components/organisms/LoadingPage";
 import Pagination from "../components/organisms/Pagination";
 import { Pagination as PaginationType } from "../../services/jobHttpClient.adapter";
 import { ITEMS_PER_PAGE } from "../../constants/constants";
+import { usePagination } from "../hooks/usePagination";
 
 export const jobsUrl = `${process.env.REACT_APP_BACKEND_URL}/jobs`;
 
@@ -22,20 +23,15 @@ const initialPagination: PaginationType = {
 };
 
 const JobList: FC = () => {
-  // FIXME: make usePagination hook
-  const [pagination, setPagination] = useState(initialPagination);
+  const { pagination, changePageHandler } = usePagination(
+    initialPagination,
+    ITEMS_PER_PAGE
+  );
 
-  const { limit } = pagination;
-  const getJobsQuery = useGetJobsQuery(pagination);
   // use application scope
   // because jobs are updated both from JobList and SearchJobForm
   const { jobs, count } = useAppSelector((state) => state.jobs);
-
-  // FIXME: make usePagination hook
-  const changePageHandler = (_: any, page: number) => {
-    const skip = (page - 1) * ITEMS_PER_PAGE;
-    setPagination((prevState) => ({ ...prevState, skip, limit }));
-  };
+  const getJobsQuery = useGetJobsQuery(pagination);
 
   return (
     <div className={classes["JobList"]}>
