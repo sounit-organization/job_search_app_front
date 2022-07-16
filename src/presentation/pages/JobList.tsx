@@ -17,7 +17,7 @@ const initialPagination: PaginationType = {
 };
 
 const JobList: FC = () => {
-  const { pagination, changePageHandler } = usePagination(
+  const { pagination, onPageChange } = usePagination(
     initialPagination,
     ITEMS_PER_PAGE
   );
@@ -37,7 +37,7 @@ const JobList: FC = () => {
       {/* put pagination outside of toggle rendering to prevent reset state */}
       <Pagination
         count={Math.ceil(count / ITEMS_PER_PAGE)}
-        onChange={changePageHandler}
+        onChange={onPageChange}
         className="flex justify-center mb-10"
       />
     </div>

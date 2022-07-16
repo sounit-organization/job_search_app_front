@@ -30,13 +30,10 @@ export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
     ],
     () => searchJobs({ searchTerms, pagination }),
     {
-      refetchOnWindowFocus: false,
-      enabled: isOnSearch, // disable this query from automatically running
+      // set dependency to react-query
+      enabled: isOnSearch,
       onSuccess: (data) => {
-        console.log("onSuccess!!!");
-
         setIsOnSearch!(false);
-
         dispatch(searchedJobsActions.setSearchedJobs(data));
       },
       onError: () => {

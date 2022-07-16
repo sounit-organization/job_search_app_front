@@ -19,13 +19,18 @@ const initialPagination: PaginationType = {
 
 type Props = {};
 
-const SearchJobs: FC<Props> = (props) => {
+const SearchJobs: FC<Props> = () => {
   const { searchedJobs, count } = useAppSelector((state) => state.searchedJobs);
-  const { pagination, changePageHandler, initPagination, page } = usePagination(
+  const { pagination, onPageChange, initPagination, page } = usePagination(
     initialPagination,
     ITEMS_PER_PAGE
   );
-  const [isOnSearch, setIsOnSearch] = useState(false);
+  const [isOnSearch, setIsOnSearch] = useState(true);
+
+  const changePageHandler = (_: any, page: number) => {
+    setIsOnSearch(true);
+    onPageChange(_, page);
+  };
 
   return (
     <div>
