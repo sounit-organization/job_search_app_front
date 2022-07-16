@@ -7,22 +7,37 @@ import {
   getJobs,
   Pagination,
   searchJobs,
-  SearchTerms,
+  SearchJobsArgs,
 } from "../../services/jobHttpClient.adapter";
 import { errorActions } from "../../services/redux/errorSlice";
 import { jobActions } from "../../services/redux/jobSlice";
+import { searchedJobsActions } from "../../services/redux/searchedJobsSlice";
 import { useAppDispatch } from "./reduxHooks";
 
-export const useSearchJobsQuery = (searchTerms: SearchTerms) => {
+export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
   const dispatch = useAppDispatch();
+  const { searchTerms, pagination } = searchJobsArgs;
   const { title, city } = searchTerms;
+  const { skip, limit } = pagination;
 
   const searchJobsQuery = useQuery(
-    [REACT_QUERY_KEY_SEARCH_JOBS, title, city],
-    () => searchJobs({ searchTerms }),
+    [
+      REACT_QUERY_KEY_SEARCH_JOBS,
+      title,
+      city,
+      `skip=${skip}`,
+      `limit=${limit}`,
+    ],
+    () => searchJobs({ searchTerms, pagination }),
     {
       refetchOnWindowFocus: false,
+      // add dependency, if isOnSearch is true, run query
       enabled: false, // disable this query from automatically running
+      onSuccess: (data) => {
+        console.log("onSuccess!!!");
+
+        dispatch(searchedJobsActions.setSearchedJobs(data));
+      },
       onError: () => {
         dispatch(errorActions.setError(`Failed to search jobs...`));
       },
@@ -38,7 +53,7 @@ export const useGetJobsQuery = (pagination: Pagination) => {
 
   const getJobsQuery = useQuery(
     [REACT_QUERY_KEY_GET_JOBS, `skip=${skip}`, `limit=${limit}`],
-    () => getJobs({ pagination }),
+    () => getJobs(pagination),
     {
       onSuccess: (data) => {
         dispatch(jobActions.setJobs(data));

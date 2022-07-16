@@ -10,6 +10,7 @@ import ErrorModal from "./presentation/components/organisms/ErrorModal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
+import SearchJobs from "./presentation/pages/SearchJobs";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -26,6 +27,7 @@ function App() {
       element: <JobList />,
       // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     },
+    { path: "/jobs/search", element: <SearchJobs /> },
     { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
     { path: "/skills/:skillId/edit", element: <EditSkill /> },
