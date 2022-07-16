@@ -16,7 +16,7 @@ import { useAppDispatch } from "./reduxHooks";
 
 export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
   const dispatch = useAppDispatch();
-  const { searchTerms, pagination } = searchJobsArgs;
+  const { searchTerms, pagination, isOnSearch, setIsOnSearch } = searchJobsArgs;
   const { title, city } = searchTerms;
   const { skip, limit } = pagination;
 
@@ -31,10 +31,11 @@ export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
     () => searchJobs({ searchTerms, pagination }),
     {
       refetchOnWindowFocus: false,
-      // add dependency, if isOnSearch is true, run query
-      enabled: false, // disable this query from automatically running
+      enabled: isOnSearch, // disable this query from automatically running
       onSuccess: (data) => {
         console.log("onSuccess!!!");
+
+        setIsOnSearch!(false);
 
         dispatch(searchedJobsActions.setSearchedJobs(data));
       },

@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { FC, useCallback, useEffect } from "react";
+import { FC } from "react";
 import { Pagination } from "../../../services/jobHttpClient.adapter";
 import useForm from "../../hooks/useForm";
 import { useSearchJobsQuery } from "../../hooks/useJobsQuery";
@@ -11,6 +11,8 @@ type Props = {
   initialValues: FormInitialValues;
   pagination: Pagination;
   initPagination: () => void;
+  isOnSearch: boolean;
+  setIsOnSearch: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type FormInitialValues = {
@@ -19,7 +21,13 @@ type FormInitialValues = {
 };
 
 const SearchJobForm: FC<Props> = (props) => {
-  const { initialValues, pagination, initPagination } = props;
+  const {
+    initialValues,
+    pagination,
+    initPagination,
+    isOnSearch,
+    setIsOnSearch,
+  } = props;
 
   // FIXME: move to parent component
   const { values, valueChangeHandler } = useForm(initialValues);
@@ -30,32 +38,21 @@ const SearchJobForm: FC<Props> = (props) => {
   const searchJobsQuery = useSearchJobsQuery({
     searchTerms: { title, city },
     pagination: { skip, limit },
+    isOnSearch,
+    setIsOnSearch,
   });
-
-  // FIXME: use react-query dependency to avoid error
-  // add `isOnSearch`
-  const refetchSearchJobs = useCallback(async () => {
-    await searchJobsQuery.refetch();
-    // FIXME: temporary ignore warning, fix in another issues
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const searchJobsHandler: React.MouseEventHandler<HTMLButtonElement> = async (
     event
   ) => {
     event.preventDefault();
 
+    setIsOnSearch(true);
     initPagination();
-
-    refetchSearchJobs();
   };
 
   // FIXME: add logic
   const checkedHandler = (checkedArr: number[]) => {};
-
-  useEffect(() => {
-    refetchSearchJobs();
-  }, [skip, limit, refetchSearchJobs]);
 
   if (searchJobsQuery.isLoading) {
     return <LoadingPage />;

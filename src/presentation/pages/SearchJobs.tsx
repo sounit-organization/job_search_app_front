@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { usePagination } from "../hooks/usePagination";
 import { Pagination as PaginationType } from "../../services/jobHttpClient.adapter";
 import { ITEMS_PER_PAGE } from "../../constants/constants";
@@ -25,6 +25,7 @@ const SearchJobs: FC<Props> = (props) => {
     initialPagination,
     ITEMS_PER_PAGE
   );
+  const [isOnSearch, setIsOnSearch] = useState(false);
 
   return (
     <div>
@@ -32,6 +33,8 @@ const SearchJobs: FC<Props> = (props) => {
         initialValues={formInitialValues}
         pagination={pagination}
         initPagination={initPagination}
+        isOnSearch={isOnSearch}
+        setIsOnSearch={setIsOnSearch}
       />
       <JobCardList jobList={searchedJobs} />
       <Pagination
