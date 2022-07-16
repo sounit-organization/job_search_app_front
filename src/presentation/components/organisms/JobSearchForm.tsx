@@ -35,6 +35,8 @@ const JobSearchForm: FC<Props> = (props) => {
   // add `isOnSearch`
   const refetchSearchJobs = useCallback(async () => {
     await searchJobsQuery.refetch();
+    // FIXME: temporary ignore warning, fix in another issues
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchJobsHandler: React.MouseEventHandler<HTMLButtonElement> = async (
