@@ -20,15 +20,19 @@ type FormInitialValues = {
 const JobSearchForm: FC<Props> = (props) => {
   const { initialValues, pagination } = props;
 
+  // FIXME: move to parent component
   const { values, valueChangeHandler } = useForm(initialValues);
   const { title, city } = values as FormInitialValues;
   const { skip, limit } = pagination;
 
+  // FIXME: move to parent component
   const searchJobsQuery = useSearchJobsQuery({
     searchTerms: { title, city },
     pagination: { skip, limit },
   });
 
+  // FIXME: use react-query dependency to avoid error
+  // add `isOnSearch`
   const refetchSearchJobs = useCallback(async () => {
     await searchJobsQuery.refetch();
   }, []);
