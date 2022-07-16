@@ -3,29 +3,29 @@
   justify-content: center;
 }
 
-.JobSearchForm {
+.SearchJobForm {
   width: 80%;
 }
 
-.JobSearchForm__input {
+.SearchJobForm__input {
   width: 100%;
 }
 
-.JobSearchForm__btn {
+.SearchJobForm__btn {
   width: 100%;
 }
 
 /* for PC */
 @media (min-width: 80rem) {
-  .JobSearchForm {
+  .SearchJobForm {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .JobSearchForm__input {
+  .SearchJobForm__input {
     width: 100%;
   }
-  .JobSearchForm__btn {
+  .SearchJobForm__btn {
     width: 20rem;
   }
 }
