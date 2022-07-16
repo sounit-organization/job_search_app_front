@@ -4,7 +4,7 @@ import { Pagination } from "../../../services/jobHttpClient.adapter";
 import useForm from "../../hooks/useForm";
 import { useSearchJobsQuery } from "../../hooks/useJobsQuery";
 import CheckBox from "../molecules/CheckBox";
-import classes from "./JobSearchForm.module.css";
+import classes from "./SearchJobForm.module.css";
 import LoadingPage from "./LoadingPage";
 
 type Props = {
@@ -17,7 +17,7 @@ type FormInitialValues = {
   city: string;
 };
 
-const JobSearchForm: FC<Props> = (props) => {
+const SearchJobForm: FC<Props> = (props) => {
   const { initialValues, pagination } = props;
 
   // FIXME: move to parent component
@@ -60,14 +60,14 @@ const JobSearchForm: FC<Props> = (props) => {
   return (
     <>
       <div className={classes["wrapper"]}>
-        <div className={classes["JobSearchForm"]}>
+        <div className={classes["SearchJobForm"]}>
           <TextField
             label="Job Title"
             name="title"
             onChange={valueChangeHandler}
             value={title}
             sx={{ mb: 1 }}
-            className={classes["JobSearchForm__input"]}
+            className={classes["SearchJobForm__input"]}
           />
           <TextField
             label="City"
@@ -75,12 +75,12 @@ const JobSearchForm: FC<Props> = (props) => {
             onChange={valueChangeHandler}
             value={city}
             sx={{ mb: 1 }}
-            className={classes["JobSearchForm__input"]}
+            className={classes["SearchJobForm__input"]}
           />
           <Button
             variant="contained"
             onClick={searchJobsHandler as any}
-            className={classes[`JobSearchForm__btn`]}
+            className={classes[`SearchJobForm__btn`]}
           >
             Search Jobs
           </Button>
@@ -92,4 +92,4 @@ const JobSearchForm: FC<Props> = (props) => {
   );
 };
 
-export default JobSearchForm;
+export default SearchJobForm;

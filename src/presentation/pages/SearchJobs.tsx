@@ -2,7 +2,7 @@ import { FC } from "react";
 import { usePagination } from "../hooks/usePagination";
 import { Pagination as PaginationType } from "../../services/jobHttpClient.adapter";
 import { ITEMS_PER_PAGE } from "../../constants/constants";
-import JobSearchForm from "../components/organisms/JobSearchForm";
+import JobSearchForm from "../components/organisms/SearchJobForm";
 import Pagination from "../components/organisms/Pagination";
 import { useAppSelector } from "../hooks/reduxHooks";
 import JobCardList from "../components/organisms/JobCardList";
