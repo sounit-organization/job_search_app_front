@@ -10,6 +10,7 @@ import LoadingPage from "./LoadingPage";
 type Props = {
   initialValues: FormInitialValues;
   pagination: Pagination;
+  initPagination: () => void;
 };
 
 type FormInitialValues = {
@@ -18,7 +19,7 @@ type FormInitialValues = {
 };
 
 const SearchJobForm: FC<Props> = (props) => {
-  const { initialValues, pagination } = props;
+  const { initialValues, pagination, initPagination } = props;
 
   // FIXME: move to parent component
   const { values, valueChangeHandler } = useForm(initialValues);
@@ -43,6 +44,9 @@ const SearchJobForm: FC<Props> = (props) => {
     event
   ) => {
     event.preventDefault();
+
+    initPagination();
+
     refetchSearchJobs();
   };
 

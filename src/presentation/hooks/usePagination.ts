@@ -6,12 +6,19 @@ export const usePagination = (
   ITEMS_PER_PAGE: number
 ) => {
   const [pagination, setPagination] = useState(initialPagination);
+  const [page, setPage] = useState(1);
   const { limit } = pagination;
 
   const changePageHandler = (_: any, page: number) => {
     const skip = (page - 1) * ITEMS_PER_PAGE;
+    setPage(page);
     setPagination((prevState) => ({ ...prevState, skip, limit }));
   };
 
-  return { pagination, changePageHandler };
+  const initPagination = () => {
+    setPage(1);
+    setPagination(initialPagination);
+  };
+
+  return { pagination, changePageHandler, initPagination, page };
 };
