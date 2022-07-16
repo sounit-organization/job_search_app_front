@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { usePagination } from "../hooks/usePagination";
 import { Pagination as PaginationType } from "../../services/jobHttpClient.adapter";
 import { ITEMS_PER_PAGE } from "../../constants/constants";
