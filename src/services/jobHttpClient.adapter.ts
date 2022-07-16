@@ -9,6 +9,8 @@ type SearchTerms = {
 export type SearchJobsArgs = {
   searchTerms: SearchTerms;
   pagination: Pagination;
+  isOnSearch?: boolean;
+  setIsOnSearch?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type Pagination = { skip: number; limit: number };
