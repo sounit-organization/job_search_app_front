@@ -21,7 +21,7 @@ type Props = {};
 
 const SearchJobs: FC<Props> = (props) => {
   const { searchedJobs, count } = useAppSelector((state) => state.searchedJobs);
-  const { pagination, changePageHandler } = usePagination(
+  const { pagination, changePageHandler, initPagination, page } = usePagination(
     initialPagination,
     ITEMS_PER_PAGE
   );
@@ -31,9 +31,11 @@ const SearchJobs: FC<Props> = (props) => {
       <JobSearchForm
         initialValues={formInitialValues}
         pagination={pagination}
+        initPagination={initPagination}
       />
       <JobCardList jobList={searchedJobs} />
       <Pagination
+        page={page}
         count={Math.ceil(count / ITEMS_PER_PAGE)}
         onChange={changePageHandler}
         className="flex justify-center mb-10"

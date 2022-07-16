@@ -7,13 +7,20 @@ type Props = {
     | ((event: React.ChangeEvent<unknown>, page: number) => void)
     | undefined;
   className?: string;
+  page?: number;
 };
 
 const Pagination: FC<Props> = (props) => {
-  const { count, onChange, className } = props;
+  const { count, onChange, className, page } = props;
+
   return (
     <div className={className}>
-      <MuiPagination color="primary" count={count} onChange={onChange} />
+      <MuiPagination
+        page={page}
+        color="primary"
+        count={count}
+        onChange={onChange}
+      />
     </div>
   );
 };
