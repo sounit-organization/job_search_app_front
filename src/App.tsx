@@ -11,6 +11,7 @@ import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
 import SearchJobs from "./presentation/pages/SearchJobs";
+import Login from "./presentation/pages/Login";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -33,6 +34,7 @@ function App() {
     { path: "/skills/:skillId/edit", element: <EditSkill /> },
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
+    { path: "/login", element: <Login /> },
   ]);
   const { errorMessage } = useAppSelector((state) => state.error);
 
