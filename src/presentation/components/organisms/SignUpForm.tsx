@@ -34,6 +34,8 @@ const SignUpForm = () => {
     return <LoadingPage />;
   }
 
+  // this can be written in onError in mutation definition
+  // leave this as it is as a sample
   if (signUpMutation.isError) {
     handleError(signUpMutation.error);
     signUpMutation.reset();

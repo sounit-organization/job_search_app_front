@@ -1,6 +1,7 @@
 import { Button, Container, FormControl, TextField } from "@mui/material";
-import { login } from "../../../services/authHttpClient.adapter";
+import { useLoginQuery } from "../../hooks/useAuthQuery";
 import useForm from "../../hooks/useForm";
+import LoadingPage from "./LoadingPage";
 
 const formInitialValues: FormValues = {
   email: "test@email.com",
@@ -15,17 +16,19 @@ type FormValues = {
 const LoginForm = () => {
   const { values, valueChangeHandler } = useForm(formInitialValues);
   const { email, password } = values as FormValues;
+  const loginQuery = useLoginQuery({ email, password });
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
     event.preventDefault();
-    console.log("submit");
 
-    const response = await login({ email, password });
-
-    console.log("login", response);
+    loginQuery.refetch();
   };
+
+  if (loginQuery.isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <Container>

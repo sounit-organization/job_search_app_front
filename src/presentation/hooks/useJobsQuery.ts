@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import {
-  REACT_QUERY_KEY_GET_JOBS,
+  REACT_QUERY_KEY_JOBS,
   REACT_QUERY_KEY_SEARCH_JOBS,
 } from "../../constants/constants";
 import {
@@ -50,7 +50,7 @@ export const useGetJobsQuery = (pagination: Pagination) => {
   const { skip, limit } = pagination;
 
   const getJobsQuery = useQuery(
-    [REACT_QUERY_KEY_GET_JOBS, `skip=${skip}`, `limit=${limit}`],
+    [REACT_QUERY_KEY_JOBS, `skip=${skip}`, `limit=${limit}`],
     () => getJobs(pagination),
     {
       onSuccess: (data) => {

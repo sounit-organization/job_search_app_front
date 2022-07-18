@@ -7,7 +7,7 @@ type SignUpData = AuthData & {
   lastName: string;
 };
 
-type LoginData = AuthData;
+export type LoginData = AuthData;
 
 type AuthData = {
   email: string;
