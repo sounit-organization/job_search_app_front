@@ -4,7 +4,7 @@
 
 .JobCard__container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -19,10 +19,10 @@
 
 /* for PC */
 @media (min-width: 40rem) {
-  /* .JobCard {
-    max-width: 40rem;
-  } */
-  /* .JobCard__container {
-    max-width: 40rem;
-  } */
+  .JobCard__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
 }

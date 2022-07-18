@@ -18,7 +18,7 @@ export const useLoginQuery = (loginData: LoginData) => {
       const { token, user } = data;
       const { _id: userId } = user;
 
-      dispatch(authActions.login(data));
+      dispatch(authActions.login({ token, userId }));
 
       saveToken(token);
       saveUserId(userId);
