@@ -6,97 +6,48 @@ import CreateButton from "../../atoms/CreateButton";
 import classes from "./EditJobForm.module.css";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { TextField, Button } from "@mui/material";
-// import useForm, { FormInitialValues } from "../../../hooks/useForm";
+import useForm, { FormInitialValues } from "../../../hooks/useForm";
 // import { current } from "@reduxjs/toolkit";
 
-// interface IProps {
-//   className: string;
-// }
-
 type Props = {
-  // initialFormData: FormInitialValues;
+  initialFormData: FormInitialValues;
   buttonText: string;
-  // onSubmitLogic: (title: string) => void;
+  onSubmitLogic: (
+    title: string,
+    companyName: string,
+    payment: string,
+    city: string,
+    description: string,
+    skills: string[]
+  ) => void;
 };
 
-const JobForm: FC<Props> = (props) => {
-  const [jobTitle, setJobTitle] = useState("");
-  const [jobCity, setJobCity] = useState("");
-  const [jobCompany, setJobCompany] = useState("");
-  const [jobPayment, setJobPayment] = useState("");
-  const [jobDesc, setJobDesc] = useState("");
+const EditJobForm: FC<Props> = (props) => {
+  const { initialFormData, buttonText, onSubmitLogic } = props;
+  const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
+
+  const { title, company, payment, city, description } = values;
+
   const [skillList, setSkillList] = useState<ISkill[]>([]);
   // const [checkedSkillList, setCheckedSkillList] = useState<ISkill[]>([]);
   const { token } = useAppSelector((state) => state.auth);
 
-  const { buttonText } = props;
-
-  // const submitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
-  //   event.preventDefault();
-  //   // onSubmitLogic({
-  //   //   jobTitle,
-  //   //   jobCompany,
-  //   //   jobCity,
-  //   //   jobPayment,
-  //   //   jobDesc,
-  //   //   skillList,
-  //   // });
-
-  //   resetValues();
-  // };
-
+  // FIXME: add checked skills to the skill list.
   const checkedChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     // setCheckedSkillList((current: any) => [...current, e.target.value]);
     // setCheckedSkillList(e.target.value);
   };
 
-  console.log(skillList);
-
-  const skillListIds: (string | undefined)[] = [];
+  const skillListIds: string[] = [];
   skillList.forEach((skill) => {
-    skillListIds.push(skill._id);
+    skillListIds.push(skill._id!);
   });
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!jobTitle) {
-      return;
-    }
+    onSubmitLogic(title, company, payment, city, description, skillListIds);
 
-    await axios.post(
-      createJobUrl,
-      {
-        title: jobTitle,
-        companyName: jobCompany,
-        city: jobCity,
-        payment: jobPayment,
-        description: jobDesc,
-        skills: skillListIds,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    setJobTitle("");
-  };
-
-  const titleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setJobTitle(event.target.value);
-  };
-  const cityChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setJobCity(event.target.value);
-  };
-  const companyChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setJobCompany(event.target.value);
-  };
-  const paymentChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setJobPayment(event.target.value);
-  };
-  const descChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setJobDesc(event.target.value);
+    resetValues();
   };
 
   useEffect(() => {
@@ -119,33 +70,47 @@ const JobForm: FC<Props> = (props) => {
   return (
     <form className={classes[componentName]} onSubmit={formSubmitHandler}>
       <div className={classes[`${componentName}__control`]}>
-        {/* <label className={classes[`${componentName}__label`]} htmlFor="title">
-          Job Title
-        </label>
-        <Input
-          id="title"
-          placeholder="title"
-          value={jobTitle}
-          onChange={titleChangeHandler}
-        /> */}
         <TextField
           name="title"
-          value={jobTitle}
-          onChange={titleChangeHandler}
+          label="Title"
+          variant="outlined"
+          sx={{ mb: 1 }}
+          value={title}
+          onChange={valueChangeHandler}
         />
         <TextField
           name="company"
-          value={jobCompany}
-          onChange={companyChangeHandler}
+          label="Company"
+          variant="outlined"
+          sx={{ mb: 1 }}
+          value={company}
+          onChange={valueChangeHandler}
         />
 
-        <TextField name="city" value={jobCity} onChange={cityChangeHandler} />
+        <TextField
+          name="city"
+          label="City"
+          variant="outlined"
+          sx={{ mb: 1 }}
+          value={city}
+          onChange={valueChangeHandler}
+        />
         <TextField
           name="payment"
-          value={jobPayment}
-          onChange={paymentChangeHandler}
+          label="Payment"
+          variant="outlined"
+          sx={{ mb: 1 }}
+          value={payment}
+          onChange={valueChangeHandler}
         />
-        <TextField name="desc" value={jobDesc} onChange={descChangeHandler} />
+        <TextField
+          name="description"
+          label="Description"
+          variant="outlined"
+          sx={{ mb: 1 }}
+          value={description}
+          onChange={valueChangeHandler}
+        />
       </div>
 
       {skillList?.map((skill) => (
@@ -172,4 +137,10 @@ const JobForm: FC<Props> = (props) => {
 
 const componentName = "JobForm";
 
-export default JobForm;
+export default EditJobForm;
+function initialFormData(initialFormData: any): {
+  values: any;
+  valueChangeHandler: any;
+} {
+  throw new Error("Function not implemented.");
+}

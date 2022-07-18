@@ -32,11 +32,11 @@ const JobCard: FC<Props> = (props) => {
             <span className={classes["JobCard__label"]}>Payment</span>{" "}
             {job.payment}
           </p>
-          <SkillTagList skills={job.skills} />
+          <SkillTagList skills={job.skills as ISkill[]} />
         </div>
         <JobCardActions
-          jobId={job._id}
-          jobUserId={jobUserId}
+          jobId={job._id!}
+          jobUserId={jobUserId!}
           loginUserId={loginUserId}
         />
       </div>
