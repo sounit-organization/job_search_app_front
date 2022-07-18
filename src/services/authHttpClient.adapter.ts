@@ -22,7 +22,7 @@ export const signUp = (signUpData: SignUpData): Promise<AuthResponse> => {
     .then((res) => res.data);
 };
 
-export const login = (loginData: LoginData) => {
+export const login = (loginData: LoginData): Promise<AuthResponse> => {
   return httpClientAdapter
     .post(`${API_URL}/auth/login`, loginData)
     .then((res) => res.data);
