@@ -3,6 +3,7 @@ import authReducer from "./authSlice";
 import { errorReducer } from "./errorSlice";
 import favoritesReducer from "./favoriteSlice";
 import { jobReducer } from "./jobSlice";
+import { searchedJobsReducer } from "./searchedJobsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     favorites: favoritesReducer,
     error: errorReducer,
     jobs: jobReducer,
+    searchedJobs: searchedJobsReducer,
   },
 });
 

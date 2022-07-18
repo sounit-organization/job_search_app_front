@@ -1,6 +1,8 @@
-import { useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import { errorActions } from "../../services/redux/errorSlice";
 import EditSkillForm from "../components/organisms/EditSkillForm";
+import LoadingPage from "../components/organisms/LoadingPage";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import useErrorHandler from "../hooks/useErrorHandler";
 import { useSkillMutations } from "../hooks/useSkillMutations";
@@ -33,7 +35,7 @@ const EditSkill = () => {
   };
 
   if (getSkillByIdQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (getSkillByIdQuery.isError) {
@@ -41,7 +43,7 @@ const EditSkill = () => {
   }
 
   if (updateSkillMutation.isLoading) {
-    return <div>Updating....</div>;
+    return <LoadingPage />;
   }
 
   if (updateSkillMutation.isError) {
@@ -50,11 +52,17 @@ const EditSkill = () => {
   }
 
   return (
-    <EditSkillForm
-      buttonText="Update Skill"
-      initialFormData={{ ...skill! }}
-      onSubmitLogic={submitLogic}
-    />
+    <div className="flex justify-center flex-col items-center">
+      <EditSkillForm
+        buttonText="Update Skill"
+        initialFormData={{ ...skill! }}
+        onSubmitLogic={submitLogic}
+        className="md:w-1/3"
+      />
+      <Button>
+        <Link to="/skills/new">Back to Skills</Link>
+      </Button>
+    </div>
   );
 };
 

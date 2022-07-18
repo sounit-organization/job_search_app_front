@@ -6,10 +6,12 @@ import CreateJob from "./presentation/pages/CreateJob";
 import Favorite from "./presentation/pages/Favorite";
 import SignUp from "./presentation/pages/SignUp";
 import useAuth from "./presentation/hooks/useAuth";
-import Modal from "./presentation/components/organisms/Modal";
+import ErrorModal from "./presentation/components/organisms/ErrorModal";
 import { useAppSelector } from "./presentation/hooks/reduxHooks";
 import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
+import SearchJobs from "./presentation/pages/SearchJobs";
+import Login from "./presentation/pages/Login";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -24,13 +26,17 @@ function App() {
     {
       path: "/",
       element: <JobList />,
+
+      // FIXME: job detail is not children, sibling?
       // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     },
+    { path: "/jobs/search", element: <SearchJobs /> },
     { path: "/jobs/new", element: <CreateJob /> },
     { path: "/skills/new", element: <CreateSkill /> },
     { path: "/skills/:skillId/edit", element: <EditSkill /> },
     { path: "/favorite", element: <Favorite /> },
     { path: "/signUp", element: <SignUp /> },
+    { path: "/login", element: <Login /> },
   ]);
   const { errorMessage } = useAppSelector((state) => state.error);
 
@@ -38,7 +44,7 @@ function App() {
 
   return (
     <>
-      <Modal message={errorMessage} isOpen={!!errorMessage} />
+      <ErrorModal message={errorMessage} isOpen={!!errorMessage} />
       {/* <Suspense fallback={<p>loading....</p>}> */}
       <Header />
       {routes}

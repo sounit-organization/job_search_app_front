@@ -8,8 +8,7 @@ const useAuth = () => {
 
   const autoLogin = useCallback(
     (token: string, userId: string) => {
-      // FIXME: change to login
-      dispatch(authActions.signUp({ token, userId }));
+      dispatch(authActions.login({ token, userId }));
     },
     [dispatch]
   );

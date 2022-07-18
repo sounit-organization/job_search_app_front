@@ -2,12 +2,13 @@ import { TextField, Container, FormControl, Button } from "@mui/material";
 import useErrorHandler from "../../hooks/useErrorHandler";
 import { useAuthMutations } from "../../hooks/useAuthMutations";
 import useForm from "../../hooks/useForm";
+import LoadingPage from "./LoadingPage";
 
 const initialValues = {
   firstName: "test first name",
   lastName: "test last name",
-  email: "test@email",
-  password: "testpassword",
+  email: "test@email.com",
+  password: "password",
 };
 
 const SignUpForm = () => {
@@ -30,9 +31,11 @@ const SignUpForm = () => {
   };
 
   if (signUpMutation.isLoading) {
-    return <div>Signing up...</div>;
+    return <LoadingPage />;
   }
 
+  // this can be written in onError in mutation definition
+  // leave this as it is as a sample
   if (signUpMutation.isError) {
     handleError(signUpMutation.error);
     signUpMutation.reset();
@@ -46,7 +49,7 @@ const SignUpForm = () => {
             fullWidth
             name="firstName"
             label="First Name"
-            variant="standard"
+            variant="outlined"
             value={firstName}
             onChange={valueChangeHandler}
           />
@@ -56,7 +59,7 @@ const SignUpForm = () => {
             fullWidth
             name="lastName"
             label="Last Name"
-            variant="standard"
+            variant="outlined"
             value={lastName}
             onChange={valueChangeHandler}
           />
@@ -67,7 +70,7 @@ const SignUpForm = () => {
             name="email"
             type="email"
             label="Email"
-            variant="standard"
+            variant="outlined"
             value={email}
             onChange={valueChangeHandler}
           />
@@ -78,14 +81,16 @@ const SignUpForm = () => {
             type="password"
             name="password"
             label="Password"
-            variant="standard"
+            variant="outlined"
             value={password}
             onChange={valueChangeHandler}
           />
         </FormControl>
-        <Button type="submit" variant="outlined">
-          Submit
-        </Button>
+        <div className="flex justify-center">
+          <Button type="submit" variant="outlined">
+            Submit
+          </Button>
+        </div>
       </form>
     </Container>
   );

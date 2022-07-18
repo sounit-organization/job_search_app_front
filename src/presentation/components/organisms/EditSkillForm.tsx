@@ -6,10 +6,11 @@ type Props = {
   initialFormData: FormInitialValues;
   buttonText: string;
   onSubmitLogic: (title: string) => void;
+  className?: string;
 };
 
 const EditSkillForm: FC<Props> = (props) => {
-  const { initialFormData, buttonText, onSubmitLogic } = props;
+  const { initialFormData, buttonText, onSubmitLogic, className } = props;
 
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
 
@@ -23,8 +24,17 @@ const EditSkillForm: FC<Props> = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <TextField name="title" value={title} onChange={valueChangeHandler} />
+    <form
+      onSubmit={submitHandler}
+      className={`flex flex-col mb-4 ${className}`}
+    >
+      <TextField
+        label="Skill Title"
+        name="title"
+        value={title}
+        onChange={valueChangeHandler}
+        sx={{ mb: 1 }}
+      />
       <Button type="submit" variant="outlined">
         {buttonText}
       </Button>

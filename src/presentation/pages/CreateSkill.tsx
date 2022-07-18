@@ -7,6 +7,7 @@ import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
+import LoadingPage from "../components/organisms/LoadingPage";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
@@ -27,11 +28,11 @@ const CreateSkill: FC = () => {
   };
 
   if (getSkillsQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (createSkillMutation.isLoading) {
-    return <div>Creating...</div>;
+    return <LoadingPage />;
   }
 
   if (createSkillMutation.isError) {
@@ -45,8 +46,9 @@ const CreateSkill: FC = () => {
         buttonText="Create Skill"
         initialFormData={{ title: "" }}
         onSubmitLogic={submitLogic}
+        className="md:w-1/3"
       />
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
         {skills?.map((skill) => (
           <SkillCard key={skill._id} skill={skill} />
         ))}
