@@ -12,18 +12,14 @@ type Props = {
 const JobCardActions: FC<Props> = (props) => {
   const { jobId, jobUserId, loginUserId } = props;
 
-  const deleteJobHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
-    console.log("delete job handler");
-  };
-
   return (
     <div className={classes["JobCardActions"]}>
-      <Button variant="outlined">
+      <Button variant="outlined" sx={{ mr: 1 }}>
         <Link to={`/jobs/detail/${jobId}`}>Detail</Link>
       </Button>
       {jobUserId === loginUserId && (
-        <Button variant="outlined" color="error" onClick={deleteJobHandler}>
-          Delete
+        <Button variant="outlined">
+          <Link to={`/jobs/detail/${jobId}`}>Edit</Link>
         </Button>
       )}
     </div>
