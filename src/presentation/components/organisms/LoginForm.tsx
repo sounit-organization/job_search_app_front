@@ -1,4 +1,5 @@
 import { Button, Container, FormControl, TextField } from "@mui/material";
+import { login } from "../../../services/authHttpClient.adapter";
 import useForm from "../../hooks/useForm";
 
 const formInitialValues: FormValues = {
@@ -15,9 +16,15 @@ const LoginForm = () => {
   const { values, valueChangeHandler } = useForm(formInitialValues);
   const { email, password } = values as FormValues;
 
-  const submitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
     event.preventDefault();
     console.log("submit");
+
+    const response = await login({ email, password });
+
+    console.log("login", response);
   };
 
   return (
