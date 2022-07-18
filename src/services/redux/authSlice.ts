@@ -12,7 +12,7 @@ const initialState: InitialState = {
   token: null,
 };
 
-type signUpAction = Action & {
+type authAction = Action & {
   payload: { token: string; userId: string };
 };
 
@@ -20,7 +20,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    signUp: (state, action: signUpAction) => {
+    signUp: (state, action: authAction) => {
+      const { token, userId } = action.payload;
+      state.isLogin = true;
+      state.token = token;
+      state.userId = userId;
+    },
+    login: (state, action: authAction) => {
       const { token, userId } = action.payload;
       state.isLogin = true;
       state.token = token;
