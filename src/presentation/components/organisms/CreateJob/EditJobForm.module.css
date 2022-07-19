@@ -4,14 +4,6 @@
   justify-content: center;
 }
 
-.JobForm__button {
-  width: 8rem;
-}
-
-.JobForm__label {
-  margin-bottom: 0.5rem;
-}
-
 .JobForm__control {
   margin-bottom: 1rem;
   display: flex;

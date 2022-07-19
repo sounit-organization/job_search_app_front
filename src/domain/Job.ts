@@ -6,6 +6,6 @@ export interface IJob {
   city: string;
   payment: number;
   description: string;
-  skills: string[] | ISkill[];
+  skills: (string | null)[] | ISkill[];
   userId?: string;
 }
