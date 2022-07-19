@@ -29,9 +29,17 @@ const SelectableSkillCard: FC<Props> = (props) => {
   };
 
   return (
-    <Paper variant="outlined" sx={{ p: 1 }} onClick={clickHandler}>
+    <Paper
+      variant="outlined"
+      sx={{
+        p: 1,
+        color: active ? "white" : "inherit",
+        backgroundColor: active ? "#90caf9" : "#eeeeee",
+      }}
+      onClick={clickHandler}
+      className="cursor-pointer"
+    >
       <p>{skill.title}</p>
-      {`active ${active}`}
     </Paper>
   );
 };

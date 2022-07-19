@@ -4,7 +4,7 @@ import { TextField, Button } from "@mui/material";
 import useForm, { FormInitialValues } from "../../../hooks/useForm";
 import { useGetSkillsQuery } from "../../../hooks/useSkillsQuery";
 import LoadingPage from "../LoadingPage";
-import SelectableSkillCard from "../SelectableSkillCard";
+import SelectableSkillCardList from "../SelectableSkillCardList";
 
 type Props = {
   initialFormData: FormInitialValues;
@@ -112,14 +112,11 @@ const EditJobForm: FC<Props> = (props) => {
         />
       </div>
 
-      {getSkillsQuery.data?.map((skill) => (
-        <SelectableSkillCard
-          key={skill._id!}
-          skill={skill}
-          active={!!selectedSkillIdsMap[skill._id!]}
-          setSelectedSkillIdsMap={setSelectedSkillIdsMap}
-        />
-      ))}
+      <SelectableSkillCardList
+        skills={getSkillsQuery.data}
+        selectedSkillIdsMap={selectedSkillIdsMap}
+        setSelectedSkillIdsMap={setSelectedSkillIdsMap}
+      />
 
       <Button type="submit" variant="outlined">
         {buttonText}
