@@ -1,13 +1,12 @@
 import axios from "axios";
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
-import { createJobUrl, fetchSkillsUrl } from "../../../../constants/constants";
+import { fetchSkillsUrl } from "../../../../constants/constants";
 import { ISkill } from "../../../../domain/Skill";
 import CreateButton from "../../atoms/CreateButton";
 import classes from "./EditJobForm.module.css";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import { TextField, Button } from "@mui/material";
 import useForm, { FormInitialValues } from "../../../hooks/useForm";
-// import { current } from "@reduxjs/toolkit";
 
 type Props = {
   initialFormData: FormInitialValues;
@@ -29,14 +28,9 @@ const EditJobForm: FC<Props> = (props) => {
   const { title, company, payment, city, description } = values;
 
   const [skillList, setSkillList] = useState<ISkill[]>([]);
-  // const [checkedSkillList, setCheckedSkillList] = useState<ISkill[]>([]);
-  const { token } = useAppSelector((state) => state.auth);
 
   // FIXME: add checked skills to the skill list.
-  const checkedChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    // setCheckedSkillList((current: any) => [...current, e.target.value]);
-    // setCheckedSkillList(e.target.value);
-  };
+  const checkedChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {};
 
   const skillListIds: string[] = [];
   skillList.forEach((skill) => {
@@ -138,9 +132,3 @@ const EditJobForm: FC<Props> = (props) => {
 const componentName = "JobForm";
 
 export default EditJobForm;
-function initialFormData(initialFormData: any): {
-  values: any;
-  valueChangeHandler: any;
-} {
-  throw new Error("Function not implemented.");
-}
