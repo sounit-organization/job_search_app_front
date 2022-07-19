@@ -13,6 +13,7 @@ const EditSkillForm: FC<Props> = (props) => {
   const { initialFormData, buttonText, onSubmitLogic, className } = props;
 
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
+
   const { title } = values;
 
   const submitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {

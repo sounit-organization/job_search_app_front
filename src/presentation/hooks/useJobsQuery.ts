@@ -1,8 +1,6 @@
 import { useQuery } from "react-query";
-import {
-  REACT_QUERY_KEY_JOBS,
-  REACT_QUERY_KEY_SEARCH_JOBS,
-} from "../../constants/constants";
+import { getJobById } from "../../services/jobsHttpClient.adapter";
+import { REACT_QUERY_KEY_JOBS } from "../../constants/constants";
 import {
   getJobs,
   Pagination,
@@ -13,6 +11,7 @@ import { errorActions } from "../../services/redux/errorSlice";
 import { jobActions } from "../../services/redux/jobSlice";
 import { searchedJobsActions } from "../../services/redux/searchedJobsSlice";
 import { useAppDispatch } from "./reduxHooks";
+import { REACT_QUERY_KEY_SEARCH_JOBS } from "../../constants/constants";
 
 export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
   const dispatch = useAppDispatch();
@@ -43,6 +42,13 @@ export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
   );
 
   return searchJobsQuery;
+};
+
+export const useGetJobByIdQuery = (jobId: string) => {
+  const getJobByIdQuery = useQuery([REACT_QUERY_KEY_JOBS, jobId], () =>
+    getJobById(jobId!)
+  );
+  return getJobByIdQuery;
 };
 
 export const useGetJobsQuery = (pagination: Pagination) => {
