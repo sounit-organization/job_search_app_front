@@ -4,7 +4,6 @@ import { fetchSkillsUrl } from "../../../../constants/constants";
 import { ISkill } from "../../../../domain/Skill";
 import CreateButton from "../../atoms/CreateButton";
 import classes from "./EditJobForm.module.css";
-import { useAppSelector } from "../../../hooks/reduxHooks";
 import { TextField, Button } from "@mui/material";
 import useForm, { FormInitialValues } from "../../../hooks/useForm";
 
