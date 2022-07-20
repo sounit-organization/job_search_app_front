@@ -2,10 +2,11 @@ import { FC } from "react";
 import EditJobForm from "../components/organisms/CreateJob/EditJobForm";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import classes from "./CreateJob.module.css";
 import { useJobMutations } from "../hooks/useJobMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
+import { IJob } from "../../domain/Job";
+import { Container } from "@mui/material";
 
 const initialFormValues = {
   title: "",
@@ -16,19 +17,12 @@ const initialFormValues = {
 };
 
 const CreateJob: FC = () => {
-  const { token } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector((state) => state.auth);
   const { createJobMutation } = useJobMutations();
   const { handleError } = useErrorHandler();
 
-  const submitLogic = (
-    title: string,
-    companyName: string,
-    payment: string,
-    city: string,
-    description: string,
-    skills: (string | null)[]
-  ) => {
+  const submitLogic = (job: IJob) => {
     if (!token) {
       return dispatch(
         errorActions.setError(`Failed to create skill: No token found`)
@@ -36,14 +30,7 @@ const CreateJob: FC = () => {
     }
 
     createJobMutation.mutate({
-      newJob: {
-        title,
-        companyName,
-        city,
-        payment: Number(payment),
-        description,
-        skills,
-      },
+      newJob: job,
       token,
     });
   };
@@ -58,13 +45,14 @@ const CreateJob: FC = () => {
   }
 
   return (
-    <div className={classes["CreateJob"]}>
+    <Container className="mb-10">
       <EditJobForm
         buttonText="Create Job"
         initialFormData={initialFormValues}
         onSubmitLogic={submitLogic}
+        initialSkillsMap={{}}
       />
-    </div>
+    </Container>
   );
 };
 
