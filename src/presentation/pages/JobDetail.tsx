@@ -23,7 +23,9 @@ const JobDetail = () => {
   return (
     <div>
       <JobDetailCard job={getJobByIdQuery.data as IJob} />
-      <Button onClick={goBackToPrevPageHandler}>Go Back To Job List</Button>
+      <div className="grid justify-center">
+        <Button onClick={goBackToPrevPageHandler}>Go Back To Job List</Button>
+      </div>
     </div>
   );
 };
