@@ -45,7 +45,7 @@ const CreateJob: FC = () => {
   }
 
   return (
-    <Container className="mb-10">
+    <Container className="mb-10 md:max-w-4xl">
       <EditJobForm
         buttonText="Create Job"
         initialFormData={initialFormValues}

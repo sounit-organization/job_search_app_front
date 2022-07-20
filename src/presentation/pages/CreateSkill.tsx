@@ -8,6 +8,7 @@ import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
+import { Container } from "@mui/material";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
@@ -41,19 +42,20 @@ const CreateSkill: FC = () => {
   }
 
   return (
-    <div className={classes[componentName]}>
-      <EditSkillForm
-        buttonText="Create Skill"
-        initialFormData={{ title: "" }}
-        onSubmitLogic={submitLogic}
-        className="md:w-1/3"
-      />
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
-        {skills?.map((skill) => (
-          <SkillCard key={skill._id} skill={skill} />
-        ))}
+    <Container className="md:max-w-4xl mb-10">
+      <div className={`${classes[componentName]}`}>
+        <EditSkillForm
+          buttonText="Create Skill"
+          initialFormData={{ title: "" }}
+          onSubmitLogic={submitLogic}
+        />
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
+          {skills?.map((skill) => (
+            <SkillCard key={skill._id} skill={skill} />
+          ))}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

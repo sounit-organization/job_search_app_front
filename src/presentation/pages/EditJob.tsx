@@ -26,7 +26,7 @@ const EditJob = () => {
   const skillsMap = convertSkillsListToMap(skills as ISkill[]);
 
   return (
-    <Container>
+    <Container className="md:max-w-4xl">
       <EditJobForm
         buttonText="Update Job"
         initialFormData={{
