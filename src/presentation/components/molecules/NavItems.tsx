@@ -20,7 +20,6 @@ const NavItems: FC<Props> = (props) => {
       )}
       {isLogin && (
         <ListItemText>
-          {" "}
           <NavItem title="Add Skill" to="/skills/new" />
         </ListItemText>
       )}

@@ -44,9 +44,11 @@ export const useSearchJobsQuery = (searchJobsArgs: SearchJobsArgs) => {
   return searchJobsQuery;
 };
 
-export const useGetJobByIdQuery = (jobId: string) => {
-  const getJobByIdQuery = useQuery([REACT_QUERY_KEY_JOBS, jobId], () =>
-    getJobById(jobId!)
+export const useGetJobByIdQuery = (jobId?: string) => {
+  const getJobByIdQuery = useQuery(
+    [REACT_QUERY_KEY_JOBS, jobId],
+    () => getJobById(jobId!),
+    { enabled: !!jobId }
   );
   return getJobByIdQuery;
 };

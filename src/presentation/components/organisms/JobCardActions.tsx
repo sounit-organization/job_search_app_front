@@ -15,11 +15,11 @@ const JobCardActions: FC<Props> = (props) => {
   return (
     <div className={classes["JobCardActions"]}>
       <Button variant="outlined" sx={{ mr: 1 }}>
-        <Link to={`/jobs/detail/${jobId}`}>Detail</Link>
+        <Link to={`/jobs/${jobId}`}>Detail</Link>
       </Button>
       {jobUserId === loginUserId && (
         <Button variant="outlined">
-          <Link to={`/jobs/detail/${jobId}`}>Edit</Link>
+          <Link to={`/jobs/${jobId}`}>Edit</Link>
         </Button>
       )}
     </div>

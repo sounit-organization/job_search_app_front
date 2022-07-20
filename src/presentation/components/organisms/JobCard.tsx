@@ -22,9 +22,9 @@ const JobCard: FC<Props> = (props) => {
     <Card className={`${classes["JobCard"]} ${className}`}>
       <div className={classes["JobCard__container"]}>
         <div>
-          <h2 className={classes["JobCard__title"]}>
+          <p className={classes["JobCard__title"]}>
             <span className={classes["JobCard__label"]}>Title</span> {job.title}
-          </h2>
+          </p>
           <p className={classes["JobCard__title"]}>
             <span className={classes["JobCard__label"]}>City</span> {job.city}
           </p>
