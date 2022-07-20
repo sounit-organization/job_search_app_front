@@ -12,6 +12,7 @@ import EditSkill from "./presentation/pages/EditSkill";
 import Header from "./presentation/components/organisms/Header";
 import SearchJobs from "./presentation/pages/SearchJobs";
 import Login from "./presentation/pages/Login";
+import JobDetail from "./presentation/pages/JobDetail";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -26,12 +27,10 @@ function App() {
     {
       path: "/",
       element: <JobList />,
-
-      // FIXME: job detail is not children, sibling?
-      // children: [{ path: "/jobs/detail/:jobId", element: <JobDetail /> }],
     },
     { path: "/jobs/search", element: <SearchJobs /> },
     { path: "/jobs/new", element: <CreateJob /> },
+    { path: "/jobs/:jobId", element: <JobDetail /> },
     { path: "/skills/new", element: <CreateSkill /> },
     { path: "/skills/:skillId/edit", element: <EditSkill /> },
     { path: "/favorite", element: <Favorite /> },

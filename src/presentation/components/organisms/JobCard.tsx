@@ -6,6 +6,7 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 import Card from "../atoms/Card";
 import SkillTagList from "./SkillTagList";
 import JobCardActions from "./JobCardActions";
+import JobLabeledText from "../molecules/JobLabeledText";
 
 interface Props {
   className: string;
@@ -22,16 +23,9 @@ const JobCard: FC<Props> = (props) => {
     <Card className={`${classes["JobCard"]} ${className}`}>
       <div className={classes["JobCard__container"]}>
         <div>
-          <h2 className={classes["JobCard__title"]}>
-            <span className={classes["JobCard__label"]}>Title</span> {job.title}
-          </h2>
-          <p className={classes["JobCard__title"]}>
-            <span className={classes["JobCard__label"]}>City</span> {job.city}
-          </p>
-          <p className={classes["JobCard__title"]}>
-            <span className={classes["JobCard__label"]}>Payment</span>{" "}
-            {job.payment}
-          </p>
+          <JobLabeledText labelText="Title" valueText={job.title} />
+          <JobLabeledText labelText="City" valueText={job.city} />
+          <JobLabeledText labelText="Payment" valueText={String(job.payment)} />
           <SkillTagList skills={job.skills as ISkill[]} />
         </div>
         <JobCardActions
