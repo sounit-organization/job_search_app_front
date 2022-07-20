@@ -21,6 +21,7 @@ const JobDetailCard: FC<Props> = (props) => {
     payment,
     skills,
     userId: jobUserId,
+    _id,
   } = job;
 
   return (
@@ -35,6 +36,7 @@ const JobDetailCard: FC<Props> = (props) => {
       />
       <SkillTagList skills={skills as ISkill[]} />
       <JobDetailCardActions
+        jobId={_id as string}
         loginUserId={loginUserId as string}
         jobUserId={jobUserId as string}
       />
