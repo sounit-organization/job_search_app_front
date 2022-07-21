@@ -58,16 +58,16 @@ export const createJob = ({
 };
 
 export const updateJob = ({
-  updatedJob,
+  jobFormData,
   token,
   jobId,
 }: {
-  updatedJob: IJob;
+  jobFormData: IJob;
   token: string;
   jobId: string;
 }): Promise<IJob> => {
   return httpClientAdapter
-    .patch(`${API_URL}/jobs/${jobId}`, updatedJob, {
+    .patch(`${API_URL}/jobs/${jobId}`, jobFormData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

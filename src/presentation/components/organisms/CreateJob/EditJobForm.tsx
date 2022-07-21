@@ -1,12 +1,20 @@
 import { FC, FormEvent, useState } from "react";
 import classes from "./EditJobForm.module.css";
 import { TextField, Button } from "@mui/material";
-import useForm, { FormInitialValues } from "../../../hooks/useForm";
+import useForm from "../../../hooks/useForm";
 import { useGetSkillsQuery } from "../../../hooks/useSkillsQuery";
 import LoadingPage from "../LoadingPage";
 import SelectableSkillCardList from "../SelectableSkillCardList";
 import { IJob } from "../../../../domain/Job";
 import { convertSkillsMapToList } from "../../../utils/utils";
+
+type FormInitialValues = {
+  title: string;
+  companyName: string;
+  payment: string;
+  city: string;
+  description: string;
+};
 
 type Props = {
   initialFormData: FormInitialValues;
@@ -23,7 +31,7 @@ const EditJobForm: FC<Props> = (props) => {
   const { initialFormData, buttonText, onSubmitLogic, initialSkillsMap } =
     props;
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
-  const { title, company, payment, city, description } = values;
+  const { title, companyName, payment, city, description } = values;
   const getSkillsQuery = useGetSkillsQuery();
   const [selectedSkillIdsMap, setSelectedSkillIdsMap] =
     useState<SelectedSkillIdsMap>(initialSkillsMap);
@@ -35,7 +43,7 @@ const EditJobForm: FC<Props> = (props) => {
 
     const jobData: IJob = {
       title,
-      companyName: company,
+      companyName,
       payment: +payment,
       city,
       description,
@@ -63,11 +71,11 @@ const EditJobForm: FC<Props> = (props) => {
           onChange={valueChangeHandler}
         />
         <TextField
-          name="company"
+          name="companyName"
           label="Company"
           variant="outlined"
           sx={{ mb: 1 }}
-          value={company}
+          value={companyName}
           onChange={valueChangeHandler}
         />
 

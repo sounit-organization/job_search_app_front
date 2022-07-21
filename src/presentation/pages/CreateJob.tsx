@@ -10,7 +10,7 @@ import { Container } from "@mui/material";
 
 const initialFormValues = {
   title: "",
-  company: "",
+  companyName: "",
   city: "",
   payment: "",
   description: "",
@@ -25,7 +25,7 @@ const CreateJob: FC = () => {
   const submitLogic = (job: IJob) => {
     if (!token) {
       return dispatch(
-        errorActions.setError(`Failed to create skill: No token found`)
+        errorActions.setError(`Failed to create job: No token found`)
       );
     }
 
