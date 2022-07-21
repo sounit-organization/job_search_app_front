@@ -29,13 +29,19 @@ export const usePagination = (
     setSearchParams({ ...searchParams, page: "1" });
   };
 
-  useEffect(() => {
+  const initPageUsingParams = useCallback(() => {
     if (paramPage) {
+      // set page
       onPageChange(null, +paramPage);
     } else {
+      // set default page
       setSearchParams({ ...searchParams, page: "1" });
     }
-  }, [paramPage, onPageChange, page, setSearchParams, searchParams]);
+  }, [paramPage, onPageChange, setSearchParams, searchParams]);
+
+  useEffect(() => {
+    initPageUsingParams();
+  }, [initPageUsingParams]);
 
   return { pagination, onPageChange, initPagination, page };
 };
