@@ -12,8 +12,6 @@ type SearchTerms = { title: string };
 // - should use application state to separate logic? instead of url?
 //   - updating `searchParams` from different component
 
-// FIXME:
-// - delete page state, url should be a single source of truth
 export const usePagination = (
   initialPagination: Pagination,
   ITEMS_PER_PAGE: number,
@@ -23,13 +21,13 @@ export const usePagination = (
 
   // to keep page state when user go back
   const [searchParams, setSearchParams] = useSearchParams();
-  const paramPage = searchParams.get("page");
 
   // to control items to fetch from backend
   const [pagination, setPagination] = useState(initialPagination);
   const { limit } = pagination;
 
   // to control page state in page component
+  const paramPage = searchParams.get("page");
   const [page, setPage] = useState(paramPage ? +paramPage : 1);
 
   const onPageChange = useCallback(
@@ -37,9 +35,8 @@ export const usePagination = (
       const skip = (page - 1) * ITEMS_PER_PAGE;
       setPage(page);
       setPagination((prevState) => ({ ...prevState, skip, limit }));
-      setSearchParams({ page: String(page) });
     },
-    [ITEMS_PER_PAGE, limit, setSearchParams]
+    [ITEMS_PER_PAGE, limit]
   );
 
   const initPagination = () => {
