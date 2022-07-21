@@ -18,13 +18,15 @@ export const usePagination = (
       const skip = (page - 1) * ITEMS_PER_PAGE;
       setPage(page);
       setPagination((prevState) => ({ ...prevState, skip, limit }));
+      setSearchParams({ page: String(page) });
     },
-    [ITEMS_PER_PAGE, limit]
+    [ITEMS_PER_PAGE, limit, setSearchParams]
   );
 
   const initPagination = () => {
     setPage(1);
     setPagination(initialPagination);
+    setSearchParams({ ...searchParams, page: "1" });
   };
 
   useEffect(() => {
@@ -35,5 +37,5 @@ export const usePagination = (
     }
   }, [paramPage, onPageChange, page, setSearchParams, searchParams]);
 
-  return { pagination, onPageChange, initPagination, page, setSearchParams };
+  return { pagination, onPageChange, initPagination, page };
 };
