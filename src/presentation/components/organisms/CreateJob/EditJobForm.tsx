@@ -1,22 +1,26 @@
 import { FC, FormEvent, useState } from "react";
 import classes from "./EditJobForm.module.css";
 import { TextField, Button } from "@mui/material";
-import useForm, { FormInitialValues } from "../../../hooks/useForm";
+import useForm from "../../../hooks/useForm";
 import { useGetSkillsQuery } from "../../../hooks/useSkillsQuery";
 import LoadingPage from "../LoadingPage";
 import SelectableSkillCardList from "../SelectableSkillCardList";
+import { IJob } from "../../../../domain/Job";
+import { convertSkillsMapToList } from "../../../utils/utils";
+
+type FormInitialValues = {
+  title: string;
+  companyName: string;
+  payment: string;
+  city: string;
+  description: string;
+};
 
 type Props = {
   initialFormData: FormInitialValues;
   buttonText: string;
-  onSubmitLogic: (
-    title: string,
-    companyName: string,
-    payment: string,
-    city: string,
-    description: string,
-    skills: (string | null)[]
-  ) => void;
+  onSubmitLogic: (job: IJob) => void;
+  initialSkillsMap: SelectedSkillIdsMap;
 };
 
 export type SelectedSkillIdsMap = {
@@ -24,39 +28,29 @@ export type SelectedSkillIdsMap = {
 };
 
 const EditJobForm: FC<Props> = (props) => {
-  const { initialFormData, buttonText, onSubmitLogic } = props;
+  const { initialFormData, buttonText, onSubmitLogic, initialSkillsMap } =
+    props;
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
-  const { title, company, payment, city, description } = values;
+  const { title, companyName, payment, city, description } = values;
   const getSkillsQuery = useGetSkillsQuery();
   const [selectedSkillIdsMap, setSelectedSkillIdsMap] =
-    useState<SelectedSkillIdsMap>({});
-
-  const getSelectedSkillIdsList = (
-    selectedSkillIdsMap: SelectedSkillIdsMap
-  ) => {
-    const skillIdList = [];
-    for (const skillId of Object.values(selectedSkillIdsMap)) {
-      // to remove null
-      if (skillId) {
-        skillIdList.push(skillId);
-      }
-    }
-    return skillIdList;
-  };
+    useState<SelectedSkillIdsMap>(initialSkillsMap);
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const selectedSkillIdsList = getSelectedSkillIdsList(selectedSkillIdsMap);
+    const selectedSkillIdsList = convertSkillsMapToList(selectedSkillIdsMap);
 
-    onSubmitLogic(
+    const jobData: IJob = {
       title,
-      company,
-      payment,
+      companyName,
+      payment: +payment,
       city,
       description,
-      selectedSkillIdsList
-    );
+      skills: selectedSkillIdsList,
+    };
+
+    onSubmitLogic(jobData);
 
     resetValues();
   };
@@ -77,11 +71,11 @@ const EditJobForm: FC<Props> = (props) => {
           onChange={valueChangeHandler}
         />
         <TextField
-          name="company"
+          name="companyName"
           label="Company"
           variant="outlined"
           sx={{ mb: 1 }}
-          value={company}
+          value={companyName}
           onChange={valueChangeHandler}
         />
 

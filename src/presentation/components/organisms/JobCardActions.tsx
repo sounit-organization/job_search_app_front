@@ -19,7 +19,7 @@ const JobCardActions: FC<Props> = (props) => {
       </Button>
       {jobUserId === loginUserId && (
         <Button variant="outlined">
-          <Link to={`/jobs/${jobId}`}>Edit</Link>
+          <Link to={`/jobs/${jobId}/edit`}>Edit</Link>
         </Button>
       )}
     </div>

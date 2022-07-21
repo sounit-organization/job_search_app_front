@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { errorActions } from "../../services/redux/errorSlice";
 import EditSkillForm from "../components/organisms/EditSkillForm";
@@ -52,17 +52,18 @@ const EditSkill = () => {
   }
 
   return (
-    <div className="flex justify-center flex-col items-center">
-      <EditSkillForm
-        buttonText="Update Skill"
-        initialFormData={{ ...skill! }}
-        onSubmitLogic={submitLogic}
-        className="md:w-1/3"
-      />
-      <Button>
-        <Link to="/skills/new">Back to Skills</Link>
-      </Button>
-    </div>
+    <Container className="md:max-w-4xl">
+      <div className="flex justify-center flex-col">
+        <EditSkillForm
+          buttonText="Update Skill"
+          initialFormData={{ ...skill! }}
+          onSubmitLogic={submitLogic}
+        />
+        <Button>
+          <Link to="/skills/new">Back to Skills</Link>
+        </Button>
+      </div>
+    </Container>
   );
 };
 

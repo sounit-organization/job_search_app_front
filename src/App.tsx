@@ -13,6 +13,7 @@ import Header from "./presentation/components/organisms/Header";
 import SearchJobs from "./presentation/pages/SearchJobs";
 import Login from "./presentation/pages/Login";
 import JobDetail from "./presentation/pages/JobDetail";
+import EditJob from "./presentation/pages/EditJob";
 
 // FIXME: no optimization before measure the performance
 // const Header = lazy(() => import("../src/components/organisms/header"));
@@ -30,6 +31,7 @@ function App() {
     },
     { path: "/jobs/search", element: <SearchJobs /> },
     { path: "/jobs/new", element: <CreateJob /> },
+    { path: "/jobs/:jobId/edit", element: <EditJob /> },
     { path: "/jobs/:jobId", element: <JobDetail /> },
     { path: "/skills/new", element: <CreateSkill /> },
     { path: "/skills/:skillId/edit", element: <EditSkill /> },
