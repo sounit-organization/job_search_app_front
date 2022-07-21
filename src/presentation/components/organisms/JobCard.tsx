@@ -25,7 +25,10 @@ const JobCard: FC<Props> = (props) => {
         <div>
           <JobLabeledText labelText="Title" valueText={job.title} />
           <JobLabeledText labelText="City" valueText={job.city} />
-          <JobLabeledText labelText="Payment" valueText={String(job.payment)} />
+          <JobLabeledText
+            labelText="Payment"
+            valueText={job.payment ? String(job.payment) : ""}
+          />
           <SkillTagList skills={job.skills as ISkill[]} />
         </div>
         <JobCardActions

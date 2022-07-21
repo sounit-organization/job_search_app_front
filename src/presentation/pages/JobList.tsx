@@ -17,7 +17,7 @@ const initialPagination: PaginationType = {
 };
 
 const JobList: FC = () => {
-  const { pagination, onPageChange } = usePagination(
+  const { pagination, onPageChange, page, setSearchParams } = usePagination(
     initialPagination,
     ITEMS_PER_PAGE
   );
@@ -26,6 +26,11 @@ const JobList: FC = () => {
   // because jobs are updated both from JobList and SearchJobForm
   const { jobs, count } = useAppSelector((state) => state.jobs);
   const getJobsQuery = useGetJobsQuery(pagination);
+
+  const pageChangeHandler = (_: any, page: number) => {
+    onPageChange(_, page);
+    setSearchParams({ page: String(page) });
+  };
 
   return (
     <div className={classes["JobList"]}>
@@ -36,8 +41,9 @@ const JobList: FC = () => {
       )}
       {/* put pagination outside of toggle rendering to prevent reset state */}
       <Pagination
+        page={page}
         count={Math.ceil(count / ITEMS_PER_PAGE)}
-        onChange={onPageChange}
+        onChange={pageChangeHandler}
         className="flex justify-center mb-10"
       />
     </div>
