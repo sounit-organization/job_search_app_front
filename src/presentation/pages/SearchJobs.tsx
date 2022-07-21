@@ -9,11 +9,7 @@ import JobCardList from "../components/organisms/JobCardList";
 import useForm, { FormInitialValues } from "../hooks/useForm";
 import { useSearchJobsQuery } from "../hooks/useJobsQuery";
 import LoadingSpinner from "../components/organisms/LoadingSpinner";
-
-const formInitialValues: FormInitialValues = {
-  title: "",
-  city: "",
-};
+import { useSearchParams } from "react-router-dom";
 
 const initialPagination: PaginationType = {
   skip: 0,
@@ -24,14 +20,26 @@ type Props = {};
 
 const SearchJobs: FC<Props> = () => {
   const { searchedJobs, count } = useAppSelector((state) => state.searchedJobs);
+
+  const [searchParams] = useSearchParams();
+  const paramTitle = searchParams.get("title");
+
+  const formInitialValues: FormInitialValues = {
+    title: paramTitle ? paramTitle : "",
+    city: "",
+  };
+
+  const { values, valueChangeHandler } = useForm(formInitialValues);
+  const { title, city } = values;
+
   const { pagination, onPageChange, initPagination, page } = usePagination(
     initialPagination,
-    ITEMS_PER_PAGE
+    ITEMS_PER_PAGE,
+    { title }
   );
-  const { values, valueChangeHandler } = useForm(formInitialValues);
+
   // to set dependency to search-job react-query
   const [isOnSearch, setIsOnSearch] = useState(true);
-  const { title, city } = values;
   const searchJobsQuery = useSearchJobsQuery({
     searchTerms: { title, city },
     pagination,
