@@ -46,8 +46,9 @@ export const usePagination = (
   };
 
   useEffect(() => {
+    onPageChange(null, page);
     setSearchParams({ title: title ? title : "", page: String(page) });
-  }, [title, page, setSearchParams]);
+  }, [title, page, setSearchParams, onPageChange]);
 
   return { pagination, onPageChange, initPagination, page };
 };
