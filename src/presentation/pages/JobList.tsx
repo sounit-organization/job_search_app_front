@@ -17,7 +17,7 @@ const initialPagination: PaginationType = {
 };
 
 const JobList: FC = () => {
-  const { pagination, onPageChange, page, setSearchParams } = usePagination(
+  const { pagination, onPageChange, page } = usePagination(
     initialPagination,
     ITEMS_PER_PAGE
   );
@@ -29,7 +29,6 @@ const JobList: FC = () => {
 
   const pageChangeHandler = (_: any, page: number) => {
     onPageChange(_, page);
-    setSearchParams({ page: String(page) });
   };
 
   return (
