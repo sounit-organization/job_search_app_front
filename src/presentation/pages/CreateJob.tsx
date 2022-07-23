@@ -9,6 +9,7 @@ import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { IJob } from "../../domain/Job";
 import { Container } from "@mui/material";
+import { addSkillsToStatistics } from "../../services/statisticsHttpClient.adapter";
 
 const initialFormValues = {
   title: "",
@@ -24,14 +25,15 @@ const CreateJob: FC = () => {
   const { createJobMutation } = useJobMutations();
   const { handleError } = useErrorHandler();
 
-  const submitLogic = (job: IJob, skillsMap: SelectedSkillsMap) => {
+  const submitLogic = async (job: IJob, skillsMap: SelectedSkillsMap) => {
     if (!token) {
       return dispatch(
         errorActions.setError(`Failed to create job: No token found`)
       );
     }
 
-    console.log("skillsMap", skillsMap);
+    const res = await addSkillsToStatistics(skillsMap);
+    console.log("submitLogic res", res);
 
     createJobMutation.mutate({
       newJob: job,

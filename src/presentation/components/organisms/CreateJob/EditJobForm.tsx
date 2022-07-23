@@ -20,11 +20,11 @@ type FormInitialValues = {
 type Props = {
   initialFormData: FormInitialValues;
   buttonText: string;
-  onSubmitLogic: (job: IJob, skillsMap: SelectedSkillIdsMap) => void;
-  initialSkillsMap: SelectedSkillIdsMap;
+  onSubmitLogic: (job: IJob, skillsMap: SelectedSkillsMap) => void;
+  initialSkillsMap: SelectedSkillsMap;
 };
 
-export type SelectedSkillIdsMap = {
+export type SelectedSkillsMap = {
   [key: string]: ISkill | null;
 };
 
@@ -34,13 +34,13 @@ const EditJobForm: FC<Props> = (props) => {
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
   const { title, companyName, payment, city, description } = values;
   const getSkillsQuery = useGetSkillsQuery();
-  const [selectedSkillIdsMap, setSelectedSkillIdsMap] =
-    useState<SelectedSkillIdsMap>(initialSkillsMap);
+  const [selectedSkillsMap, setSelectedSkillsMap] =
+    useState<SelectedSkillsMap>(initialSkillsMap);
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const selectedSkillIdsList = convertSkillsMapToList(selectedSkillIdsMap);
+    const selectedSkillIdsList = convertSkillsMapToList(selectedSkillsMap);
 
     const jobData: IJob = {
       title,
@@ -51,7 +51,7 @@ const EditJobForm: FC<Props> = (props) => {
       skills: selectedSkillIdsList,
     };
 
-    onSubmitLogic(jobData, selectedSkillIdsMap);
+    onSubmitLogic(jobData, selectedSkillsMap);
 
     resetValues();
   };
@@ -109,8 +109,8 @@ const EditJobForm: FC<Props> = (props) => {
 
       <SelectableSkillCardList
         skills={getSkillsQuery.data}
-        selectedSkillIdsMap={selectedSkillIdsMap}
-        setSelectedSkillIdsMap={setSelectedSkillIdsMap}
+        selectedSkillsMap={selectedSkillsMap}
+        setSelectedSkillsMap={setSelectedSkillsMap}
       />
 
       <Button type="submit" variant="outlined">

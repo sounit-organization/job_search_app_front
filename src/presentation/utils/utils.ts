@@ -1,8 +1,8 @@
 import { ISkill } from "../../domain/Skill";
-import { SelectedSkillIdsMap } from "../components/organisms/CreateJob/EditJobForm";
+import { SelectedSkillsMap } from "../components/organisms/CreateJob/EditJobForm";
 
 export const convertSkillsListToMap = (skillsList: ISkill[]) => {
-  const skillsMap: SelectedSkillIdsMap = {};
+  const skillsMap: SelectedSkillsMap = {};
 
   for (const skill of skillsList) {
     skillsMap[skill._id!] = skill;
@@ -11,7 +11,7 @@ export const convertSkillsListToMap = (skillsList: ISkill[]) => {
   return skillsMap;
 };
 
-export const convertSkillsMapToList = (skillsMap: SelectedSkillIdsMap) => {
+export const convertSkillsMapToList = (skillsMap: SelectedSkillsMap) => {
   const skillIdList: string[] = [];
 
   for (const skill of Object.values(skillsMap)) {
