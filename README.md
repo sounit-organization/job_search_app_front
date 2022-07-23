@@ -1,4 +1,4 @@
-# Appeals
+# Things I focused on
 
 - `React Query` / Pagination
 - MongoDB Client / CRUD
