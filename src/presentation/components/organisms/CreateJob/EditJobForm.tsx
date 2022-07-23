@@ -7,6 +7,7 @@ import LoadingPage from "../LoadingPage";
 import SelectableSkillCardList from "../SelectableSkillCardList";
 import { IJob } from "../../../../domain/Job";
 import { convertSkillsMapToList } from "../../../utils/utils";
+import { ISkill } from "../../../../domain/Skill";
 
 type FormInitialValues = {
   title: string;
@@ -19,12 +20,12 @@ type FormInitialValues = {
 type Props = {
   initialFormData: FormInitialValues;
   buttonText: string;
-  onSubmitLogic: (job: IJob) => void;
-  initialSkillsMap: SelectedSkillIdsMap;
+  onSubmitLogic: (job: IJob, skillsMap: SelectedSkillsMap) => void;
+  initialSkillsMap: SelectedSkillsMap;
 };
 
-export type SelectedSkillIdsMap = {
-  [key: string]: string | null;
+export type SelectedSkillsMap = {
+  [key: string]: ISkill | null;
 };
 
 const EditJobForm: FC<Props> = (props) => {
@@ -33,13 +34,13 @@ const EditJobForm: FC<Props> = (props) => {
   const { values, valueChangeHandler, resetValues } = useForm(initialFormData);
   const { title, companyName, payment, city, description } = values;
   const getSkillsQuery = useGetSkillsQuery();
-  const [selectedSkillIdsMap, setSelectedSkillIdsMap] =
-    useState<SelectedSkillIdsMap>(initialSkillsMap);
+  const [selectedSkillsMap, setSelectedSkillsMap] =
+    useState<SelectedSkillsMap>(initialSkillsMap);
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const selectedSkillIdsList = convertSkillsMapToList(selectedSkillIdsMap);
+    const selectedSkillIdsList = convertSkillsMapToList(selectedSkillsMap);
 
     const jobData: IJob = {
       title,
@@ -50,7 +51,7 @@ const EditJobForm: FC<Props> = (props) => {
       skills: selectedSkillIdsList,
     };
 
-    onSubmitLogic(jobData);
+    onSubmitLogic(jobData, selectedSkillsMap);
 
     resetValues();
   };
@@ -108,8 +109,8 @@ const EditJobForm: FC<Props> = (props) => {
 
       <SelectableSkillCardList
         skills={getSkillsQuery.data}
-        selectedSkillIdsMap={selectedSkillIdsMap}
-        setSelectedSkillIdsMap={setSelectedSkillIdsMap}
+        selectedSkillsMap={selectedSkillsMap}
+        setSelectedSkillsMap={setSelectedSkillsMap}
       />
 
       <Button type="submit" variant="outlined">

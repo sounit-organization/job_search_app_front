@@ -1,5 +1,7 @@
 import { FC } from "react";
-import EditJobForm from "../components/organisms/CreateJob/EditJobForm";
+import EditJobForm, {
+  SelectedSkillsMap,
+} from "../components/organisms/CreateJob/EditJobForm";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useJobMutations } from "../hooks/useJobMutations";
@@ -7,6 +9,7 @@ import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { IJob } from "../../domain/Job";
 import { Container } from "@mui/material";
+import { useStatisticsMutations } from "../hooks/useStatisticsMutations";
 
 const initialFormValues = {
   title: "",
@@ -20,14 +23,17 @@ const CreateJob: FC = () => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
   const { createJobMutation } = useJobMutations();
+  const { addSkillsToStatisticsMutation } = useStatisticsMutations();
   const { handleError } = useErrorHandler();
 
-  const submitLogic = (job: IJob) => {
+  const submitLogic = async (job: IJob, skillsMap: SelectedSkillsMap) => {
     if (!token) {
       return dispatch(
         errorActions.setError(`Failed to create job: No token found`)
       );
     }
+
+    addSkillsToStatisticsMutation.mutate(skillsMap);
 
     createJobMutation.mutate({
       newJob: job,
@@ -35,7 +41,7 @@ const CreateJob: FC = () => {
     });
   };
 
-  if (createJobMutation.isLoading) {
+  if (createJobMutation.isLoading || addSkillsToStatisticsMutation.isLoading) {
     return <LoadingPage />;
   }
 
