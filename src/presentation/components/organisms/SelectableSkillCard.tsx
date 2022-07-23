@@ -1,27 +1,25 @@
 import { Paper } from "@mui/material";
 import { FC } from "react";
 import { ISkill } from "../../../domain/Skill";
-import { SelectedSkillIdsMap } from "./CreateJob/EditJobForm";
+import { SelectedSkillsMap } from "./CreateJob/EditJobForm";
 
 type Props = {
   skill: ISkill;
   active: boolean;
-  setSelectedSkillIdsMap: React.Dispatch<
-    React.SetStateAction<SelectedSkillIdsMap>
-  >;
+  setSelectedSkillsMap: React.Dispatch<React.SetStateAction<SelectedSkillsMap>>;
 };
 
 const SelectableSkillCard: FC<Props> = (props) => {
-  const { skill, active, setSelectedSkillIdsMap } = props;
+  const { skill, active, setSelectedSkillsMap } = props;
 
   const clickHandler: React.MouseEventHandler<HTMLDivElement> = () => {
     if (active) {
-      setSelectedSkillIdsMap((prevState) => ({
+      setSelectedSkillsMap((prevState) => ({
         ...prevState,
         [skill._id!]: null,
       }));
     } else {
-      setSelectedSkillIdsMap((prevState) => ({
+      setSelectedSkillsMap((prevState) => ({
         ...prevState,
         [skill._id!]: skill,
       }));

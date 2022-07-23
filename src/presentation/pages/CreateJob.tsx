@@ -1,6 +1,6 @@
 import { FC } from "react";
 import EditJobForm, {
-  SelectedSkillIdsMap,
+  SelectedSkillsMap,
 } from "../components/organisms/CreateJob/EditJobForm";
 import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
@@ -24,7 +24,7 @@ const CreateJob: FC = () => {
   const { createJobMutation } = useJobMutations();
   const { handleError } = useErrorHandler();
 
-  const submitLogic = (job: IJob, skillsMap: SelectedSkillIdsMap) => {
+  const submitLogic = (job: IJob, skillsMap: SelectedSkillsMap) => {
     if (!token) {
       return dispatch(
         errorActions.setError(`Failed to create job: No token found`)
