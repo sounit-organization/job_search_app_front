@@ -23,7 +23,7 @@ const SelectableSkillCard: FC<Props> = (props) => {
     } else {
       setSelectedSkillIdsMap((prevState) => ({
         ...prevState,
-        [skill._id!]: skill._id!,
+        [skill._id!]: skill,
       }));
     }
   };

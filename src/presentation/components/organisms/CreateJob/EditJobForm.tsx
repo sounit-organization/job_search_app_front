@@ -7,6 +7,7 @@ import LoadingPage from "../LoadingPage";
 import SelectableSkillCardList from "../SelectableSkillCardList";
 import { IJob } from "../../../../domain/Job";
 import { convertSkillsMapToList } from "../../../utils/utils";
+import { ISkill } from "../../../../domain/Skill";
 
 type FormInitialValues = {
   title: string;
@@ -19,12 +20,12 @@ type FormInitialValues = {
 type Props = {
   initialFormData: FormInitialValues;
   buttonText: string;
-  onSubmitLogic: (job: IJob) => void;
+  onSubmitLogic: (job: IJob, skillsMap: SelectedSkillIdsMap) => void;
   initialSkillsMap: SelectedSkillIdsMap;
 };
 
 export type SelectedSkillIdsMap = {
-  [key: string]: string | null;
+  [key: string]: ISkill | null;
 };
 
 const EditJobForm: FC<Props> = (props) => {
@@ -50,7 +51,7 @@ const EditJobForm: FC<Props> = (props) => {
       skills: selectedSkillIdsList,
     };
 
-    onSubmitLogic(jobData);
+    onSubmitLogic(jobData, selectedSkillIdsMap);
 
     resetValues();
   };
