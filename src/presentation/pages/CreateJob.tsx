@@ -9,7 +9,7 @@ import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { IJob } from "../../domain/Job";
 import { Container } from "@mui/material";
-import { addSkillsToStatistics } from "../../services/statisticsHttpClient.adapter";
+import { useStatisticsMutations } from "../hooks/useStatisticsMutations";
 
 const initialFormValues = {
   title: "",
@@ -23,6 +23,7 @@ const CreateJob: FC = () => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
   const { createJobMutation } = useJobMutations();
+  const { addSkillsToStatisticsMutation } = useStatisticsMutations();
   const { handleError } = useErrorHandler();
 
   const submitLogic = async (job: IJob, skillsMap: SelectedSkillsMap) => {
@@ -32,8 +33,7 @@ const CreateJob: FC = () => {
       );
     }
 
-    const res = await addSkillsToStatistics(skillsMap);
-    console.log("submitLogic res", res);
+    addSkillsToStatisticsMutation.mutate(skillsMap);
 
     createJobMutation.mutate({
       newJob: job,
@@ -41,7 +41,7 @@ const CreateJob: FC = () => {
     });
   };
 
-  if (createJobMutation.isLoading) {
+  if (createJobMutation.isLoading || addSkillsToStatisticsMutation.isLoading) {
     return <LoadingPage />;
   }
 
