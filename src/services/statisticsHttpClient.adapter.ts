@@ -7,5 +7,7 @@ type SkillIdList = string[];
 export const addSkillsToStatistics = (
   skillsMap: SelectedSkillsMap
 ): Promise<SkillIdList> => {
-  return axios.post(`${API_URL}/statistics`, skillsMap).then((res) => res.data);
+  return axios
+    .post(`${API_URL}/statistics`, skillsMap)
+    .then((res) => res.data.skillIdList);
 };

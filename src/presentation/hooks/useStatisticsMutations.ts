@@ -7,6 +7,8 @@ export const useStatisticsMutations = () => {
 
   const addSkillsToStatisticsMutation = useMutation(addSkillsToStatistics, {
     onSuccess: (data) => {
+      console.log(data);
+
       data.forEach((skillId) => {
         queryClient.invalidateQueries([REACT_QUERY_KEY_STATISTICS, skillId]);
       });
