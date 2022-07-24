@@ -3,13 +3,12 @@ import { errorActions } from "../../services/redux/errorSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
 import classes from "./CreateSkill.module.css";
-import SkillCard from "../components/organisms/SkillCard";
 import EditSkillForm from "../components/organisms/EditSkillForm";
 import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { Container } from "@mui/material";
-import SkillCardList from "../components/organisms/SkillCardList";
+import SkillCardList from "../components/organisms/EditButtonSkillCardList";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
