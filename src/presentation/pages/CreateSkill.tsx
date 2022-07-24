@@ -9,6 +9,7 @@ import { useSkillMutations } from "../hooks/useSkillMutations";
 import useErrorHandler from "../hooks/useErrorHandler";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { Container } from "@mui/material";
+import SkillCardList from "../components/organisms/SkillCardList";
 
 const CreateSkill: FC = () => {
   const { token } = useAppSelector((state) => state.auth);
@@ -49,11 +50,7 @@ const CreateSkill: FC = () => {
           initialFormData={{ title: "" }}
           onSubmitLogic={submitLogic}
         />
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
-          {skills?.map((skill) => (
-            <SkillCard key={skill._id} skill={skill} />
-          ))}
-        </div>
+        <SkillCardList skills={skills!} />
       </div>
     </Container>
   );
