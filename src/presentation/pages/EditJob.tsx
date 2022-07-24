@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
 import { Container } from "@mui/system";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IJob } from "../../domain/Job";
 import { ISkill } from "../../domain/Skill";
 import { errorActions } from "../../services/redux/errorSlice";
+import BackButton from "../components/organisms/BackButton";
 import EditJobForm from "../components/organisms/CreateJob/EditJobForm";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
@@ -13,15 +13,10 @@ import { convertSkillsListToMap } from "../utils/utils";
 
 const EditJob = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { jobId } = useParams();
   const getJobByIdQuery = useGetJobByIdQuery(jobId);
   const { token } = useAppSelector((state) => state.auth);
   const { updateJobMutation } = useJobMutations();
-
-  const goBackHandler = () => {
-    navigate(-1);
-  };
 
   const submitLogic = (jobFormData: IJob) => {
     if (!token) {
@@ -64,7 +59,7 @@ const EditJob = () => {
         initialSkillsMap={skillsMap}
       />
       <div className="grid justify-center">
-        <Button onClick={goBackHandler}>Go Back</Button>
+        <BackButton />
       </div>
     </Container>
   );

@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IJob } from "../../domain/Job";
+import BackButton from "../components/organisms/BackButton";
 import JobDetailCard from "../components/organisms/JobDetailCard";
 import LoadingPage from "../components/organisms/LoadingPage";
 import { useGetJobByIdQuery } from "../hooks/useJobsQuery";
@@ -8,7 +8,6 @@ import { useGetJobByIdQuery } from "../hooks/useJobsQuery";
 const JobDetail = () => {
   const params = useParams();
   const { jobId } = params;
-  const navigate = useNavigate();
 
   const getJobByIdQuery = useGetJobByIdQuery(jobId);
 
@@ -16,15 +15,11 @@ const JobDetail = () => {
     return <LoadingPage />;
   }
 
-  const goBackToPrevPageHandler = () => {
-    navigate(-1);
-  };
-
   return (
     <div>
       <JobDetailCard job={getJobByIdQuery.data as IJob} />
       <div className="grid justify-center">
-        <Button onClick={goBackToPrevPageHandler}>Go Back To Job List</Button>
+        <BackButton buttonText="Go Back To Job List" />
       </div>
     </div>
   );
