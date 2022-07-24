@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../constants/constants";
+import { Statistics } from "../domain/Statistics";
 import { SelectedSkillsMap } from "../presentation/components/organisms/CreateJob/EditJobForm";
 
 type SkillIdList = string[];
@@ -10,4 +11,12 @@ export const addSkillsToStatistics = (
   return axios
     .post(`${API_URL}/statistics`, skillsMap)
     .then((res) => res.data.skillIdList);
+};
+
+export const getStatisticsBySkillId = (
+  skillId?: string
+): Promise<Statistics> => {
+  return axios
+    .get(`${API_URL}/statistics/${skillId}`)
+    .then((res) => res.data.statistics);
 };

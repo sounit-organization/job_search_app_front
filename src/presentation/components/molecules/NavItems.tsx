@@ -13,6 +13,9 @@ const NavItems: FC<Props> = (props) => {
       <ListItemText>
         <NavItem title="Search Jobs" to="/jobs/search" />
       </ListItemText>
+      <ListItemText>
+        <NavItem title="Statistics" to="/statistics" />
+      </ListItemText>
       {isLogin && (
         <ListItemText>
           <NavItem title="Add Job" to="/jobs/new" />
