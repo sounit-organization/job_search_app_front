@@ -11,6 +11,12 @@ const Statistics = () => {
     return <LoadingPage />;
   }
 
+  const statistics = getStatisticsBySkillIdQuery.data;
+
+  if (!statistics) {
+    return <p>No Statistics Data Found</p>;
+  }
+
   return (
     <div>
       Statistics {skillId}
