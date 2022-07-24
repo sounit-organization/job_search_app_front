@@ -1,21 +1,15 @@
-import { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getStatisticsBySkillId } from "../../services/statisticsHttpClient.adapter";
 import BackButton from "../components/organisms/BackButton";
+import LoadingPage from "../components/organisms/LoadingPage";
+import { useGetStatisticsBySkillIdQuery } from "../hooks/useStatisticsQuery";
 
 const Statistics = () => {
   const { skillId } = useParams();
+  const getStatisticsBySkillIdQuery = useGetStatisticsBySkillIdQuery(skillId);
 
-  const fetch = useCallback(async () => {
-    if (skillId) {
-      const res = await getStatisticsBySkillId(skillId);
-      console.log("statistics res", res);
-    }
-  }, [skillId]);
-
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
+  if (getStatisticsBySkillIdQuery.isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div>

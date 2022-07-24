@@ -14,7 +14,7 @@ export const addSkillsToStatistics = (
 };
 
 export const getStatisticsBySkillId = (
-  skillId: string
+  skillId?: string
 ): Promise<Statistics> => {
   return axios
     .get(`${API_URL}/statistics/${skillId}`)
