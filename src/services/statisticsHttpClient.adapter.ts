@@ -20,3 +20,15 @@ export const getStatisticsBySkillId = (
     .get(`${API_URL}/statistics/${skillId}`)
     .then((res) => res.data.statistics);
 };
+
+export const updateSkillsInStatistics = ({
+  jobId,
+  skillsMap,
+}: {
+  jobId: string;
+  skillsMap: SelectedSkillsMap;
+}): Promise<SkillIdList> => {
+  return axios
+    .put(`${API_URL}/statistics/${jobId}`, skillsMap)
+    .then((res) => res.data.skillIdList);
+};
