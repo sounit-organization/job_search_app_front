@@ -18,13 +18,13 @@ const Statistics = () => {
 
   const statistics = getStatisticsBySkillIdQuery.data;
 
-  if (!statistics) {
-    return <p>No Statistics Data Found</p>;
-  }
-
   return (
     <Container>
-      <SkillStaticsBarGraph statistics={statistics} />
+      {statistics ? (
+        <SkillStaticsBarGraph statistics={statistics} />
+      ) : (
+        <p className="text-center">No Statistics Data Found</p>
+      )}
       <div className="flex justify-center mt-5">
         <BackButton />
       </div>
