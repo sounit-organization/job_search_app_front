@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { ISkill } from "../../../domain/Skill";
@@ -19,14 +19,14 @@ const SkillCard: FC<Props> = (props) => {
   };
 
   return (
-    <Paper elevation={1} className="px-5 py-3">
-      {title}
+    <Paper className="px-5 py-3" variant="outlined">
+      <Typography variant="body1" sx={{ mb: 2 }}>
+        {title}
+      </Typography>
       {stateUserId === userId && (
-        <div>
-          <Button variant="outlined" onClick={editClickHandler}>
-            Edit
-          </Button>
-        </div>
+        <Button variant="outlined" onClick={editClickHandler}>
+          Edit
+        </Button>
       )}
     </Paper>
   );

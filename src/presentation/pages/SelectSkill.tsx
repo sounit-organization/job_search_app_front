@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import LoadingPage from "../components/organisms/LoadingPage";
-import SkillCardList from "../components/organisms/SkillCardList";
+import SkillCard from "../components/organisms/SkillCard";
 import { useGetSkillsQuery } from "../hooks/useSkillsQuery";
 
 const SelectSkill = () => {
@@ -14,7 +14,9 @@ const SelectSkill = () => {
 
   return (
     <Container className="md:max-w-4xl mb-10">
-      <SkillCardList skills={skillList!} />
+      {skillList?.map((skill) => (
+        <SkillCard key={skill._id} skill={skill} />
+      ))}
     </Container>
   );
 };
