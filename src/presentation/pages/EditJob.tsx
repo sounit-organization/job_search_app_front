@@ -34,7 +34,11 @@ const EditJob = () => {
 
     // update statistic first,
     // to get old skills in job to delete from statistics
-    updateSkillsInStatisticsMutation.mutate({ jobId: jobId!, skillsMap });
+    updateSkillsInStatisticsMutation.mutate({
+      jobId: jobId!,
+      skillsMap,
+      token,
+    });
 
     updateJobMutation.mutate({
       jobFormData,

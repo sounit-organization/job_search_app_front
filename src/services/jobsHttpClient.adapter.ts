@@ -6,9 +6,9 @@ export const getJobs = (): Promise<IJob[]> => {
   return httpClientAdapter.get(`${API_URL}/jobs`).then((res) => res.data.jobs);
 };
 
-export const getJobById = (jonId: string): Promise<IJob> => {
+export const getJobById = (jobId: string): Promise<IJob> => {
   return httpClientAdapter
-    .get(`${API_URL}/jobs/${jonId}`)
+    .get(`${API_URL}/jobs/${jobId}`)
     .then((res) => res.data.job);
 };
 
@@ -31,14 +31,14 @@ export const createJob = ({
 export const updateJob = ({
   updatedJob,
   token,
-  jonId,
+  jobId,
 }: {
   updatedJob: IJob;
   token: string;
-  jonId: string;
+  jobId: string;
 }): Promise<IJob> => {
   return httpClientAdapter
-    .patch(`${API_URL}/jobs/${jonId}`, updatedJob, {
+    .patch(`${API_URL}/jobs/${jobId}`, updatedJob, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

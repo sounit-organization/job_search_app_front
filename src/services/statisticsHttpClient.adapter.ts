@@ -5,11 +5,27 @@ import { SelectedSkillsMap } from "../presentation/components/organisms/CreateJo
 
 type SkillIdList = string[];
 
-export const addSkillsToStatistics = (
-  skillsMap: SelectedSkillsMap
-): Promise<SkillIdList> => {
+type AddSkillsToStatisticsArgs = {
+  skillsMap: SelectedSkillsMap;
+  token: string;
+};
+
+type UpdateSkillsInStatisticsArgs = {
+  jobId: string;
+  skillsMap: SelectedSkillsMap;
+  token: string;
+};
+
+export const addSkillsToStatistics = ({
+  skillsMap,
+  token,
+}: AddSkillsToStatisticsArgs): Promise<SkillIdList> => {
   return axios
-    .post(`${API_URL}/statistics`, skillsMap)
+    .post(`${API_URL}/statistics`, skillsMap, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then((res) => res.data.skillIdList);
 };
 
@@ -24,11 +40,13 @@ export const getStatisticsBySkillId = (
 export const updateSkillsInStatistics = ({
   jobId,
   skillsMap,
-}: {
-  jobId: string;
-  skillsMap: SelectedSkillsMap;
-}): Promise<SkillIdList> => {
+  token,
+}: UpdateSkillsInStatisticsArgs): Promise<SkillIdList> => {
   return axios
-    .put(`${API_URL}/statistics/${jobId}`, skillsMap)
+    .put(`${API_URL}/statistics/${jobId}`, skillsMap, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then((res) => res.data.skillIdList);
 };
