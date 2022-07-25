@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { IJob } from "../../domain/Job";
 import { ISkill } from "../../domain/Skill";
 import { errorActions } from "../../services/redux/errorSlice";
-import { updateSkillsInStatistics } from "../../services/statisticsHttpClient.adapter";
 import BackButton from "../components/organisms/BackButton";
 import EditJobForm, {
   SelectedSkillsMap,
@@ -12,6 +11,7 @@ import LoadingPage from "../components/organisms/LoadingPage";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useJobMutations } from "../hooks/useJobMutations";
 import { useGetJobByIdQuery } from "../hooks/useJobsQuery";
+import { useStatisticsMutations } from "../hooks/useStatisticsMutations";
 import { convertSkillsListToMap } from "../utils/utils";
 
 const EditJob = () => {
@@ -20,6 +20,7 @@ const EditJob = () => {
   const getJobByIdQuery = useGetJobByIdQuery(jobId);
   const { token } = useAppSelector((state) => state.auth);
   const { updateJobMutation } = useJobMutations();
+  const { updateSkillsInStatisticsMutation } = useStatisticsMutations();
 
   const submitLogic = async (
     jobFormData: IJob,
@@ -31,9 +32,9 @@ const EditJob = () => {
       );
     }
 
-    // update statistic first, to get old skills in job to delete from statistics
-    const res = await updateSkillsInStatistics({ jobId: jobId!, skillsMap });
-    console.log("edit job submit res", res);
+    // update statistic first,
+    // to get old skills in job to delete from statistics
+    updateSkillsInStatisticsMutation.mutate({ jobId: jobId!, skillsMap });
 
     updateJobMutation.mutate({
       jobFormData,
@@ -42,11 +43,11 @@ const EditJob = () => {
     });
   };
 
-  if (getJobByIdQuery.isLoading) {
-    return <LoadingPage />;
-  }
-
-  if (updateJobMutation.isLoading) {
+  if (
+    getJobByIdQuery.isLoading ||
+    updateJobMutation.isLoading ||
+    updateSkillsInStatisticsMutation.isLoading
+  ) {
     return <LoadingPage />;
   }
 
