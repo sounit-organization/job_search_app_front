@@ -33,7 +33,7 @@ const CreateJob: FC = () => {
       );
     }
 
-    addSkillsToStatisticsMutation.mutate(skillsMap);
+    addSkillsToStatisticsMutation.mutate({ skillsMap, token });
 
     createJobMutation.mutate({
       newJob: job,
