@@ -4,7 +4,7 @@
 
 <img width="503" alt="job-search-graph-preview" src="https://user-images.githubusercontent.com/38809138/181070265-8946baac-357c-48b8-bf96-854d85058aa0.png">
 
-# Things I focused on
+# Things This App focused on
 
 - `React Query` / Pagination
 - MongoDB Client / CRUD
